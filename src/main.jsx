@@ -60,16 +60,6 @@ const liveBuilds = [
     note: 'A customer-facing store experience with product browsing and polished shopping presentation.'
   },
   {
-    slug: 'stockflow',
-    name: 'StockFlow',
-    type: 'Inventory UI',
-    category: 'Dashboard',
-    filters: ['Frontend', 'Dashboard'],
-    color: 'purple',
-    url: 'https://stockflow-ecru.vercel.app/',
-    note: 'Inventory dashboard concept for product visibility, stock status, and operational review.'
-  },
-  {
     slug: 'taskflow-pro',
     name: 'TaskFlow Pro',
     type: 'Productivity App',
@@ -92,24 +82,22 @@ const liveBuilds = [
   {
     slug: 'cipherpass',
     name: 'CipherPass',
-    type: 'Coming Soon',
+    type: 'Security Product',
     category: 'Security',
     filters: ['Security', 'Full Stack'],
     color: 'terminal',
-    url: '',
-    comingSoon: true,
-    note: 'A security-focused password and access management project currently in progress.'
+    url: 'https://cipher-pass-beta.vercel.app/',
+    note: 'A focused password and access-management interface built around vault clarity, account protection, and secure product trust.'
   },
   {
     slug: 'devdocs-ai',
     name: 'DevDocs AI',
-    type: 'Coming Soon',
+    type: 'AI Developer Tool',
     category: 'AI + Developer Tools',
     filters: ['AI', 'Frontend'],
     color: 'indigo',
-    url: '',
-    comingSoon: true,
-    note: 'An AI documentation assistant concept for helping developers understand and search technical docs faster.'
+    url: 'https://dev-docs-ai-lac.vercel.app/',
+    note: 'An AI documentation assistant for searching technical docs, simplifying developer questions, and turning scattered references into usable answers.'
   },
   {
     slug: 'everafter-weddings',
@@ -126,6 +114,194 @@ const liveBuilds = [
 
 const selectedLiveBuildSlugs = ['blockchain-voting', 'sentinelx', 'intern-track']
 const selectedLiveBuilds = liveBuilds.filter((build) => selectedLiveBuildSlugs.includes(build.slug))
+
+const caseStudyDetails = {
+  'blockchain-voting': {
+    role: 'Full-stack security builder',
+    problem: 'Voting products have to communicate trust immediately. The main challenge was making voter verification, ballot casting, and audit review feel understandable without flattening the seriousness of the workflow.',
+    approach: 'I structured the experience around a clear sequence: verify eligibility, review the ballot, cast the vote, and leave the user with a confidence signal. The interface favors readable states, strong confirmations, and a deployment-ready product rhythm.',
+    outcome: 'The result is a live voting flow that presents a security-heavy idea in a way normal users can follow, while still showing the technical care behind verification and auditability.',
+    cards: [
+      ['Trust Model', 'The case study frames the product around eligibility checks, ballot review, and post-submit confidence. Each step is written to reduce uncertainty and make the vote feel traceable.'],
+      ['Interface Flow', 'The layout avoids unnecessary decoration and keeps the main action visible. Supporting copy explains what is happening before the user commits to a sensitive action.'],
+      ['Security Thinking', 'The project demonstrates how I think about secure flows: clear user state, careful confirmation, and a product story that treats trust as part of the interface.']
+    ],
+    process: [
+      ['Understand', 'Mapped the voting journey around the moments where users need the most confidence: identity, ballot choice, submission, and confirmation.'],
+      ['Structure', 'Separated the flow into readable stages so the product does not feel like one crowded technical screen.'],
+      ['Design', 'Used strong hierarchy, quiet surfaces, and clear action placement to support a serious civic product.'],
+      ['Build', 'Implemented the frontend flow with responsive sections and deployment-friendly structure.'],
+      ['Deploy', 'Published the project so the case study can point to a real, reviewable product instead of only a concept.']
+    ],
+    results: ['Live voting experience', 'Clear verification story', 'Audit-aware product flow']
+  },
+  'ai-smart-ui': {
+    role: 'AI interface designer and frontend builder',
+    problem: 'AI tools can become vague quickly when the input, generated output, and user control all compete for attention. This project needed a workspace that made prompting feel direct and the response area easy to read.',
+    approach: 'I treated the product as a practical AI workbench: prompt area first, generated result second, and supporting interface details kept quiet. The goal was to make the user feel oriented from the first screen.',
+    outcome: 'AI Smart UI presents a clean prompt-first experience with enough polish to feel like a real product direction, not a loose demo.',
+    cards: [
+      ['Prompt Experience', 'The interface makes the prompt feel like the primary object. It supports fast entry, review, and iteration without crowding the workspace.'],
+      ['Output Clarity', 'Generated content is presented with readable hierarchy so the result feels useful immediately instead of buried inside decorative UI.'],
+      ['Product Polish', 'Motion, spacing, and responsive structure are used to make the concept feel finished while keeping the experience lightweight.']
+    ],
+    process: [
+      ['Understand', 'Identified the main user need: ask a question, receive output, and keep enough context to continue working.'],
+      ['Structure', 'Built the screen around a prompt-to-output rhythm rather than a generic dashboard.'],
+      ['Design', 'Kept visual noise low so the generated content stays central.'],
+      ['Build', 'Implemented a responsive React interface with a polished product feel.'],
+      ['Deploy', 'Shipped the live demo for portfolio review and iteration.']
+    ],
+    results: ['Prompt-first workflow', 'Readable AI output', 'Responsive live product']
+  },
+  sentinelx: {
+    role: 'Cybersecurity frontend builder',
+    problem: 'Security dashboards often overload the user with charts and alerts. SentinelX needed to feel like an analyst workspace where risk, priority, and next action are easy to scan.',
+    approach: 'I shaped the interface around alert visibility, risk signals, and operational rhythm. The product language is intentionally direct, with a darker security tone and compact information surfaces.',
+    outcome: 'The case study shows a live cybersecurity frontend that communicates monitoring, alert review, and analyst visibility with a strong security identity.',
+    cards: [
+      ['Risk Visibility', 'The dashboard is written around what an analyst needs to know first: what happened, how serious it is, and where attention should go next.'],
+      ['Dashboard Rhythm', 'Sections are organized to scan quickly instead of behaving like disconnected cards. This supports repeated operational use.'],
+      ['Security Tone', 'The visual language is restrained and technical, giving the project credibility without making the interface hard to read.']
+    ],
+    process: [
+      ['Understand', 'Defined the dashboard around alert monitoring and fast risk recognition.'],
+      ['Structure', 'Grouped information into analyst-friendly surfaces instead of generic metrics.'],
+      ['Design', 'Used contrast, spacing, and compact labels to support a security operations feel.'],
+      ['Build', 'Created the frontend experience and prepared it for a live deployment.'],
+      ['Deploy', 'Published the project for direct review.']
+    ],
+    results: ['Security dashboard live', 'Analyst-style scan pattern', 'Clear incident visibility']
+  },
+  'nevermind-store': {
+    role: 'Ecommerce frontend builder',
+    problem: 'The store needed to feel polished enough for shopping while keeping product discovery straightforward. The challenge was balancing presentation with a practical buying journey.',
+    approach: 'I focused on product browsing, visual hierarchy, and shopping flow clarity. The experience is built to help visitors inspect products, understand the brand mood, and move through the interface without confusion.',
+    outcome: 'Nevermind Store now sits in the portfolio as a live ecommerce frontend that shows product presentation, layout polish, and customer-facing interaction design.',
+    cards: [
+      ['Product Browsing', 'The case study highlights how the store organizes product attention, helping visitors compare items without a heavy interface.'],
+      ['Shopping Flow', 'The product experience is built around familiar ecommerce expectations: browse, inspect, choose, and continue.'],
+      ['Brand Feel', 'The visual direction gives the store personality while keeping the core shopping path readable.']
+    ],
+    process: [
+      ['Understand', 'Studied the basic customer journey from product discovery to shopping intent.'],
+      ['Structure', 'Organized surfaces around browsing and product clarity.'],
+      ['Design', 'Balanced brand styling with familiar ecommerce patterns.'],
+      ['Build', 'Implemented the frontend with responsive product sections.'],
+      ['Deploy', 'Published the live storefront for portfolio review.']
+    ],
+    results: ['Live ecommerce frontend', 'Product-first browsing', 'Responsive store layout']
+  },
+  'taskflow-pro': {
+    role: 'Productivity frontend builder',
+    problem: 'Task tools can become noisy when statuses, priorities, and daily planning all sit on the same screen. TaskFlow Pro needed a cleaner workflow that makes progress easy to understand.',
+    approach: 'I built the case around task states, dashboard rhythm, and a practical planning interface. The UI supports repeated daily use through simple grouping and clear status language.',
+    outcome: 'The project demonstrates productivity UI thinking: visible workflow states, readable planning surfaces, and a live deployed interface.',
+    cards: [
+      ['Workflow States', 'The product story focuses on how work moves from planned to active to complete, making progress easier to understand.'],
+      ['Planning Clarity', 'The interface favors direct labels and clear grouping so the user can make decisions quickly.'],
+      ['Daily Use', 'Spacing, hierarchy, and interaction rhythm are designed for a tool someone could return to often.']
+    ],
+    process: [
+      ['Understand', 'Defined the core planning loop around today, in-progress work, and completion.'],
+      ['Structure', 'Grouped tasks by state so the workflow is visible without explanation.'],
+      ['Design', 'Kept the interface polished but practical for repeated use.'],
+      ['Build', 'Implemented the responsive productivity frontend.'],
+      ['Deploy', 'Published the live project and connected it to the portfolio.']
+    ],
+    results: ['Live productivity app', 'Clear workflow states', 'Dashboard-style planning']
+  },
+  'intern-track': {
+    role: 'Dashboard frontend builder',
+    problem: 'Internship applications involve deadlines, statuses, interviews, and follow-ups. The challenge was turning a stressful search process into a calmer tracking dashboard.',
+    approach: 'I centered the project on application organization, progress states, and deadline awareness. The interface is designed to help users know what is pending, what needs attention, and what has moved forward.',
+    outcome: 'Intern Track becomes a strong dashboard case study because it solves a real workflow with clear categories, focused sections, and a live deployed product.',
+    cards: [
+      ['Application System', 'The case study explains how applications can be tracked by stage so users do not lose context across many opportunities.'],
+      ['Deadline Awareness', 'The product story emphasizes timing, follow-ups, and interview readiness as part of the dashboard value.'],
+      ['Career Workflow', 'The interface supports a real job-search process instead of presenting disconnected productivity cards.']
+    ],
+    process: [
+      ['Understand', 'Mapped the internship search around applications, deadlines, interviews, and follow-ups.'],
+      ['Structure', 'Created a dashboard rhythm that makes each stage easy to review.'],
+      ['Design', 'Used calm visual hierarchy to reduce the stress of tracking many opportunities.'],
+      ['Build', 'Implemented the frontend and responsive sections for live use.'],
+      ['Deploy', 'Published the project as a working case-study build.']
+    ],
+    results: ['Live tracking dashboard', 'Application-stage clarity', 'Career workflow focus']
+  },
+  cipherpass: {
+    role: 'Security product builder',
+    problem: 'Password tools must feel trustworthy without overwhelming users with security language. CipherPass needed a case study that explains vault clarity, safe access, and account protection in practical terms.',
+    approach: 'I positioned the product around secure access management: a clear vault experience, careful sign-in expectations, and a product tone that makes sensitive information feel handled with care.',
+    outcome: 'CipherPass is now linked as a live security project and presented with a detailed case study instead of a coming-soon placeholder.',
+    cards: [
+      ['Vault Clarity', 'The case study focuses on making stored credentials easy to review while keeping the interface serious and controlled.'],
+      ['Trust Signals', 'Copy and layout emphasize protection, account access, and secure product expectations without turning the page into a technical essay.'],
+      ['Live Delivery', 'The project moves from placeholder status to a real deployed product that visitors can open and inspect.']
+    ],
+    process: [
+      ['Understand', 'Defined the sensitive parts of the experience: access, storage, review, and user confidence.'],
+      ['Structure', 'Organized the case study around trust, vault usability, and product readiness.'],
+      ['Design', 'Kept the visual system controlled so the product feels focused and security-aware.'],
+      ['Build', 'Connected the live deployment and removed the old coming-soon state.'],
+      ['Deploy', 'Linked the finished Vercel project directly from the portfolio.']
+    ],
+    results: ['Live CipherPass link', 'Security-focused case study', 'Trust-centered product story']
+  },
+  'devdocs-ai': {
+    role: 'AI developer-tool builder',
+    problem: 'Developers often lose time moving between documentation pages, examples, and unclear explanations. DevDocs AI needed to show how AI can make documentation search faster and more usable.',
+    approach: 'I framed the tool around developer questions: search, summarize, clarify, and return practical answers. The case study explains the value in terms of reduced context switching and better technical understanding.',
+    outcome: 'DevDocs AI is now connected to its live deployment with a fuller case study that shows the product purpose and developer workflow.',
+    cards: [
+      ['Developer Search', 'The product is presented as a focused assistant for finding and understanding docs, not as a generic chatbot.'],
+      ['Answer Quality', 'The case study emphasizes useful technical explanations, direct summaries, and clearer next steps for developers.'],
+      ['Workflow Fit', 'The interface story is built around reducing documentation friction during real development work.']
+    ],
+    process: [
+      ['Understand', 'Identified the documentation pain point: scattered references and slow answer-finding.'],
+      ['Structure', 'Defined the workflow around asking, searching, clarifying, and applying an answer.'],
+      ['Design', 'Kept the UI developer-focused with clean hierarchy and enough space for technical text.'],
+      ['Build', 'Connected the live deployment and replaced the placeholder state.'],
+      ['Deploy', 'Added the Vercel project link so visitors can test it directly.']
+    ],
+    results: ['Live DevDocs AI link', 'Developer-tool case study', 'AI documentation workflow']
+  },
+  'everafter-weddings': {
+    role: 'Frontend experience designer',
+    problem: 'Wedding and event pages need emotion, clarity, and practical information in one place. The case study needed to show the direction without pretending the build is already live.',
+    approach: 'I framed the project around event storytelling, guest information, and a polished presentation system that can grow into a full live experience.',
+    outcome: 'The project remains marked as coming soon, but the case study now has a clearer purpose and a better explanation of the intended product experience.',
+    cards: [
+      ['Event Story', 'The concept is centered on making the couple, schedule, and event details feel warm and easy to explore.'],
+      ['Guest Clarity', 'The planned interface prioritizes the information guests need most: date, venue, schedule, and RSVP direction.'],
+      ['Visual Direction', 'The project is positioned as an elegant event website rather than a generic landing page.']
+    ],
+    process: [
+      ['Understand', 'Mapped the page around emotional storytelling and practical guest needs.'],
+      ['Structure', 'Planned sections for event details, schedule, venue, and RSVP.'],
+      ['Design', 'Defined a polished wedding tone with clear reading flow.'],
+      ['Build', 'Prepared the project direction for future implementation.'],
+      ['Deploy', 'Keeping this one as coming soon until the live site is ready.']
+    ],
+    results: ['Prepared event concept', 'Guest-focused structure', 'Clear coming-soon status']
+  }
+}
+
+const getCaseStudy = (project) => caseStudyDetails[project.slug] || {
+  role: 'Frontend builder',
+  problem: project.note,
+  approach: 'I focused on a clean user flow, responsive layout, readable sections, and a presentation strong enough for a portfolio case study.',
+  outcome: `${project.name} is presented as a focused portfolio project with clear purpose, implementation story, and delivery notes.`,
+  cards: [
+    ['Challenge', `Make ${project.name} feel clear, useful, and ready for real users.`],
+    ['Interface', 'Shape a polished responsive experience with readable sections, focused states, and strong visual hierarchy.'],
+    ['Result', `${project.name} is presented with a stronger portfolio case-study flow.`]
+  ],
+  process: ['Understand', 'Structure', 'Design', 'Build', 'Deploy'].map((step) => [step, project.note]),
+  results: ['Live deployment', 'Responsive interface', 'Portfolio-ready case study']
+}
 
 const projects = [
   {
@@ -649,7 +825,7 @@ function FeaturedProjects({ navigate }) {
 }
 
 function LiveBuildsSection({ compact = false, navigate }) {
-  const buildsToShow = compact ? selectedLiveBuilds : liveBuilds
+  const buildsToShow = (compact ? selectedLiveBuilds : liveBuilds).filter((build) => build.url)
 
   return (
     <section className={`section live-builds ${compact ? 'compact' : ''}`}>
@@ -795,7 +971,7 @@ function WorkPage({ navigate }) {
   const filtered = filter === 'All' ? liveBuilds : liveBuilds.filter((project) => project.filters.includes(filter))
   return (
     <>
-      <PageHero label="MY WORK" title="Real projects, categorized clearly." text="Live deployed work across frontend, AI interfaces, cybersecurity dashboards, ecommerce, inventory, productivity, and full-stack/security flows." />
+      <PageHero label="MY WORK" title="Real projects, categorized clearly." text="Live deployed work across frontend, AI interfaces, cybersecurity dashboards, ecommerce, productivity, and full-stack/security flows." />
       <section className="section work-index">
         <div className="filters">{categories.map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div>
         <motion.div layout className="work-grid">
@@ -812,7 +988,6 @@ function ProjectCard({ project, index = 0, navigate }) {
   return (
     <motion.article layout className={`project-card ${project.color}`} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }}>
       <div className="project-card-top"><span>{String(index + 1).padStart(2, '0')}</span><small>{project.category}</small></div>
-      <ProjectPreview project={project} />
       <h3>{project.name}</h3>
       <p>{project.note}</p>
       <div className="tag-row">{project.filters.map((tag) => <span key={tag}>{tag}</span>)}</div>
@@ -822,89 +997,43 @@ function ProjectCard({ project, index = 0, navigate }) {
   )
 }
 
-function ProjectPreview({ project }) {
-  const host = project.url ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'coming-soon'
-  const templates = {
-    'blockchain-voting': ['Verify voter', 'Cast ballot', 'Audit trail'],
-    'ai-smart-ui': ['Prompt panel', 'AI output', 'Workspace'],
-    sentinelx: ['Threat feed', 'Risk map', 'Incident queue'],
-    'nevermind-store': ['Product grid', 'Cart drawer', 'Checkout'],
-    stockflow: ['Inventory', 'Low stock', 'Reports'],
-    'taskflow-pro': ['Today', 'In progress', 'Done'],
-    'intern-track': ['Applications', 'Interviews', 'Deadlines']
-  }
-  const labels = templates[project.slug] || ['Preview', 'Interface', 'Live']
-
-  return (
-    <div className={`project-art preview-frame ${project.color}`}>
-      <div className="preview-browser">
-        <div className="preview-topbar">
-          <i /><i /><i />
-          <span>{host}</span>
-        </div>
-        {project.url ? <iframe className="preview-iframe" src={project.url} title={`${project.name} live preview`} loading="lazy" /> : <div className="preview-screen coming-soon-screen">
-          <aside>
-            <strong>{project.name.slice(0, 2)}</strong>
-            <span />
-            <span />
-            <span />
-          </aside>
-          <main>
-            <div className="preview-hero">
-              <small>{project.type}</small>
-              <b>{project.name}</b>
-            </div>
-            <div className="preview-panels">
-              {labels.map((label, index) => <span key={label} style={{ '--delay': `${index * 0.35}s` }}>{label}</span>)}
-            </div>
-            <div className="preview-lines"><i /><i /><i /></div>
-          </main>
-        </div>}
-      </div>
-      <span className="preview-live-dot">{project.url ? 'Live preview' : 'Coming soon'}</span>
-    </div>
-  )
-}
-
 function ProjectPage({ slug, navigate }) {
   const project = liveBuilds.find((item) => item.slug === slug) || liveBuilds[0]
   const next = liveBuilds[(liveBuilds.findIndex((item) => item.slug === project.slug) + 1) % liveBuilds.length]
+  const study = getCaseStudy(project)
   return (
     <>
       <section className={`project-hero ${project.color}`}>
-        <div><span>{project.type}</span><h1>{project.name}</h1><p>{project.note}</p><div className="tag-row">{project.filters.map((tag) => <span key={tag}>{tag}</span>)}</div><a className="live-project-link" href={project.url} target="_blank" rel="noreferrer">Open Live Project</a></div>
-        <div className="project-mockup"><b>{project.name}</b><i>{project.category}</i></div>
+        <div><span>{project.type}</span><h1>{project.name}</h1><p>{study.outcome}</p><div className="tag-row">{project.filters.map((tag) => <span key={tag}>{tag}</span>)}</div>{project.url ? <a className="live-project-link" href={project.url} target="_blank" rel="noreferrer">Open Live Project</a> : <span className="coming-soon-link">Coming Soon</span>}</div>
+        <div className="project-brief-panel">
+          <span>Case Study Brief</span>
+          <p>{project.note}</p>
+          <strong>{study.role}</strong>
+        </div>
       </section>
-      <section className="overview-row">{[['Role', 'Frontend builder'], ['Category', project.category], ['Type', project.type], ['Status', 'Live deployment']].map(([label, value]) => <article key={label}><span>{label}</span><strong>{value}</strong></article>)}</section>
+      <section className="overview-row">{[['Role', study.role], ['Category', project.category], ['Type', project.type], ['Status', project.url ? 'Live deployment' : 'Coming soon']].map(([label, value]) => <article key={label}><span>{label}</span><strong>{value}</strong></article>)}</section>
       <section className="section problem-solution">
-        <article><span>The Project</span><p>{project.note}</p></article>
-        <article><span>My Approach</span><p>I focused on a clean user flow, responsive layout, readable sections, and a presentation strong enough for a portfolio case study.</p></article>
+        <article><span>The Problem</span><p>{study.problem}</p></article>
+        <article><span>My Approach</span><p>{study.approach}</p></article>
       </section>
-      <CaseStudyCards project={project} />
+      <CaseStudyCards project={project} study={study} />
       <section className="section process">
         <SectionTitle eyebrow="PROCESS" title="Research. Define. Design. Build. Ship." watermark="PROCESS" />
-        {['Understand', 'Structure', 'Design', 'Build', 'Deploy'].map((step, index) => <article key={step}><span>0{index + 1}</span><h3>{step}</h3><p>{project.note}</p></article>)}
+        {study.process.map(([step, text], index) => <article key={step}><span>0{index + 1}</span><h3>{step}</h3><p>{text}</p></article>)}
       </section>
-      <section className="section showcase-grid">{[1, 2, 3].map((item) => <div key={item} className={`showcase-shot ${project.color}`}><span>{project.name} visual {item}</span></div>)}</section>
       <LiveBuildsSection compact />
-      <section className="results-row">{['Live deployment', 'Responsive interface', 'Portfolio-ready case study'].map((result) => <article key={result}><strong>{result.split(' ')[0]}</strong><span>{result.split(' ').slice(1).join(' ')}</span></article>)}</section>
+      <section className="results-row">{study.results.map((result) => <article key={result}><strong>{result.split(' ')[0]}</strong><span>{result.split(' ').slice(1).join(' ')}</span></article>)}</section>
       <button className={`next-project ${next.color}`} onClick={() => navigate(`/work/${next.slug}`)}>Next Project - {next.name}</button>
     </>
   )
 }
 
-function CaseStudyCards({ project }) {
-  const cards = [
-    ['Challenge', `Make ${project.name} feel clear, useful, and ready for real users.`],
-    ['Interface', 'Shape a polished responsive experience with readable cards, focused states, and strong visual hierarchy.'],
-    ['Result', `${project.name} is now presented as a live deployed project with a full portfolio case-study flow.`]
-  ]
-
+function CaseStudyCards({ project, study }) {
   return (
     <section className="section case-study-cards">
-      <SectionTitle eyebrow="CASE STUDY" title="What the project shows." watermark="STUDY" />
+      <SectionTitle eyebrow="CASE STUDY" title="Detailed project decisions." watermark="STUDY" />
       <div>
-        {cards.map(([title, text], index) => (
+        {study.cards.map(([title, text], index) => (
           <motion.article
             key={title}
             className={`case-card ${project.color}`}
