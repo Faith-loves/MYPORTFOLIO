@@ -1431,8 +1431,12 @@ body[data-route="security"] .orb-cyan {
 
 .project-card {
   display: flex;
-  min-height: 24rem;
+  min-height: 33rem;
   flex-direction: column;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.018)),
+    radial-gradient(circle at 82% 6%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 13rem),
+    rgba(13, 13, 26, 0.82);
 }
 
 .project-card::after,
@@ -1459,6 +1463,9 @@ body[data-route="security"] .orb-cyan {
   display: flex;
   justify-content: space-between;
   color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
 }
 
 .project-card-top small {
@@ -1470,10 +1477,10 @@ body[data-route="security"] .orb-cyan {
 .showcase-shot,
 .project-mockup {
   display: grid;
-  min-height: 16rem;
+  min-height: 12.8rem;
   place-items: center;
-  margin: 1rem 0;
-  border-radius: 1rem;
+  margin: 1rem 0 1.15rem;
+  border-radius: 0.9rem;
   background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(108, 99, 255, 0.18));
   color: var(--gold-light);
   font-family: 'Clash Display', sans-serif;
@@ -1484,7 +1491,7 @@ body[data-route="security"] .orb-cyan {
 .preview-frame {
   position: relative;
   place-items: stretch;
-  padding: clamp(0.65rem, 1.4vw, 1rem);
+  padding: clamp(0.55rem, 1.2vw, 0.8rem);
   font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
 }
@@ -1506,20 +1513,20 @@ body[data-route="security"] .orb-cyan {
   z-index: 1;
   display: grid;
   grid-template-rows: auto 1fr;
-  min-height: 14.5rem;
+  min-height: 11.4rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.17);
   border-radius: 0.85rem;
   background: rgba(5, 5, 10, 0.62);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(18px);
-  transform: perspective(900px) rotateX(5deg) rotateY(-5deg);
+  transform: perspective(900px) rotateX(3deg) rotateY(-4deg);
   transition: transform 0.45s ease, box-shadow 0.45s ease;
 }
 
 .preview-iframe {
   width: 140%;
-  height: 21rem;
+  height: 16.4rem;
   border: 0;
   background: var(--bg-surface);
   transform: scale(0.72);
@@ -1536,7 +1543,7 @@ body[data-route="security"] .orb-cyan {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.65rem 0.75rem;
+  padding: 0.52rem 0.65rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.06);
 }
@@ -1694,8 +1701,8 @@ body[data-route="security"] .orb-cyan {
 
 .preview-live-dot {
   position: absolute;
-  right: 1.15rem;
-  bottom: 1.15rem;
+  right: 0.92rem;
+  bottom: 0.92rem;
   z-index: 2;
   border: 1px solid rgba(201, 168, 76, 0.34);
   border-radius: 999px;
@@ -1750,6 +1757,9 @@ body[data-route="security"] .orb-cyan {
 
 .project-card button {
   margin-top: auto;
+  min-height: 2.75rem;
+  border-radius: 999px;
+  background: rgba(201, 168, 76, 0.1);
   color: var(--gold-light);
   font-weight: 900;
 }

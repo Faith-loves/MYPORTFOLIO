@@ -26,7 +26,7 @@ const liveBuilds = [
     category: 'Full Stack',
     filters: ['Full Stack', 'Security'],
     color: 'cyan',
-    url: 'https://blockchain-voting-ebop.onrender.com',
+    url: 'https://blockchain-voting-5ob8.vercel.app/',
     note: 'Secure voting flow with verification, ballot review, and deployment-ready product structure.'
   },
   {
@@ -46,7 +46,7 @@ const liveBuilds = [
     category: 'Cybersecurity',
     filters: ['Security', 'Frontend'],
     color: 'terminal',
-    url: 'https://sentinelx-frontend.onrender.com/',
+    url: 'https://sentinelx-pi.vercel.app/',
     note: 'Security operations frontend for monitoring alerts, risk signals, and analyst-style visibility.'
   },
   {
@@ -98,17 +98,6 @@ const liveBuilds = [
     color: 'indigo',
     url: 'https://dev-docs-ai-lac.vercel.app/',
     note: 'An AI documentation assistant for searching technical docs, simplifying developer questions, and turning scattered references into usable answers.'
-  },
-  {
-    slug: 'everafter-weddings',
-    name: 'EverAfter Weddings',
-    type: 'Coming Soon',
-    category: 'Event Website',
-    filters: ['Frontend'],
-    color: 'gold',
-    url: '',
-    comingSoon: true,
-    note: 'A romantic wedding experience and event showcase project currently being prepared.'
   }
 ]
 
@@ -267,25 +256,6 @@ const caseStudyDetails = {
       ['Deploy', 'Added the Vercel project link so visitors can test it directly.']
     ],
     results: ['Live DevDocs AI link', 'Developer-tool case study', 'AI documentation workflow']
-  },
-  'everafter-weddings': {
-    role: 'Frontend experience designer',
-    problem: 'Wedding and event pages need emotion, clarity, and practical information in one place. The case study needed to show the direction without pretending the build is already live.',
-    approach: 'I framed the project around event storytelling, guest information, and a polished presentation system that can grow into a full live experience.',
-    outcome: 'The project remains marked as coming soon, but the case study now has a clearer purpose and a better explanation of the intended product experience.',
-    cards: [
-      ['Event Story', 'The concept is centered on making the couple, schedule, and event details feel warm and easy to explore.'],
-      ['Guest Clarity', 'The planned interface prioritizes the information guests need most: date, venue, schedule, and RSVP direction.'],
-      ['Visual Direction', 'The project is positioned as an elegant event website rather than a generic landing page.']
-    ],
-    process: [
-      ['Understand', 'Mapped the page around emotional storytelling and practical guest needs.'],
-      ['Structure', 'Planned sections for event details, schedule, venue, and RSVP.'],
-      ['Design', 'Defined a polished wedding tone with clear reading flow.'],
-      ['Build', 'Prepared the project direction for future implementation.'],
-      ['Deploy', 'Keeping this one as coming soon until the live site is ready.']
-    ],
-    results: ['Prepared event concept', 'Guest-focused structure', 'Clear coming-soon status']
   }
 }
 
@@ -741,7 +711,7 @@ function HomePage({ navigate }) {
           <RoleTicker />
           <div className="hero-actions">
             <button onClick={() => navigate('/work')}>See My Work</button>
-            <a href="/Faith-Temiloluwa-Kareem-CV.pdf" download>Download CV</a>
+            <a href="/FaithKareem_CV.pdf" download>Download CV</a>
           </div>
         </div>
         <div className="scroll-indicator"><span>SCROLL</span><i /></div>
@@ -988,12 +958,29 @@ function ProjectCard({ project, index = 0, navigate }) {
   return (
     <motion.article layout className={`project-card ${project.color}`} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }}>
       <div className="project-card-top"><span>{String(index + 1).padStart(2, '0')}</span><small>{project.category}</small></div>
+      <ProjectPreview project={project} />
       <h3>{project.name}</h3>
       <p>{project.note}</p>
       <div className="tag-row">{project.filters.map((tag) => <span key={tag}>{tag}</span>)}</div>
       <button onClick={() => navigate(`/work/${project.slug}`)}>View Case Study</button>
       {project.comingSoon ? <span className="coming-soon-link">Coming Soon</span> : <a href={project.url} target="_blank" rel="noreferrer">Live Demo</a>}
     </motion.article>
+  )
+}
+
+function ProjectPreview({ project }) {
+  const host = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  return (
+    <div className={`project-art preview-frame ${project.color}`}>
+      <div className="preview-browser">
+        <div className="preview-topbar">
+          <i /><i /><i />
+          <span>{host}</span>
+        </div>
+        <iframe className="preview-iframe" src={project.url} title={`${project.name} live preview`} loading="lazy" />
+      </div>
+      <span className="preview-live-dot">Live preview</span>
+    </div>
   )
 }
 
