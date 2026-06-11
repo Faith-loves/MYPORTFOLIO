@@ -2738,8 +2738,6 @@ body[data-route="security"] .orb-cyan {
   .hero::after,
   .hero-mesh,
   .scroll-indicator,
-  .hex-portrait::before,
-  .hex-portrait i,
   .case-card i,
   .project-card::after,
   .blog-grid article::after {
@@ -2885,13 +2883,36 @@ body[data-route="security"] .orb-cyan {
   }
 
   .hex-portrait {
-    min-height: 22rem;
+    min-height: 25rem;
+    overflow: hidden;
   }
 
   .hexagon {
-    inset: 0;
-    border-radius: 1.1rem;
-    clip-path: none;
+    inset: 2.2rem 2.6rem;
+    border-radius: 0;
+    clip-path: polygon(50% 0, 92% 24%, 92% 76%, 50% 100%, 8% 76%, 8% 24%);
+  }
+
+  .hexagon::after {
+    display: none;
+  }
+
+  .hex-portrait::before {
+    display: block;
+    inset: 1.7rem;
+    transform: rotateX(70deg);
+  }
+
+  .hex-portrait i {
+    display: block;
+    padding: 0.36rem 0.5rem;
+    font-size: 0.58rem;
+    transform:
+      rotate(calc(var(--i) * 90deg))
+      translateX(min(34vw, 8.6rem))
+      rotate(calc(var(--i) * -90deg));
+    animation: mobileOrbitBadge 14s linear infinite;
+    animation-delay: calc(var(--i) * -2.4s);
   }
 
   .stats-grid,
@@ -3074,6 +3095,22 @@ body[data-route="security"] .orb-cyan {
 
   .site-footer {
     padding: 2.5rem 1rem;
+  }
+}
+
+@keyframes mobileOrbitBadge {
+  from {
+    transform:
+      rotate(calc(var(--i) * 90deg))
+      translateX(min(34vw, 8.6rem))
+      rotate(calc(var(--i) * -90deg));
+  }
+
+  to {
+    transform:
+      rotate(calc(var(--i) * 90deg + 360deg))
+      translateX(min(34vw, 8.6rem))
+      rotate(calc((var(--i) * -90deg) - 360deg));
   }
 }
 
