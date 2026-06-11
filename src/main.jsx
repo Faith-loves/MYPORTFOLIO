@@ -634,6 +634,13 @@ function Navbar({ path, scrolled, navigate }) {
     setOpen(false)
   }
 
+  useEffect(() => {
+    if (!open) return undefined
+    const closeOnScroll = () => setOpen(false)
+    window.addEventListener('scroll', closeOnScroll, { passive: true })
+    return () => window.removeEventListener('scroll', closeOnScroll)
+  }, [open])
+
   return (
     <header className={`site-nav ${scrolled ? 'scrolled' : ''}`}>
       <button className="logo" onClick={() => linkClick('/')}>
