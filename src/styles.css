@@ -2293,6 +2293,15 @@ body[data-route="security"] .orb-cyan {
 }
 
 @media (max-width: 980px) {
+  .site-nav {
+    padding: 0.8rem 1rem;
+  }
+
+  .theme-switcher {
+    right: 0.75rem;
+    top: 4.4rem;
+  }
+
   .desktop-nav,
   .hire-button {
     display: none;
@@ -2323,13 +2332,19 @@ body[data-route="security"] .orb-cyan {
   .mobile-menu {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 9988;
     display: grid;
     align-content: center;
     gap: 1rem;
     border-left: 1px solid var(--gold);
     padding: 6rem 2rem 2rem;
     background: rgba(13, 13, 26, 0.97);
+  }
+
+  .site-nav .logo,
+  .menu-button {
+    position: relative;
+    z-index: 9991;
   }
 
   .mobile-menu button {
@@ -2353,6 +2368,47 @@ body[data-route="security"] .orb-cyan {
     grid-template-columns: 1fr;
   }
 
+  .hero {
+    min-height: auto;
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero-content,
+  .page-hero,
+  .contact-page {
+    width: 100%;
+  }
+
+  .hero h1,
+  .page-hero h1,
+  .contact-page h1,
+  .project-hero h1 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .section,
+  .page-hero,
+  .about-hero,
+  .contact-page,
+  .project-hero {
+    padding-inline: clamp(1rem, 4vw, 2rem);
+  }
+
+  .project-hero {
+    min-height: auto;
+    padding-top: 7.5rem;
+  }
+
+  .project-brief-panel {
+    min-height: 18rem;
+  }
+
+  .process article {
+    grid-template-columns: auto 0.55fr 1fr;
+  }
+
   .services-grid,
   .skills-panels,
   .case-study-cards > div,
@@ -2366,6 +2422,18 @@ body[data-route="security"] .orb-cyan {
   .work-grid,
   .testimonials {
     grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    min-height: auto;
+  }
+
+  .preview-browser {
+    transform: none;
+  }
+
+  .contact-page form {
+    width: 100%;
   }
 }
 
@@ -2381,7 +2449,9 @@ body[data-route="security"] .orb-cyan {
   }
 
   .hero {
+    min-height: 100svh;
     place-items: end start;
+    padding: 6rem 1rem 3.2rem;
     text-align: left;
   }
 
@@ -2389,7 +2459,33 @@ body[data-route="security"] .orb-cyan {
     text-align: left;
   }
 
+  .role-badge {
+    max-width: 100%;
+  }
+
+  .hero h1,
+  .page-hero h1,
+  .contact-page h1 {
+    font-size: clamp(3.25rem, 17vw, 5.3rem);
+    line-height: 0.86;
+  }
+
+  .project-hero h1 {
+    font-size: clamp(3.1rem, 16vw, 5rem);
+    line-height: 0.88;
+  }
+
+  .hero-content > p,
+  .page-hero p,
+  .project-hero p,
+  .contact-page p,
+  .large-copy {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
   .hero-actions {
+    width: 100%;
     justify-content: flex-start;
   }
 
@@ -2401,6 +2497,41 @@ body[data-route="security"] .orb-cyan {
 
   .project-row {
     grid-template-columns: 1fr;
+  }
+
+  .project-row > span {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding-block: clamp(3.25rem, 12vw, 5rem);
+    padding-inline: 1rem;
+  }
+
+  .section-title {
+    margin-bottom: 1.6rem;
+  }
+
+  .section-title h2 {
+    font-size: clamp(2.2rem, 13vw, 4rem);
+    line-height: 0.95;
+  }
+
+  .section-title > strong {
+    display: none;
+  }
+
+  .page-hero,
+  .about-hero,
+  .contact-page,
+  .project-hero {
+    padding-inline: 1rem;
+  }
+
+  .page-hero {
+    min-height: auto;
+    padding-top: 7rem;
+    padding-bottom: 3rem;
   }
 
   .stats-grid,
@@ -2419,10 +2550,139 @@ body[data-route="security"] .orb-cyan {
 
   .process article {
     grid-template-columns: 1fr;
+    gap: 0.4rem;
   }
 
   .project-brief-panel {
     min-height: 16rem;
+  }
+
+  .project-card,
+  .blog-grid article,
+  .security-card,
+  .services-grid article,
+  .testimonials article,
+  .contact-page form {
+    border-radius: 0.9rem;
+    padding: 1rem;
+  }
+
+  .project-card h3,
+  .blog-grid h3,
+  .live-build-grid strong {
+    font-size: 1.35rem;
+  }
+
+  .project-art {
+    min-height: 10.6rem;
+    margin: 0.85rem 0 1rem;
+  }
+
+  .preview-frame {
+    padding: 0.45rem;
+  }
+
+  .preview-browser {
+    min-height: 9.6rem;
+    border-radius: 0.72rem;
+  }
+
+  .preview-iframe {
+    width: 160%;
+    height: 14.2rem;
+    transform: scale(0.625);
+  }
+
+  .preview-topbar {
+    gap: 0.32rem;
+    padding: 0.42rem 0.48rem;
+  }
+
+  .preview-topbar span {
+    padding: 0.22rem 0.45rem;
+    font-size: 0.5rem;
+  }
+
+  .preview-live-dot {
+    right: 0.72rem;
+    bottom: 0.72rem;
+    font-size: 0.5rem;
+  }
+
+  .tag-row {
+    gap: 0.35rem;
+  }
+
+  .tag-row span {
+    padding: 0.3rem 0.48rem;
+    font-size: 0.6rem;
+  }
+
+  .project-card button,
+  .project-card > a,
+  .live-project-link,
+  .coming-soon-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .live-build-grid a {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .live-build-grid b {
+    grid-column: auto;
+  }
+
+  .overview-row,
+  .results-row {
+    margin-inline: 1rem;
+  }
+
+  .contact-page form {
+    gap: 0.8rem;
+  }
+
+  .contact-page input,
+  .contact-page textarea,
+  .contact-page select {
+    min-height: 3rem;
+  }
+
+  .site-footer {
+    gap: 2rem;
+    padding: 3rem 1rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .logo {
+    font-size: 1.08rem;
+  }
+
+  .logo code {
+    font-size: 0.82rem;
+  }
+
+  .mobile-menu {
+    padding-inline: 1.2rem;
+  }
+
+  .mobile-menu button {
+    font-size: clamp(2.1rem, 14vw, 3rem);
+  }
+
+  .hero h1,
+  .page-hero h1,
+  .contact-page h1,
+  .project-hero h1 {
+    font-size: clamp(2.85rem, 16vw, 4.4rem);
+  }
+
+  .theme-switcher {
+    transform: scale(0.88);
+    transform-origin: top right;
   }
 }
 
