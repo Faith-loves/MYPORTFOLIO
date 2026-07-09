@@ -14,7 +14,7 @@ const routes = [
 
 const profileLinks = [
   ['GitHub', 'https://github.com/Faith-loves'],
-  ['LinkedIn', 'https://www.linkedin.com/in/faith-kareem-7676a1332?utm_source=share_via&utm_content=profile&utm_medium=member_android'],
+  ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
   ['Email', 'mailto:omolarak724@gmail.com']
 ]
 
@@ -1128,3 +1128,4 @@ function BackToTop() {
 }
 
 createRoot(document.getElementById('root')).render(<App />)
+
