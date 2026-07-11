@@ -273,104 +273,6 @@ const getCaseStudy = (project) => caseStudyDetails[project.slug] || {
   results: ['Live deployment', 'Responsive interface', 'Portfolio-ready case study']
 }
 
-const projects = [
-  {
-    slug: 'naijaaudit',
-    number: '01',
-    name: 'SecureAudit',
-    category: 'Full Stack + Cybersecurity',
-    filters: ['Full Stack', 'Security'],
-    color: 'cyan',
-    tags: ['Node.js', 'React', 'MongoDB', 'JWT', 'OWASP'],
-    description: 'A web-based security audit dashboard built for small businesses to run automated website vulnerability checks, generate reports, and understand risk.',
-    story: 'Many small business websites are exposed without their owners knowing. SecureAudit makes security accessible without needing a cybersecurity degree.',
-    role: 'Full-stack builder',
-    timeline: '6 weeks',
-    tools: 'React, Node, MongoDB',
-    status: 'Concept case study',
-    problem: 'Small businesses often do not know their websites are exposed until something breaks or customer trust is already damaged.',
-    approach: 'I designed a dashboard that translates technical scan results into plain-language risk signals, remediation steps, and exportable reports.',
-    results: ['10 OWASP risks mapped', '24-page report flow', '3 scan states designed'],
-    links: ['Live Demo', 'GitHub', 'Read Report']
-  },
-  {
-    slug: 'solva',
-    number: '02',
-    name: 'Solva',
-    category: 'UI/UX Design',
-    filters: ['UI/UX'],
-    color: 'indigo',
-    tags: ['Figma', 'Design System', 'Mobile App', 'Research'],
-    description: 'A fintech mobile app concept helping freelancers track income, manage taxes, and invoice clients across currencies.',
-    story: 'Freelancers lose money through missed invoices and messy tracking. Solva gives that workflow a calm financial home.',
-    role: 'Product designer',
-    timeline: '4 weeks',
-    tools: 'Figma, Research, Prototype',
-    status: 'Design case study',
-    problem: 'Freelancers need invoicing and income clarity without enterprise finance complexity.',
-    approach: 'I shaped the app around quick income capture, simple invoice states, and a compact design system for repeated financial actions.',
-    results: ['52 components designed', '7 user flows mapped', '4 prototype states'],
-    links: ['View Figma', 'Case Study']
-  },
-  {
-    slug: 'vulnreport',
-    number: '03',
-    name: 'VulnReport',
-    category: 'Cybersecurity Research',
-    filters: ['Security'],
-    color: 'terminal',
-    tags: ['Pentesting', 'Burp Suite', 'DVWA', 'OWASP', 'PDF'],
-    description: 'A professional penetration testing report covering SQL Injection, XSS, CSRF, and brute-force vulnerabilities with remediation steps.',
-    story: 'Most junior security learners run tools. This report proves the ability to think like an attacker and write like a consultant.',
-    role: 'Security researcher',
-    timeline: '3 weeks',
-    tools: 'Burp, DVWA, OWASP',
-    status: 'Report ready',
-    problem: 'Security findings are only useful when the reader understands impact, evidence, and repair priority.',
-    approach: 'I documented each vulnerability with proof, risk severity, business impact, and practical remediation language.',
-    results: ['4 vuln classes tested', 'CVSS scoring included', 'Executive summary written'],
-    links: ['Read Report PDF', 'GitHub']
-  },
-  {
-    slug: 'koto',
-    number: '04',
-    name: 'Koto',
-    category: 'Frontend Development',
-    filters: ['Frontend'],
-    color: 'gold',
-    tags: ['React', 'Tailwind', 'Framer Motion', 'Vercel'],
-    description: 'A cinematic community events platform with search, filtering, and shareable event cards.',
-    story: 'Diaspora communities often organize through scattered chats. Koto turns cultural discovery into a beautiful public product.',
-    role: 'Frontend developer',
-    timeline: '5 weeks',
-    tools: 'React, Tailwind, Motion',
-    status: 'Frontend case study',
-    problem: 'Community events need trust, discovery, and shareability without feeling like a plain listing directory.',
-    approach: 'I designed animated event surfaces, clean filters, and a visual rhythm that makes cultural discovery feel premium.',
-    results: ['99 Lighthouse target', '5 event categories', 'Share-card flow'],
-    links: ['Live Site', 'GitHub']
-  },
-  {
-    slug: 'securevault',
-    number: '05',
-    name: 'SecureVault',
-    category: 'Full Stack Engineering',
-    filters: ['Full Stack', 'Security'],
-    color: 'purple',
-    tags: ['Node.js', 'MongoDB', 'bcrypt', 'JWT', 'React'],
-    description: 'A full-stack encrypted password manager with client-side encryption, authentication, rate limiting, and brute-force protection.',
-    story: 'Built because privacy tools should prove trust through architecture, not just a long policy page.',
-    role: 'Full-stack engineer',
-    timeline: '6 weeks',
-    tools: 'React, Express, MongoDB',
-    status: 'Architecture case study',
-    problem: 'Password managers must feel simple to use while respecting the seriousness of sensitive data.',
-    approach: 'I planned a secure-by-default flow with encryption before storage, protected authentication, and clear vault interactions.',
-    results: ['AES flow planned', 'JWT auth model', 'Rate limiting included'],
-    links: ['Live Demo', 'GitHub']
-  }
-]
-
 const posts = [
   {
     slug: 'owasp-for-nigerian-developers',
@@ -444,7 +346,6 @@ function App() {
   return (
     <>
       <Atmosphere />
-      <CustomCursor />
       <AnimatePresence>
         {showPreloader && <Preloader onDone={() => {
           sessionStorage.setItem('ftk-visited', 'true')
@@ -525,73 +426,11 @@ function Atmosphere() {
   )
 }
 
-function CustomCursor() {
-  const dot = useRef(null)
-  const ring = useRef(null)
-  const label = useRef(null)
-
-  useEffect(() => {
-    let x = window.innerWidth / 2
-    let y = window.innerHeight / 2
-    let rx = x
-    let ry = y
-    let raf
-
-    const move = (event) => {
-      x = event.clientX
-      y = event.clientY
-      dot.current?.style.setProperty('--x', `${x}px`)
-      dot.current?.style.setProperty('--y', `${y}px`)
-    }
-    const animate = () => {
-      rx += (x - rx) * 0.12
-      ry += (y - ry) * 0.12
-      ring.current?.style.setProperty('--x', `${rx}px`)
-      ring.current?.style.setProperty('--y', `${ry}px`)
-      raf = requestAnimationFrame(animate)
-    }
-    const over = (event) => {
-      const target = event.target.closest('a, button, .project-card, .project-row, .security-card')
-      if (!target) return
-      const text = target.classList.contains('project-card') || target.classList.contains('project-row')
-        ? 'OPEN'
-        : target.classList.contains('security-card')
-          ? 'SCAN'
-          : 'VIEW'
-      ring.current?.classList.add('cursor-active')
-      label.current.textContent = text
-    }
-    const out = (event) => {
-      if (!event.target.closest('a, button, .project-card, .project-row, .security-card')) return
-      ring.current?.classList.remove('cursor-active')
-      label.current.textContent = ''
-    }
-
-    window.addEventListener('mousemove', move)
-    document.addEventListener('mouseover', over)
-    document.addEventListener('mouseout', out)
-    animate()
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('mousemove', move)
-      document.removeEventListener('mouseover', over)
-      document.removeEventListener('mouseout', out)
-    }
-  }, [])
-
-  return (
-    <>
-      <div className="cursor-dot" ref={dot} />
-      <div className="cursor-ring" ref={ring}><span ref={label} /></div>
-    </>
-  )
-}
-
 function Preloader({ onDone }) {
   const [count, setCount] = useState(0)
   useEffect(() => {
     const timer = setInterval(() => setCount((n) => Math.min(100, n + 4)), 42)
-    const done = setTimeout(onDone, 2600)
+    const done = setTimeout(onDone, 1500)
     return () => {
       clearInterval(timer)
       clearTimeout(done)
@@ -704,37 +543,77 @@ function SectionTitle({ eyebrow, title, watermark }) {
 }
 
 function HomePage({ navigate }) {
+  const [track, setTrack] = useState('engineering')
+  const isDesign = track === 'design'
+
   return (
     <>
-      <section className="hero">
+      <section className={`hero ${isDesign ? 'design-track' : 'engineering-track'}`}>
         <HeroMesh />
         <div className="hero-content">
           <motion.div className="role-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-            {'Open to Global Opportunities'}
+            {isDesign ? 'UI/UX Portfolio Track - Coming Soon' : 'Full Stack / Frontend / Cybersecurity / Mobile'}
           </motion.div>
-          <motion.h1 initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.24 } } }}>
-            {['I Design It.', 'I Build It.', 'I Secure It.'].map((line) => (
-              <motion.span key={line} variants={{ hidden: { opacity: 0, filter: 'blur(28px)' }, show: { opacity: 1, filter: 'blur(0px)' } }}>
-                {line.includes('Secure') ? <>I <em>Secure</em> It.</> : line}
+          <motion.h1 initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.18 } } }}>
+            {(isDesign ? ['UI/UX Track.', 'Coming Soon.'] : ['I Build It.', 'I Secure It.']).map((line) => (
+              <motion.span key={line} variants={{ hidden: { opacity: 0, filter: 'blur(18px)' }, show: { opacity: 1, filter: 'blur(0px)' } }}>
+                {line.includes('Secure') || line.includes('Coming') ? <><em>{line}</em></> : line}
               </motion.span>
             ))}
           </motion.h1>
-          <p>A multidisciplinary technologist crafting digital products that are beautiful, functional, and secure.</p>
-          <RoleTicker />
+          <p>{isDesign ? 'A separate UI/UX case-study portfolio is being prepared with Figma flows, product thinking, wireframes, prototypes, and polished design systems.' : 'Engineering-focused portfolio for full-stack development, frontend systems, cybersecurity products, AI tools, and mobile app development.'}</p>
+          <TrackSelector active={track} setActive={setTrack} />
+          {!isDesign ? <RoleTicker /> : <div className="design-hero-note"><strong>Coming soon</strong><span>Figma case studies, UX research, product flows, and interface systems will live here.</span></div>}
           <div className="hero-actions">
-            <button onClick={() => navigate('/work')}>See My Work</button>
+            <button onClick={() => isDesign ? setTrack('engineering') : navigate('/work')}>{isDesign ? 'Back to Engineering Portfolio' : 'See Engineering Work'}</button>
             <a href="/FaithKareem_CV.pdf" download>Download CV</a>
           </div>
         </div>
       </section>
       <Marquee />
-      <AboutPreview navigate={navigate} />
-      <FeaturedProjects navigate={navigate} />
-      <LiveBuildsSection compact navigate={navigate} />
-      <Services />
-      <Testimonials />
-      <CtaBanner navigate={navigate} />
+      {isDesign ? <UiUxComingSoon /> : <>
+        <AboutPreview navigate={navigate} />
+        <FeaturedProjects navigate={navigate} />
+        <LiveBuildsSection compact navigate={navigate} />
+        <Services />
+        <Testimonials />
+        <CtaBanner navigate={navigate} />
+      </>}
     </>
+  )
+}
+
+function TrackSelector({ active, setActive }) {
+  const tracks = [
+    ['engineering', 'Full Stack / Cybersecurity', ['React', 'Node.js', 'MongoDB', 'Auth', 'OWASP', 'APIs']],
+    ['design', 'UI/UX Designer', ['Figma', 'Wireframes', 'Prototypes', 'UX Research', 'Design Systems']]
+  ]
+
+  return (
+    <div className="track-selector" aria-label="Portfolio track selector">
+      {tracks.map(([id, label, tools]) => (
+        <button key={id} type="button" className={`track-button ${id} ${active === id ? 'active' : ''}`} onClick={() => setActive(id)}>
+          <span>{label}</span>
+          <div aria-hidden="true">{tools.map((tool, index) => <i key={tool} style={{ '--i': index }}>{tool}</i>)}</div>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+function UiUxComingSoon() {
+  const cards = [
+    ['Figma Systems', 'Design-system files, components, variants, and polished interface screens are being prepared.'],
+    ['UX Case Studies', 'Research notes, user flows, journey maps, and problem-to-solution stories will be added here.'],
+    ['Prototype Work', 'Clickable flows, mobile screens, and product interaction demos are coming soon.']
+  ]
+
+  return (
+    <section className="section design-coming-soon">
+      <SectionTitle eyebrow="UI/UX TRACK" title="Design portfolio coming soon." watermark="UX" />
+      <p className="section-note">This portfolio is currently focused on engineering work. The UI/UX track has its own space so recruiters can review design work separately when it is ready.</p>
+      <div>{cards.map(([title, text]) => <article key={title}><span>Coming Soon</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+    </section>
   )
 }
 
@@ -748,7 +627,7 @@ function HeroMesh() {
 }
 
 function RoleTicker() {
-  const roles = ['UI/UX Designer', 'Frontend Developer', 'Full Stack Engineer', 'Security Researcher']
+  const roles = ['Full Stack Developer', 'Frontend Developer', 'Cybersecurity Builder', 'Mobile App Developer']
   const [index, setIndex] = useState(0)
   useEffect(() => {
     const timer = setInterval(() => setIndex((n) => (n + 1) % roles.length), 2500)
@@ -758,7 +637,7 @@ function RoleTicker() {
 }
 
 function Marquee() {
-  const text = 'UI/UX DESIGN - FRONTEND DEVELOPMENT - FULL STACK - CYBERSECURITY - AVAILABLE FOR HIRE - THINKING GLOBALLY - MORE PROJECTS COMING - FAITH TEMILOLUWA KAREEM -'
+  const text = 'FULL STACK DEVELOPMENT - FRONTEND DEVELOPMENT - CYBERSECURITY - MOBILE APP DEVELOPMENT - AI TOOLS - AVAILABLE FOR HIRE - FAITH TEMILOLUWA KAREEM -'
   return <div className="marquee"><span>{text} {text}</span></div>
 }
 
@@ -773,7 +652,7 @@ function AboutPreview({ navigate }) {
       </div>
       <div>
         <SectionTitle eyebrow="01 - WHO I AM" title="A builder with a global vision." watermark="ABOUT" />
-        <p className="large-copy">Computer Science student building AI-powered cybersecurity and full-stack solutions. I design the interface, build the system, and think about how it can be protected before it reaches users.</p>
+        <p className="large-copy">Computer Science student building full-stack products, frontend systems, cybersecurity dashboards, AI tools, and mobile app experiences with a practical security-first mindset.</p>
         <div className="stats-grid">
           {['3+ Years Building', '12+ Projects Shipped', '4 Domains Mastered', '100% Passion Always'].map((stat) => (
             <article key={stat}><strong>{stat.split(' ')[0]}</strong><span>{stat.split(' ').slice(1).join(' ')}</span></article>
@@ -836,14 +715,14 @@ function LiveBuildsSection({ compact = false, navigate }) {
 
 function Services() {
   const items = [
-    ['01', 'UI/UX Design', 'Interfaces with structure, intention, and a premium user rhythm.'],
-    ['02', 'Frontend Dev', 'Responsive React builds with motion, polish, and clean interaction.'],
-    ['03', 'Full Stack Engineering', 'APIs, dashboards, authentication, and deployment-ready systems.'],
-    ['04', 'Security Research', 'Security-first thinking rooted in OWASP, testing, and risk awareness.']
+    ['01', 'Full Stack Engineering', 'APIs, dashboards, authentication, and deployment-ready systems.'],
+    ['02', 'Frontend Development', 'Responsive React builds with clean interaction and production polish.'],
+    ['03', 'Cybersecurity', 'Security-first thinking rooted in OWASP, testing, and risk awareness.'],
+    ['04', 'Mobile App Development', 'Mobile-first interfaces, app flows, and scalable user experiences.']
   ]
   return (
     <section className="section">
-      <SectionTitle eyebrow="03 - WHAT I DO" title="Four disciplines. One builder." watermark="SERVICES" />
+      <SectionTitle eyebrow="03 - WHAT I DO" title="Engineering disciplines. One builder." watermark="SERVICES" />
       <div className="services-grid">
         {items.map(([number, title, text]) => <article key={title}><IconMark /><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}
       </div>
@@ -904,11 +783,11 @@ function AboutPage() {
         </div>
       </section>
       <section className="section about-statement">
-        <SectionTitle eyebrow="01 - IDENTITY" title="A designer's eye, an engineer's discipline, a security mindset." watermark="FAITH" />
+        <SectionTitle eyebrow="01 - IDENTITY" title="An engineer's discipline, a frontend eye, and a security mindset." watermark="FAITH" />
         <div className="about-statement-grid">
           <article>
-            <span>Design</span>
-            <p>I use layout, typography, and product thinking to make interfaces feel clear, credible, and useful.</p>
+            <span>Frontend</span>
+            <p>I build responsive interfaces that feel clear, credible, and useful across devices.</p>
           </article>
           <article>
             <span>Engineering</span>
@@ -929,16 +808,16 @@ function AboutPage() {
 
 function SkillsDeepDive() {
   const panels = [
-    ['01 / DESIGN', 'I design clean, useful product experiences.', ['Figma', 'Wireframing', 'Prototyping', 'Design Systems']],
-    ['02 / FRONTEND', 'I turn ideas into responsive interfaces.', ['React', 'JavaScript', 'Tailwind CSS', 'HTML & CSS']],
-    ['03 / FULL STACK', 'I connect interfaces to real systems.', ['Node.js', 'MongoDB', 'REST API Design', 'Authentication']],
-    ['04 / SECURITY', 'I build with risk in mind.', ['Penetration Testing', 'Burp Suite', 'OWASP Top 10', 'Kali Linux']]
+    ['01 / FRONTEND', 'I turn ideas into responsive interfaces.', ['React', 'JavaScript', 'Tailwind CSS', 'HTML & CSS']],
+    ['02 / FULL STACK', 'I connect interfaces to real systems.', ['Node.js', 'MongoDB', 'REST API Design', 'Authentication']],
+    ['03 / SECURITY', 'I build with risk in mind.', ['Penetration Testing', 'Burp Suite', 'OWASP Top 10', 'Kali Linux']],
+    ['04 / MOBILE', 'I plan app screens and mobile-first flows.', ['React Native', 'Mobile UX', 'Responsive UI', 'App Architecture']]
   ]
   return <section className="skills-panels">{panels.map(([label, title, skills]) => <article key={label}><span>{label}</span><h2>{title}</h2><div>{skills.map((skill) => <p key={skill}>{skill}</p>)}</div></article>)}</section>
 }
 
 function Timeline() {
-  const steps = ['2022 - Started UI/UX Design and HTML/CSS', '2023 - Built first React app', '2024 - Discovered cybersecurity', '2024 - Completed DVWA pentest', '2025 - Ready to build globally']
+  const steps = ['2022 - Started HTML/CSS and frontend development', '2023 - Built first React app', '2024 - Discovered cybersecurity', '2024 - Completed DVWA pentest', '2025 - Building full-stack, security, and mobile projects']
   return <section className="section"><SectionTitle eyebrow="JOURNEY" title="Built one layer at a time." watermark="TIMELINE" /><div className="timeline">{steps.map((step) => <article key={step}><span /> <p>{step}</p></article>)}</div></section>
 }
 
@@ -947,17 +826,13 @@ function Values() {
 }
 
 function WorkPage({ navigate }) {
-  const [filter, setFilter] = useState('All')
-  const categories = ['All', 'Frontend', 'Security', 'Full Stack', 'AI', 'Dashboard', 'Ecommerce', 'Productivity']
-  const filtered = filter === 'All' ? liveBuilds : liveBuilds.filter((project) => project.filters.includes(filter))
   return (
     <>
-      <PageHero label="MY WORK" title="Real projects, categorized clearly." text="Live deployed work across frontend, AI interfaces, cybersecurity dashboards, ecommerce, productivity, and full-stack/security flows." />
+      <PageHero label="ENGINEERING WORK" title="Full-stack, frontend, security, and mobile projects." text="A recruiter-friendly archive of deployed engineering projects with clear case studies, live demos, and product decisions." />
       <section className="section work-index">
-        <div className="filters">{categories.map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div>
         <motion.div layout className="work-grid">
           <AnimatePresence>
-            {filtered.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
+            {liveBuilds.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
           </AnimatePresence>
         </motion.div>
       </section>
@@ -980,17 +855,15 @@ function ProjectCard({ project, index = 0, navigate }) {
 }
 
 function ProjectPreview({ project }) {
-  const host = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  const labels = project.filters.slice(0, 3)
   return (
-    <div className={`project-art preview-frame ${project.color}`}>
-      <div className="preview-browser">
-        <div className="preview-topbar">
-          <i /><i /><i />
-          <span>{host}</span>
-        </div>
-        <iframe className="preview-iframe" src={project.url} title={`${project.name} live preview`} loading="lazy" />
+    <div className={`project-art preview-frame static-preview ${project.color}`}>
+      <div className="static-preview-shell">
+        <span>{project.type}</span>
+        <strong>{project.name}</strong>
+        <div>{labels.map((label) => <i key={label}>{label}</i>)}</div>
       </div>
-      <span className="preview-live-dot">Live preview</span>
+      <span className="preview-live-dot">Case study</span>
     </div>
   )
 }
@@ -1013,6 +886,14 @@ function ProjectPage({ slug, navigate }) {
       <section className="section problem-solution">
         <article><span>The Problem</span><p>{study.problem}</p></article>
         <article><span>My Approach</span><p>{study.approach}</p></article>
+      </section>
+      <section className="section recruiter-snapshot">
+        <SectionTitle eyebrow="RECRUITER SNAPSHOT" title="What this project proves." watermark="VALUE" />
+        <div>
+          <article><span>Product Skill</span><p>{study.problem}</p></article>
+          <article><span>Technical Judgment</span><p>{study.approach}</p></article>
+          <article><span>Delivery Signal</span><p>{study.outcome}</p></article>
+        </div>
       </section>
       <CaseStudyCards project={project} study={study} />
       <section className="section process">
@@ -1092,7 +973,7 @@ function BlogPage({ navigate }) {
 
 function BlogPostPage({ slug, navigate }) {
   const post = posts.find((item) => item.slug === slug) || posts[0]
-  return <article className="post-page"><span>{post.date} - {post.read}</span><h1>{post.title}</h1><div className="tag-row">{post.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><p>{post.excerpt}</p><hr /><p>Great digital products are never just beautiful screens. They are decisions, constraints, risks, and tradeoffs made visible. This article is a placeholder for Faith's thinking, written in a clean editorial format that makes the portfolio feel alive and credible.</p><pre><code>{`const faith = {\n  designs: true,\n  builds: true,\n  secures: true\n}`}</code></pre><p>The goal is simple: document what I am learning, show how I think, and make every project easier to trust.</p><button onClick={() => navigate('/blog')}>Back to Blog</button></article>
+  return <article className="post-page"><span>{post.date} - {post.read}</span><h1>{post.title}</h1><div className="tag-row">{post.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><p>{post.excerpt}</p><hr /><p>Great digital products are never just beautiful screens. They are decisions, constraints, risks, and tradeoffs made visible. This article is a placeholder for Faith's thinking, written in a clean editorial format that makes the portfolio feel alive and credible.</p><pre><code>{`const faith = {\n  builds: true,\n  ships: true,\n  secures: true\n}`}</code></pre><p>The goal is simple: document what I am learning, show technical judgment, and make every project easier to trust.</p><button onClick={() => navigate('/blog')}>Back to Blog</button></article>
 }
 
 function ContactPage() {
@@ -1102,7 +983,7 @@ function ContactPage() {
     <section className="contact-page">
       <div><h1>LET'S<br />BUILD<br /><em>SOMETHING.</em></h1><p>Available for freelance projects, remote roles, and internships. Responsive within 24 hours.</p><div className="social-row">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div><code>Remote-friendly<br />omolarak724@gmail.com</code></div>
       <form className={sent ? 'sent' : ''} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
-        {!sent ? <><label>Name<input required /></label><label>Email<input required type="email" /></label><label>Service<select><option>UI/UX Design</option><option>Frontend Dev</option><option>Full Stack</option><option>Security Audit</option><option>Other</option></select></label><label>Message<textarea required value={message} onChange={(event) => setMessage(event.target.value)} maxLength="500" /></label><small>{message.length}/500</small><button>SEND MESSAGE</button></> : <div className="thanks"><h2>MESSAGE SENT</h2><p>I will be in touch within 24 hours.</p></div>}
+        {!sent ? <><label>Name<input required /></label><label>Email<input required type="email" /></label><label>Service<select><option>Full Stack</option><option>Frontend Dev</option><option>Full Stack</option><option>Security Audit</option><option>Other</option></select></label><label>Message<textarea required value={message} onChange={(event) => setMessage(event.target.value)} maxLength="500" /></label><small>{message.length}/500</small><button>SEND MESSAGE</button></> : <div className="thanks"><h2>MESSAGE SENT</h2><p>I will be in touch within 24 hours.</p></div>}
       </form>
     </section>
   )
@@ -1131,5 +1012,6 @@ function BackToTop() {
 }
 
 createRoot(document.getElementById('root')).render(<App />)
+
 
 
