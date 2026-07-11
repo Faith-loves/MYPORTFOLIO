@@ -577,42 +577,6 @@ body[data-route="security"] .orb-cyan {
   color: var(--text-primary);
 }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 1.4rem;
-  left: 50%;
-  display: grid;
-  justify-items: center;
-  gap: 0.5rem;
-  transform: translateX(-50%);
-  color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-}
-
-.scroll-indicator i {
-  position: relative;
-  width: 1px;
-  height: 3.8rem;
-  background: rgba(201, 168, 76, 0.32);
-}
-
-.scroll-indicator i::after {
-  position: absolute;
-  left: -3px;
-  top: 0;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  content: '';
-  background: var(--gold);
-  animation: scrollDot 1.8s linear infinite;
-}
-
-@keyframes scrollDot {
-  to { top: calc(100% - 7px); }
-}
 
 .hero-mesh {
   position: absolute;
@@ -1426,12 +1390,13 @@ body[data-route="security"] .orb-cyan {
 }
 
 .work-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
 }
 
 .project-card {
   display: flex;
-  min-height: 33rem;
+  min-height: 30rem;
   flex-direction: column;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.018)),
@@ -1477,9 +1442,9 @@ body[data-route="security"] .orb-cyan {
 .showcase-shot,
 .project-mockup {
   display: grid;
-  min-height: 12.8rem;
+  min-height: 11rem;
   place-items: center;
-  margin: 1rem 0 1.15rem;
+  margin: 0.9rem 0 1rem;
   border-radius: 0.9rem;
   background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(108, 99, 255, 0.18));
   color: var(--gold-light);
@@ -1513,7 +1478,7 @@ body[data-route="security"] .orb-cyan {
   z-index: 1;
   display: grid;
   grid-template-rows: auto 1fr;
-  min-height: 11.4rem;
+  min-height: 9.8rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.17);
   border-radius: 0.85rem;
@@ -1526,7 +1491,7 @@ body[data-route="security"] .orb-cyan {
 
 .preview-iframe {
   width: 140%;
-  height: 16.4rem;
+  height: 14.2rem;
   border: 0;
   background: var(--bg-surface);
   transform: scale(0.72);
@@ -2440,7 +2405,10 @@ body[data-route="security"] .orb-cyan {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .work-grid,
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .testimonials {
     grid-template-columns: 1fr;
   }
@@ -2737,7 +2705,6 @@ body[data-route="security"] .orb-cyan {
   .hero::before,
   .hero::after,
   .hero-mesh,
-  .scroll-indicator,
   .case-card i,
   .project-card::after,
   .blog-grid article::after {
@@ -3141,3 +3108,8 @@ body[data-route="security"] .orb-cyan {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+
+
+

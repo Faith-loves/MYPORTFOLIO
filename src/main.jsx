@@ -399,7 +399,12 @@ const posts = [
 ]
 
 function App() {
-  const [path, setPath] = useState(() => window.location.pathname)
+  const [path, setPath] = useState(() => {
+    if (window.location.pathname !== '/') {
+      window.history.replaceState({}, '', '/')
+    }
+    return '/'
+  })
   const [scrolled, setScrolled] = useState(false)
   const [transitionTone, setTransitionTone] = useState('gold')
   const [showPreloader, setShowPreloader] = useState(() => sessionStorage.getItem('ftk-visited') !== 'true')
@@ -721,7 +726,6 @@ function HomePage({ navigate }) {
             <a href="/FaithKareem_CV.pdf" download>Download CV</a>
           </div>
         </div>
-        <div className="scroll-indicator"><span>SCROLL</span><i /></div>
       </section>
       <Marquee />
       <AboutPreview navigate={navigate} />
@@ -1015,7 +1019,6 @@ function ProjectPage({ slug, navigate }) {
         <SectionTitle eyebrow="PROCESS" title="Research. Define. Design. Build. Ship." watermark="PROCESS" />
         {study.process.map(([step, text], index) => <article key={step}><span>0{index + 1}</span><h3>{step}</h3><p>{text}</p></article>)}
       </section>
-      <LiveBuildsSection compact />
       <section className="results-row">{study.results.map((result) => <article key={result}><strong>{result.split(' ')[0]}</strong><span>{result.split(' ').slice(1).join(' ')}</span></article>)}</section>
       <button className={`next-project ${next.color}`} onClick={() => navigate(`/work/${next.slug}`)}>Next Project - {next.name}</button>
     </>
@@ -1128,4 +1131,5 @@ function BackToTop() {
 }
 
 createRoot(document.getElementById('root')).render(<App />)
+
 
