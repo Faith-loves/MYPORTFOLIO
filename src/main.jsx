@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AnimatePresence, motion } from 'framer-motion'
 import './styles.css'
@@ -7,9 +7,7 @@ const routes = [
   ['/', 'Home'],
   ['/work', 'Work'],
   ['/about', 'About'],
-  ['/security', 'Security'],
-  ['/blog', 'Blog'],
-  ['/contact', 'Contact']
+  ['/security', 'Security']
 ]
 
 const profileLinks = [
@@ -313,10 +311,21 @@ function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('faith-theme') || 'royal')
 
   useEffect(() => {
+    let ticking = false
     const onPop = () => setPath(window.location.pathname)
-    const onScroll = () => setScrolled(window.scrollY > 80)
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        ticking = false
+        setScrolled((value) => {
+          const next = window.scrollY > 80
+          return value === next ? value : next
+        })
+      })
+    }
     window.addEventListener('popstate', onPop)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => {
       window.removeEventListener('popstate', onPop)
@@ -334,12 +343,12 @@ function App() {
     localStorage.setItem('faith-theme', theme)
   }, [theme])
 
-  const navigate = (to) => {
-    if (to === path) return
+  const navigate = useCallback((to) => {
+    if (to === window.location.pathname) return
     setTransitionTone((tone) => (tone === 'gold' ? 'indigo' : 'gold'))
     window.history.pushState({}, '', to)
     setPath(to)
-  }
+  }, [])
 
   const route = useMemo(() => resolveRoute(path), [path])
 
@@ -355,17 +364,14 @@ function App() {
       <Navbar path={path} scrolled={scrolled} navigate={navigate} />
       <ThemeSwitcher theme={theme} setTheme={setTheme} />
       <main>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={path}
-            initial={{ opacity: 0, y: 18, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -18, filter: 'blur(10px)' }}
-            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <PageRenderer route={route} navigate={navigate} />
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key={path}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.18, ease: 'easeOut' }}
+        >
+          <PageRenderer route={route} navigate={navigate} />
+        </motion.div>
       </main>
       <PageCurtain tone={transitionTone} path={path} />
       <Footer navigate={navigate} />
@@ -398,9 +404,6 @@ function resolveRoute(path) {
   if (path === '/work') return { type: 'work' }
   if (path.startsWith('/work/')) return { type: 'project', slug: path.split('/').pop() }
   if (path === '/security') return { type: 'security' }
-  if (path === '/blog') return { type: 'blog' }
-  if (path.startsWith('/blog/')) return { type: 'post', slug: path.split('/').pop() }
-  if (path === '/contact') return { type: 'contact' }
   return { type: 'notFound' }
 }
 
@@ -410,9 +413,6 @@ function PageRenderer({ route, navigate }) {
   if (route.type === 'work') return <WorkPage navigate={navigate} />
   if (route.type === 'project') return <ProjectPage slug={route.slug} navigate={navigate} />
   if (route.type === 'security') return <SecurityPage />
-  if (route.type === 'blog') return <BlogPage navigate={navigate} />
-  if (route.type === 'post') return <BlogPostPage slug={route.slug} navigate={navigate} />
-  if (route.type === 'contact') return <ContactPage />
   return <NotFound navigate={navigate} />
 }
 
@@ -427,48 +427,32 @@ function Atmosphere() {
 }
 
 function Preloader({ onDone }) {
-  const [count, setCount] = useState(0)
   useEffect(() => {
-    const timer = setInterval(() => setCount((n) => Math.min(100, n + 4)), 42)
-    const done = setTimeout(onDone, 1500)
-    return () => {
-      clearInterval(timer)
-      clearTimeout(done)
-    }
+    const done = setTimeout(onDone, 650)
+    return () => clearTimeout(done)
   }, [onDone])
 
   return (
-    <motion.div className="preloader" exit={{ y: '-100%' }} transition={{ duration: 0.55 }}>
+    <motion.div className="preloader" exit={{ y: '-100%' }} transition={{ duration: 0.22 }}>
       <div className="preloader-line" />
       <div className="preloader-mark">
         {['F', 'T', 'K'].map((letter, index) => (
           <motion.span
             key={letter}
-            initial={{ y: -80, opacity: 0 }}
+            initial={{ y: -32, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.25 + index * 0.18, type: 'spring', stiffness: 220, damping: 12 }}
+            transition={{ delay: 0.08 + index * 0.06, duration: 0.22, ease: 'easeOut' }}
           >
             {letter}
           </motion.span>
         ))}
       </div>
-      <div className="preloader-progress"><span style={{ width: `${count}%` }} /></div>
-      <p>{count}%</p>
+      <div className="preloader-progress"><span /></div>
     </motion.div>
   )
 }
-
-function PageCurtain({ tone, path }) {
-  return (
-    <motion.div
-      key={`${path}-${tone}`}
-      className={`page-curtain ${tone}`}
-      initial={{ y: '100%' }}
-      animate={{ y: '-100%' }}
-      transition={{ duration: 0.8, ease: [0.77, 0, 0.18, 1] }}
-      aria-hidden="true"
-    />
-  )
+function PageCurtain() {
+  return null
 }
 
 function Navbar({ path, scrolled, navigate }) {
@@ -497,7 +481,7 @@ function Navbar({ path, scrolled, navigate }) {
           </button>
         ))}
       </nav>
-      <button className="hire-button" onClick={() => linkClick('/contact')}>Hire Me</button>
+      <a className="hire-button" href="mailto:omolarak724@gmail.com">Hire Me</a>
       <button className={`menu-button ${open ? 'open' : ''}`} onClick={() => setOpen(!open)} aria-label="Menu">
         <span />
         <span />
@@ -528,7 +512,6 @@ function Navbar({ path, scrolled, navigate }) {
 
 function activePath(path, href) {
   if (href === '/work') return path.startsWith('/work')
-  if (href === '/blog') return path.startsWith('/blog')
   return path === href
 }
 
@@ -573,7 +556,6 @@ function HomePage({ navigate }) {
       <Marquee />
       {isDesign ? <UiUxComingSoon /> : <>
         <AboutPreview navigate={navigate} />
-        <FeaturedProjects navigate={navigate} />
         <LiveBuildsSection compact navigate={navigate} />
         <Services />
         <Testimonials />
@@ -689,11 +671,11 @@ function LiveBuildsSection({ compact = false, navigate }) {
 
   return (
     <section className={`section live-builds ${compact ? 'compact' : ''}`}>
-      <SectionTitle eyebrow="REAL DEPLOYED LINKS" title={compact ? 'Selected live builds you can open.' : 'Live builds you can open.'} watermark="LIVE" />
+      <SectionTitle eyebrow="DEPLOYED PROJECTS" title={compact ? 'Real deployed projects.' : 'Real deployed projects you can open.'} watermark="LIVE" />
       <p className="section-note">
         {compact
-          ? 'A few deployed highlights are shown here. The full project archive lives on the Work page, and more projects are coming.'
-          : 'This list will keep growing. These are the deployed builds available now, with more project work on the way.'}
+          ? 'Live portfolio projects with working links, clean product stories, and recruiter-friendly proof of delivery.'
+          : 'These are the live deployed builds available now, each with a case study and direct demo link.'}
       </p>
       <div className="live-build-grid">
         {buildsToShow.map((build, index) => (
@@ -752,7 +734,7 @@ function CtaBanner({ navigate }) {
       <strong aria-hidden="true">FAITH</strong>
       <h2>Let's build something that matters.</h2>
       <p>Available for freelance, remote roles, and internships.</p>
-      <button onClick={() => navigate('/contact')}>Start a Conversation</button>
+      <a className="cta-button" href="mailto:omolarak724@gmail.com">Start a Conversation</a>
     </section>
   )
 }
@@ -830,11 +812,9 @@ function WorkPage({ navigate }) {
     <>
       <PageHero label="ENGINEERING WORK" title="Full-stack, frontend, security, and mobile projects." text="A recruiter-friendly archive of deployed engineering projects with clear case studies, live demos, and product decisions." />
       <section className="section work-index">
-        <motion.div layout className="work-grid">
-          <AnimatePresence>
-            {liveBuilds.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
-          </AnimatePresence>
-        </motion.div>
+        <div className="work-grid">
+          {liveBuilds.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
+        </div>
       </section>
     </>
   )
@@ -842,7 +822,7 @@ function WorkPage({ navigate }) {
 
 function ProjectCard({ project, index = 0, navigate }) {
   return (
-    <motion.article layout className={`project-card ${project.color}`} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }}>
+    <article className={`project-card ${project.color}`}>
       <div className="project-card-top"><span>{String(index + 1).padStart(2, '0')}</span><small>{project.category}</small></div>
       <ProjectPreview project={project} />
       <h3>{project.name}</h3>
@@ -850,7 +830,7 @@ function ProjectCard({ project, index = 0, navigate }) {
       <div className="tag-row">{project.filters.map((tag) => <span key={tag}>{tag}</span>)}</div>
       <button onClick={() => navigate(`/work/${project.slug}`)}>View Case Study</button>
       {project.comingSoon ? <span className="coming-soon-link">Coming Soon</span> : <a href={project.url} target="_blank" rel="noreferrer">Live Demo</a>}
-    </motion.article>
+    </article>
   )
 }
 
@@ -962,50 +942,27 @@ function Terminal() {
   return <div className="terminal-window"><div className="terminal-top"><span /><span /><span /><b>faith@kali</b></div><pre>{lines.map((line) => <code key={line}>{line}{'\n'}</code>)}<i /></pre></div>
 }
 
-function BlogPage({ navigate }) {
-  return (
-    <>
-      <PageHero label="BLOG" title="Thoughts on Design, Code & Security." text="I write when I learn something worth sharing." />
-      <section className="section blog-grid">{posts.map((post) => <article key={post.slug} onClick={() => navigate(`/blog/${post.slug}`)}><span>{post.date} - {post.read}</span><h3>{post.title}</h3><p>{post.excerpt}</p><div className="tag-row">{post.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><button>Read Article</button></article>)}</section>
-    </>
-  )
-}
-
-function BlogPostPage({ slug, navigate }) {
-  const post = posts.find((item) => item.slug === slug) || posts[0]
-  return <article className="post-page"><span>{post.date} - {post.read}</span><h1>{post.title}</h1><div className="tag-row">{post.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><p>{post.excerpt}</p><hr /><p>Great digital products are never just beautiful screens. They are decisions, constraints, risks, and tradeoffs made visible. This article is a placeholder for Faith's thinking, written in a clean editorial format that makes the portfolio feel alive and credible.</p><pre><code>{`const faith = {\n  builds: true,\n  ships: true,\n  secures: true\n}`}</code></pre><p>The goal is simple: document what I am learning, show technical judgment, and make every project easier to trust.</p><button onClick={() => navigate('/blog')}>Back to Blog</button></article>
-}
-
-function ContactPage() {
-  const [sent, setSent] = useState(false)
-  const [message, setMessage] = useState('')
-  return (
-    <section className="contact-page">
-      <div><h1>LET'S<br />BUILD<br /><em>SOMETHING.</em></h1><p>Available for freelance projects, remote roles, and internships. Responsive within 24 hours.</p><div className="social-row">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div><code>Remote-friendly<br />omolarak724@gmail.com</code></div>
-      <form className={sent ? 'sent' : ''} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
-        {!sent ? <><label>Name<input required /></label><label>Email<input required type="email" /></label><label>Service<select><option>Full Stack</option><option>Frontend Dev</option><option>Full Stack</option><option>Security Audit</option><option>Other</option></select></label><label>Message<textarea required value={message} onChange={(event) => setMessage(event.target.value)} maxLength="500" /></label><small>{message.length}/500</small><button>SEND MESSAGE</button></> : <div className="thanks"><h2>MESSAGE SENT</h2><p>I will be in touch within 24 hours.</p></div>}
-      </form>
-    </section>
-  )
-}
-
-function PageHero({ label, title, text }) {
-  return <section className="page-hero"><span>{label}</span><h1>{title}</h1><p>{text}</p></section>
-}
-
-function NotFound({ navigate }) {
-  return <section className="page-hero"><span>404</span><h1>Page not found.</h1><p>This room does not exist in the empire yet.</p><button onClick={() => navigate('/')}>Return Home</button></section>
-}
-
 function Footer({ navigate }) {
-  return <footer className="site-footer"><div><button className="logo" onClick={() => navigate('/')}><span>Faith</span><code>.dev</code></button><p>Designing. Building. Securing.</p><small>2026 Faith Temiloluwa Kareem. All rights reserved.</small></div><nav>{routes.map(([href, label]) => <button key={href} onClick={() => navigate(href)}>{label}</button>)}</nav><div><p>Available for new projects.</p><button onClick={() => navigate('/contact')}>Hire Me</button><div className="footer-socials">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div></div><strong>Designed, built and secured by Faith Temiloluwa Kareem</strong></footer>
+  return <footer className="site-footer"><div><button className="logo" onClick={() => navigate('/')}><span>Faith</span><code>.dev</code></button><p>Designing. Building. Securing.</p><small>2026 Faith Temiloluwa Kareem. All rights reserved.</small></div><nav>{routes.map(([href, label]) => <button key={href} onClick={() => navigate(href)}>{label}</button>)}</nav><div><p>Available for new projects.</p><a className="footer-hire" href="mailto:omolarak724@gmail.com">Hire Me</a><div className="footer-socials">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div></div><strong>Designed, built and secured by Faith Temiloluwa Kareem</strong></footer>
 }
 
 function BackToTop() {
   const [show, setShow] = useState(false)
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 400)
-    window.addEventListener('scroll', onScroll)
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        ticking = false
+        setShow((value) => {
+          const next = window.scrollY > 400
+          return value === next ? value : next
+        })
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
   return <button className={`back-top ${show ? 'visible' : ''}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>UP</button>

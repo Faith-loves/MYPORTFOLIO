@@ -1,5 +1,3 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=cabinet-grotesk@500,700,800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -23,8 +21,8 @@
   --text-muted: #4a4a6a;
   --border: #ffffff0a;
   --grid: #ffffff06;
-  --script: 'Cormorant Garamond', Georgia, serif;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  --script: Georgia, 'Times New Roman', serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 :root[data-theme="midnight"] {
@@ -229,7 +227,7 @@ body[data-route="security"] .orb-cyan {
   border: 1.5px solid var(--gold);
   border-radius: 999px;
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 8px;
   transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
 }
@@ -261,7 +259,7 @@ body[data-route="security"] .orb-cyan {
   display: flex;
   gap: 0.5rem;
   color: var(--gold-light);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 700;
 }
@@ -286,7 +284,7 @@ body[data-route="security"] .orb-cyan {
   position: absolute;
   top: calc(50% + 5.6rem);
   color: var(--text-secondary);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.72rem;
 }
 
@@ -369,14 +367,14 @@ body[data-route="security"] .orb-cyan {
   display: inline-flex;
   align-items: baseline;
   gap: 0.08rem;
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 1.28rem;
   font-weight: 700;
 }
 
 .logo code {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 1rem;
 }
 
@@ -499,7 +497,7 @@ body[data-route="security"] .orb-cyan {
   padding: 0.5rem 0.8rem;
   background: rgba(13, 13, 26, 0.72);
   color: var(--gold-light);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
 }
@@ -535,7 +533,7 @@ body[data-route="security"] .orb-cyan {
 }
 
 .role-ticker {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   color: var(--text-secondary);
 }
 
@@ -555,6 +553,7 @@ body[data-route="security"] .orb-cyan {
 .hero-actions button,
 .hero-actions a,
 .cta-banner button,
+.cta-banner .cta-button,
 .contact-page form button,
 .page-hero button {
   display: inline-flex;
@@ -625,7 +624,7 @@ body[data-route="security"] .orb-cyan {
   border-block: 1px solid var(--gold-dim);
   background: rgba(13, 13, 26, 0.78);
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   white-space: nowrap;
@@ -664,7 +663,7 @@ body[data-route="security"] .orb-cyan {
 .security-grid .section-title span,
 .arsenal .section-title span {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -674,7 +673,7 @@ body[data-route="security"] .orb-cyan {
 .section-title h2 {
   margin: 0.8rem 0 0;
   max-width: 48rem;
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(2.2rem, 5vw, 4.8rem);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -687,7 +686,7 @@ body[data-route="security"] .orb-cyan {
   top: -4rem;
   z-index: -1;
   color: rgba(255, 255, 255, 0.045);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(7rem, 20vw, 20rem);
   line-height: 1;
   letter-spacing: -0.08em;
@@ -764,7 +763,7 @@ body[data-route="security"] .orb-cyan {
   padding: 0.5rem 0.7rem;
   background: rgba(13, 13, 26, 0.75);
   color: var(--gold-light);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.72rem;
   font-style: normal;
   transform:
@@ -844,7 +843,7 @@ body[data-route="security"] .orb-cyan {
 .results-row strong {
   display: block;
   color: var(--gold);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(2rem, 4vw, 3.5rem);
 }
 
@@ -893,7 +892,7 @@ body[data-route="security"] .orb-cyan {
 
 .project-row > span {
   color: var(--gold);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 2.4rem;
 }
 
@@ -902,7 +901,7 @@ body[data-route="security"] .orb-cyan {
 .project-card h3,
 .blog-grid h3 {
   margin: 0;
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1.35rem, 2.5vw, 2rem);
 }
 
@@ -964,14 +963,14 @@ body[data-route="security"] .orb-cyan {
 
 .live-build-grid a > span {
   color: var(--gold);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 2.2rem;
   line-height: 1;
 }
 
 .live-build-grid strong {
   display: block;
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 1.35rem;
 }
 
@@ -979,7 +978,7 @@ body[data-route="security"] .orb-cyan {
   display: block;
   margin-top: 0.35rem;
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1037,7 +1036,7 @@ body[data-route="security"] .orb-cyan {
 .services-grid article > span {
   float: right;
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 .testimonials {
@@ -1070,14 +1069,14 @@ body[data-route="security"] .orb-cyan {
   position: absolute;
   inset: auto 0 -2rem;
   color: rgba(255, 255, 255, 0.035);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(7rem, 22vw, 20rem);
   line-height: 1;
 }
 
 .cta-banner h2 {
   position: relative;
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(2.4rem, 6vw, 5.8rem);
   line-height: 0.95;
 }
@@ -1088,6 +1087,7 @@ body[data-route="security"] .orb-cyan {
 }
 
 .cta-banner button,
+.cta-banner .cta-button,
 .contact-page form button {
   position: relative;
   background: var(--orange);
@@ -1163,7 +1163,7 @@ body[data-route="security"] .orb-cyan {
 .about-hero-copy > span,
 .about-statement-grid span {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -1173,14 +1173,14 @@ body[data-route="security"] .orb-cyan {
 .about-portrait-card strong {
   display: block;
   margin-top: 0.45rem;
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1.2rem, 2vw, 1.8rem);
 }
 
 .about-hero-copy h1 {
   margin: 1rem 0 1.3rem;
   max-width: 48rem;
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(3.4rem, 8vw, 8rem);
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -1212,7 +1212,7 @@ body[data-route="security"] .orb-cyan {
   border-radius: 999px;
   padding: 0.64rem 0.85rem;
   color: var(--gold-light);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.72rem;
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
@@ -1289,7 +1289,7 @@ body[data-route="security"] .orb-cyan {
 .skills-panels span,
 .skills-panels p {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 .skills-panels h2 {
@@ -1358,7 +1358,7 @@ body[data-route="security"] .orb-cyan {
   border-top: 1px solid var(--border);
   margin: 0;
   padding: 1.5rem 0;
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(2rem, 5vw, 5rem);
   line-height: 1;
 }
@@ -1428,7 +1428,7 @@ body[data-route="security"] .orb-cyan {
   display: flex;
   justify-content: space-between;
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
 }
@@ -1448,7 +1448,7 @@ body[data-route="security"] .orb-cyan {
   border-radius: 0.9rem;
   background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(108, 99, 255, 0.18));
   color: var(--gold-light);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(2rem, 5vw, 5rem);
   overflow: hidden;
 }
@@ -1457,7 +1457,7 @@ body[data-route="security"] .orb-cyan {
   position: relative;
   place-items: stretch;
   padding: clamp(0.55rem, 1.2vw, 0.8rem);
-  font-family: 'DM Sans', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 1rem;
 }
 
@@ -1537,7 +1537,7 @@ body[data-route="security"] .orb-cyan {
   border-radius: 999px;
   padding: 0.28rem 0.65rem;
   color: rgba(240, 238, 230, 0.72);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.58rem;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1572,7 +1572,7 @@ body[data-route="security"] .orb-cyan {
   border-radius: 0.5rem;
   background: rgba(201, 168, 76, 0.18);
   color: var(--gold-light);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.68rem;
 }
 
@@ -1606,7 +1606,7 @@ body[data-route="security"] .orb-cyan {
 
 .preview-hero small {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.58rem;
   text-transform: uppercase;
 }
@@ -1635,7 +1635,7 @@ body[data-route="security"] .orb-cyan {
   background:
     linear-gradient(160deg, rgba(201, 168, 76, 0.18), rgba(108, 99, 255, 0.1)),
     rgba(255, 255, 255, 0.05);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: clamp(0.52rem, 1vw, 0.68rem);
   line-height: 1.35;
   animation: previewFloat 3.2s ease-in-out infinite;
@@ -1674,7 +1674,7 @@ body[data-route="security"] .orb-cyan {
   padding: 0.32rem 0.58rem;
   color: var(--gold-light);
   background: rgba(5, 5, 10, 0.68);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.58rem;
   box-shadow: 0 0 22px rgba(201, 168, 76, 0.14);
 }
@@ -1716,7 +1716,7 @@ body[data-route="security"] .orb-cyan {
   border-radius: 999px;
   padding: 0.35rem 0.55rem;
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.68rem;
 }
 
@@ -1799,14 +1799,14 @@ body[data-route="security"] .orb-cyan {
 
 .case-card span {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.16em;
 }
 
 .case-card h3 {
   margin-top: 1rem;
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1.35rem, 2vw, 2rem);
   line-height: 1.05;
 }
@@ -1880,7 +1880,7 @@ body[data-route="security"] .orb-cyan {
 
 .project-brief-panel span {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.74rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1889,14 +1889,14 @@ body[data-route="security"] .orb-cyan {
 .project-brief-panel p {
   margin: 0;
   color: var(--text-primary);
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1.25rem, 2.8vw, 2.1rem);
   line-height: 1.18;
 }
 
 .project-brief-panel strong {
   color: var(--text-secondary);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.8rem;
   font-weight: 500;
 }
@@ -1937,7 +1937,7 @@ body[data-route="security"] .orb-cyan {
 
 .process article span {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 .process article p {
@@ -1958,7 +1958,7 @@ body[data-route="security"] .orb-cyan {
   width: 100%;
   min-height: 12rem;
   color: var(--text-primary);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(2rem, 6vw, 5rem);
 }
 
@@ -1994,7 +1994,7 @@ body[data-route="security"] .orb-cyan {
 .terminal-top b {
   margin-left: 0.5rem;
   color: var(--cyan);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.8rem;
 }
 
@@ -2003,7 +2003,7 @@ body[data-route="security"] .orb-cyan {
   margin: 0;
   padding: clamp(1rem, 3vw, 2rem);
   color: var(--cyan);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: clamp(0.78rem, 1.3vw, 0.95rem);
   line-height: 1.8;
   white-space: pre-wrap;
@@ -2043,7 +2043,7 @@ body[data-route="security"] .orb-cyan {
 .arsenal p {
   max-width: 70rem;
   color: var(--cyan);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   line-height: 2.2;
 }
 
@@ -2059,7 +2059,7 @@ body[data-route="security"] .orb-cyan {
 .blog-grid article > span,
 .post-page > span {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.72rem;
 }
 
@@ -2076,7 +2076,7 @@ body[data-route="security"] .orb-cyan {
 }
 
 .post-page h1 {
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(3rem, 7vw, 6rem);
   line-height: 0.95;
 }
@@ -2132,7 +2132,7 @@ body[data-route="security"] .orb-cyan {
   display: block;
   margin-top: 1.5rem;
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 .contact-page form {
@@ -2182,7 +2182,7 @@ body[data-route="security"] .orb-cyan {
 .contact-page small {
   justify-self: end;
   color: var(--text-muted);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 .thanks {
@@ -2194,7 +2194,7 @@ body[data-route="security"] .orb-cyan {
 
 .thanks h2 {
   color: var(--gold);
-  font-family: 'Clash Display', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(2rem, 5vw, 4rem);
 }
 
@@ -2225,7 +2225,7 @@ body[data-route="security"] .orb-cyan {
 .site-footer strong {
   grid-column: 1 / -1;
   justify-self: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -2314,7 +2314,7 @@ body[data-route="security"] .orb-cyan {
 
   .mobile-menu button {
     text-align: left;
-    font-family: 'Clash Display', sans-serif;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1.35rem, 6vw, 2.1rem);
     line-height: 1.08;
     padding: 0.5rem 0;
@@ -2325,7 +2325,7 @@ body[data-route="security"] .orb-cyan {
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 1.2rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
     font-size: 0.7rem;
   }
 
@@ -2746,7 +2746,7 @@ body[data-route="security"] .orb-cyan {
   .mobile-menu button {
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding: 0.68rem 0;
-    font-family: 'Cabinet Grotesk', sans-serif;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
     font-size: 1.25rem;
     line-height: 1.1;
   }
@@ -3152,7 +3152,7 @@ body[data-route="security"] .orb-cyan {
 .track-button > span {
   z-index: 2;
   max-width: 12rem;
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1.15rem, 2.4vw, 1.65rem);
   font-weight: 800;
   line-height: 1.05;
@@ -3173,7 +3173,7 @@ body[data-route="security"] .orb-cyan {
   padding: 0.28rem 0.48rem;
   color: var(--gold-light);
   background: rgba(5, 5, 10, 0.62);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.58rem;
   font-style: normal;
   transform: rotate(calc(var(--i) * 60deg)) translateX(8.1rem) rotate(calc(var(--i) * -60deg));
@@ -3196,7 +3196,7 @@ body[data-route="security"] .orb-cyan {
 
 .design-hero-note strong {
   color: var(--gold-light);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   text-transform: uppercase;
 }
 
@@ -3221,13 +3221,13 @@ body[data-route="security"] .orb-cyan {
 .design-coming-soon article span,
 .recruiter-snapshot article span {
   color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.68rem;
   text-transform: uppercase;
 }
 
 .design-coming-soon h3 {
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 1.45rem;
 }
 
@@ -3254,13 +3254,13 @@ body[data-route="security"] .orb-cyan {
 
 .static-preview-shell span {
   color: var(--gold-light);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.62rem;
   text-transform: uppercase;
 }
 
 .static-preview-shell strong {
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 1.45rem;
   line-height: 1;
 }
@@ -3276,7 +3276,7 @@ body[data-route="security"] .orb-cyan {
   border-radius: 999px;
   padding: 0.25rem 0.45rem;
   color: var(--text-secondary);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 0.58rem;
   font-style: normal;
 }
@@ -3315,5 +3315,191 @@ body[data-route="security"] .orb-cyan {
 
   .static-preview {
     min-height: 8.4rem;
+  }
+}
+
+/* Compact portfolio track buttons */
+.track-selector {
+  max-width: 34rem;
+  gap: 0.65rem;
+}
+
+.track-button {
+  min-height: 3.4rem;
+  border-radius: 999px;
+  padding: 0 1rem;
+}
+
+.track-button > span {
+  max-width: none;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+.track-button div {
+  display: none;
+}
+
+.track-button i {
+  display: none;
+  animation: none;
+}
+
+@media (max-width: 640px) {
+  .track-selector {
+    gap: 0.55rem;
+  }
+
+  .track-button {
+    min-height: 3rem;
+  }
+}
+
+
+/* Speed pass: reduce blocking fonts, scroll work, and expensive mobile painting. */
+button,
+a {
+  cursor: pointer;
+}
+
+.preloader-progress span {
+  width: 100%;
+  animation: lineDraw 0.48s ease-out both;
+}
+
+.section,
+.work-index,
+.about-page,
+.security-page,
+.blog-grid,
+.post-page,
+.contact-page,
+.project-hero + section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 720px;
+}
+
+.project-card,
+.blog-grid article,
+.security-card,
+.case-card,
+.live-build-grid a,
+.services-grid article,
+.testimonials article {
+  contain: content;
+}
+
+@media (max-width: 760px) {
+  body {
+    background: var(--bg-void);
+  }
+
+  body::before,
+  body::after,
+  .atmosphere,
+  .mesh,
+  .hero-visual::before,
+  .hero-visual::after,
+  .project-art::before,
+  .page-curtain {
+    display: none !important;
+  }
+
+  .site-nav,
+  .theme-switcher,
+  .project-card,
+  .blog-grid article,
+  .security-card,
+  .case-card,
+  .project-brief-panel,
+  .preview-browser {
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  .marquee span,
+  .floating-card,
+  .orbit-ring,
+  .orbit-badge,
+  .preview-pill,
+  .terminal-line,
+  .orb {
+    animation: none !important;
+  }
+
+  .project-card:hover,
+  .project-card:hover .preview-browser,
+  .project-row:hover,
+  .blog-grid article:hover {
+    transform: none !important;
+  }
+}
+
+
+/* Final spacing polish for deployed project cards and CTA buttons. */
+.project-card {
+  gap: 0.85rem;
+}
+
+.project-card .tag-row {
+  margin-bottom: 0.45rem;
+}
+
+.project-card button {
+  margin-top: auto;
+  margin-bottom: 0.4rem;
+}
+
+.project-card > a,
+.project-card .coming-soon-link {
+  margin-top: 0.35rem;
+  margin-bottom: 0.15rem;
+}
+
+.cta-banner {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.cta-banner .cta-button {
+  position: relative;
+  display: inline-flex;
+  min-height: 3.2rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  padding: 0 1.25rem;
+  background: var(--orange);
+  color: #1a0d06;
+  font-weight: 800;
+}
+
+.footer-hire {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0.35rem 0 1rem;
+  border: 1px solid var(--gold-dim);
+  border-radius: 999px;
+  padding: 0 1rem;
+  color: var(--gold-light);
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .project-card {
+    gap: 0.75rem;
+  }
+
+  .project-card button,
+  .project-card > a,
+  .project-card .coming-soon-link,
+  .cta-banner .cta-button {
+    width: 100%;
+    justify-content: center;
   }
 }
