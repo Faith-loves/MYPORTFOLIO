@@ -549,7 +549,7 @@ function HomePage({ navigate }) {
           {!isDesign ? <RoleTicker /> : <div className="design-hero-note"><strong>Coming soon</strong><span>Figma case studies, UX research, product flows, and interface systems will live here.</span></div>}
           <div className="hero-actions">
             <button onClick={() => isDesign ? setTrack('engineering') : navigate('/work')}>{isDesign ? 'Back to Engineering Portfolio' : 'See Engineering Work'}</button>
-            <a href="/FaithKareem_CV.pdf" download>Download CV</a>
+            <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">View CV</a>
           </div>
         </div>
       </section>
