@@ -527,6 +527,16 @@ function SectionTitle({ eyebrow, title, watermark }) {
   )
 }
 
+function PageHero({ label, title, text }) {
+  return (
+    <section className="page-hero">
+      <span>{label}</span>
+      <h1>{title}</h1>
+      <p>{text}</p>
+    </section>
+  )
+}
+
 function HomePage({ navigate }) {
   const [track, setTrack] = useState('engineering')
   const isDesign = track === 'design'
