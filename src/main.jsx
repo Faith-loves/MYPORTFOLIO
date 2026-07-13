@@ -830,7 +830,6 @@ function WorkPage({ navigate }) {
           {liveBuilds.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
         </div>
       </section>
-      <LiveBuildsSection navigate={navigate} />
     </>
   )
 }
