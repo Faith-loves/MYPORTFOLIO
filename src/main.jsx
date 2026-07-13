@@ -690,7 +690,7 @@ function LiveBuildsSection({ compact = false, navigate }) {
           </a>
         ))}
       </div>
-      {compact && navigate ? <button className="wide-link" onClick={() => navigate('/work')}>See Full Project Archive</button> : null}
+      {compact && navigate ? <button className="wide-link" onClick={() => navigate('/work')}>See All Deployed Projects</button> : null}
     </section>
   )
 }
@@ -810,12 +810,15 @@ function Values() {
 function WorkPage({ navigate }) {
   return (
     <>
-      <PageHero label="ENGINEERING WORK" title="Full-stack, frontend, security, and mobile projects." text="A recruiter-friendly archive of deployed engineering projects with clear case studies, live demos, and product decisions." />
+      <PageHero label="ALL WORK" title="Everything I have worked on." text="A complete collection of my deployed full-stack, frontend, cybersecurity, AI, ecommerce, dashboard, and productivity projects." />
       <section className="section work-index">
+        <SectionTitle eyebrow="DEPLOYED PROJECTS" title="All deployed projects I have worked on." watermark="LIVE" />
+        <p className="section-note">Every project below includes a case study button and a direct live demo link.</p>
         <div className="work-grid">
           {liveBuilds.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
         </div>
       </section>
+      <LiveBuildsSection navigate={navigate} />
     </>
   )
 }
