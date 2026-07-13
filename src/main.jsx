@@ -300,10 +300,12 @@ const posts = [
 
 function App() {
   const [path, setPath] = useState(() => {
-    if (window.location.pathname !== '/') {
+    const initialPath = window.location.pathname
+    if (initialPath.startsWith('/work/')) {
       window.history.replaceState({}, '', '/')
+      return '/'
     }
-    return '/'
+    return resolveRoute(initialPath).type === 'notFound' ? '/' : initialPath
   })
   const [scrolled, setScrolled] = useState(false)
   const [transitionTone, setTransitionTone] = useState('gold')
@@ -548,7 +550,7 @@ function HomePage({ navigate }) {
           <TrackSelector active={track} setActive={setTrack} />
           {!isDesign ? <RoleTicker /> : <div className="design-hero-note"><strong>Coming soon</strong><span>Figma case studies, UX research, product flows, and interface systems will live here.</span></div>}
           <div className="hero-actions">
-            <button onClick={() => isDesign ? setTrack('engineering') : navigate('/work')}>{isDesign ? 'Back to Engineering Portfolio' : 'See Engineering Work'}</button>
+            {isDesign ? <button onClick={() => setTrack('engineering')}>Back to Engineering Portfolio</button> : <a href="/work" onClick={(event) => { event.preventDefault(); navigate('/work') }}>See Engineering Work</a>}
             <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">View CV</a>
           </div>
         </div>
@@ -690,7 +692,7 @@ function LiveBuildsSection({ compact = false, navigate }) {
           </a>
         ))}
       </div>
-      {compact && navigate ? <button className="wide-link" onClick={() => navigate('/work')}>See All Deployed Projects</button> : null}
+      {compact ? <a className="wide-link" href="/work" onClick={(event) => { if (navigate) { event.preventDefault(); navigate('/work') } }}>See All Deployed Projects</a> : null}
     </section>
   )
 }
