@@ -18,6 +18,16 @@ const profileLinks = [
 
 const liveBuilds = [
   {
+    slug: 'deceivra',
+    name: 'Deceivra',
+    type: 'Context-Aware Scam Detection Platform',
+    category: 'Cybersecurity + Frontend',
+    filters: ['Security', 'Frontend', 'AI', 'UX'],
+    color: 'cyan',
+    url: 'https://deceivra.vercel.app/',
+    note: 'A context-aware scam detection platform that analyzes suspicious conversations, explains social-engineering tactics, and gives users practical safety actions before they respond.'
+  },
+  {
     slug: 'blockchain-voting',
     name: 'Blockchain Voting',
     type: 'Full Stack + Security',
@@ -46,16 +56,6 @@ const liveBuilds = [
     color: 'terminal',
     url: 'https://sentinelx-pi.vercel.app/',
     note: 'Security operations frontend for monitoring alerts, risk signals, and analyst-style visibility.'
-  },
-  {
-    slug: 'deceivra',
-    name: 'Deceivra',
-    type: 'Context-Aware Scam Detection Platform',
-    category: 'Cybersecurity + Frontend',
-    filters: ['Security', 'Frontend', 'AI', 'UX'],
-    color: 'cyan',
-    url: 'https://deceivra.vercel.app/',
-    note: 'A context-aware scam detection platform that analyzes suspicious conversations, explains social-engineering tactics, and gives users practical safety actions before they respond.'
   },
   {
     slug: 'nevermind-store',
@@ -109,8 +109,7 @@ const liveBuilds = [
   }
 ]
 
-const selectedLiveBuildSlugs = ['deceivra', 'blockchain-voting', 'sentinelx', 'intern-track']
-const selectedLiveBuilds = liveBuilds.filter((build) => selectedLiveBuildSlugs.includes(build.slug))
+const selectedLiveBuilds = liveBuilds.filter((build) => build.url).slice(0, 4)
 
 const caseStudyDetails = {
   'blockchain-voting': {
@@ -726,15 +725,18 @@ function LiveBuildsSection({ compact = false, navigate }) {
       </p>
       <div className="live-build-grid">
         {buildsToShow.map((build, index) => (
-          <a key={build.url} href={build.url} target="_blank" rel="noreferrer">
+          <article key={build.url} className="live-build-card">
             <span>{String(index + 1).padStart(2, '0')}</span>
             <div>
               <strong>{build.name}</strong>
               <small>{build.type}</small>
               <p>{build.note}</p>
+              <div className="live-build-actions">
+                <a href={`/work/${build.slug}`} onClick={(event) => { if (navigate) { event.preventDefault(); navigate(`/work/${build.slug}`) } }}>Case Study</a>
+                <a href={build.url} target="_blank" rel="noreferrer">Live Demo</a>
+              </div>
             </div>
-            <b>Open</b>
-          </a>
+          </article>
         ))}
       </div>
       {compact ? <a className="wide-link" href="/work" onClick={(event) => { if (navigate) { event.preventDefault(); navigate('/work') } }}>See All Deployed Projects</a> : null}
