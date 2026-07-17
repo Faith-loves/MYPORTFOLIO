@@ -48,6 +48,16 @@ const liveBuilds = [
     note: 'Security operations frontend for monitoring alerts, risk signals, and analyst-style visibility.'
   },
   {
+    slug: 'deceivra',
+    name: 'Deceivra',
+    type: 'Context-Aware Scam Detection Platform',
+    category: 'Cybersecurity + Frontend',
+    filters: ['Security', 'Frontend', 'AI', 'UX'],
+    color: 'cyan',
+    url: 'https://deceivra.vercel.app/',
+    note: 'A context-aware scam detection platform that analyzes suspicious conversations, explains social-engineering tactics, and gives users practical safety actions before they respond.'
+  },
+  {
     slug: 'nevermind-store',
     name: 'Nevermind Store',
     type: 'Ecommerce Frontend',
@@ -99,7 +109,7 @@ const liveBuilds = [
   }
 ]
 
-const selectedLiveBuildSlugs = ['blockchain-voting', 'sentinelx', 'intern-track']
+const selectedLiveBuildSlugs = ['deceivra', 'blockchain-voting', 'sentinelx', 'intern-track']
 const selectedLiveBuilds = liveBuilds.filter((build) => selectedLiveBuildSlugs.includes(build.slug))
 
 const caseStudyDetails = {
@@ -254,6 +264,31 @@ const caseStudyDetails = {
       ['Deploy', 'Added the Vercel project link so visitors can test it directly.']
     ],
     results: ['Live DevDocs AI link', 'Developer-tool case study', 'AI documentation workflow']
+  },
+  deceivra: {
+    role: 'UI/UX designer and frontend developer',
+    problem: 'Online scams are no longer obvious. Attackers impersonate trusted brands, create urgency, request credentials, hide suspicious links, and use emotional pressure across WhatsApp, SMS, email, job offers, and social media. Most tools stop at a vague safe-or-dangerous label, leaving everyday users unsure about what exactly is risky or what to do next.',
+    approach: 'I designed Deceivra around explainable security: choose the conversation source, paste the suspicious message, run an analysis, review an overall threat score, inspect each detected signal, and follow practical recommendations. The interface translates cybersecurity indicators into clear evidence, confidence scores, severity labels, and recommended next steps, while staying responsive across desktop and mobile.',
+    outcome: 'Deceivra ships as a live context-aware scam detection platform with multi-channel conversation analysis, explainable threat breakdowns, overall risk scoring, downloadable reports, history, and a polished responsive product experience that connects cybersecurity thinking with everyday usability.',
+    images: [
+      ['/deceivra-home.png', 'Home screen', "Hero and conversation-start flow showing Deceivra's trust-first positioning across desktop and mobile."],
+      ['/deceivra-analyzer.png', 'Analyzer screen', 'Conversation analyzer with platform selection, privacy guidance, and message input designed for low-friction threat checks.'],
+      ['/deceivra-results.png', 'Results screen', 'Security report with overall threat score, risk contribution, evidence, confidence, and recommended actions.'],
+      ['/deceivra-about.png', 'About screen', 'About page explaining the mission, design principles, and product trust story.']
+    ],
+    cards: [
+      ['Explainable Detection', 'Instead of returning a generic warning, Deceivra explains why a message is risky. Each threat includes supporting evidence, severity, confidence, and contribution to the final risk score.'],
+      ['Trust-Centered UX', 'The product language avoids unnecessary jargon and guides users through a calm sequence: source, message, analysis, evidence, and action. This makes security feel understandable rather than intimidating.'],
+      ['Responsive Product System', 'The experience was designed for desktop and mobile from the start, including navigation, analyzer forms, results cards, report actions, and readable information hierarchy on smaller screens.']
+    ],
+    process: [
+      ['Research', 'Explored phishing and scam patterns including trusted-brand impersonation, time pressure, suspicious domains, credential requests, financial manipulation, and social-engineering tactics.'],
+      ['Define', 'Framed the goal around helping users analyze suspicious conversations, understand the reason for risk, and act before sending money or revealing personal information.'],
+      ['Design', 'Built a dark cybersecurity visual system with clear hierarchy, confidence signals, severity badges, proof panels, and interaction states for desktop and mobile.'],
+      ['Build', 'Implemented the responsive frontend with Next.js, TypeScript, Tailwind CSS, React, motion, and deploy-ready component structure.'],
+      ['Ship', 'Published the platform on Vercel with live analyzer, results, history, report export, and a case-study-ready product narrative.']
+    ],
+    results: ['Explainable scam detection', 'Multi-platform analysis', 'Responsive cybersecurity UI', 'Actionable safety guidance']
   }
 }
 
@@ -881,6 +916,7 @@ function ProjectPage({ slug, navigate }) {
         <article><span>The Problem</span><p>{study.problem}</p></article>
         <article><span>My Approach</span><p>{study.approach}</p></article>
       </section>
+      <ProjectImageGallery study={study} />
       <section className="section recruiter-snapshot">
         <SectionTitle eyebrow="RECRUITER SNAPSHOT" title="What this project proves." watermark="VALUE" />
         <div>
@@ -897,6 +933,23 @@ function ProjectPage({ slug, navigate }) {
       <section className="results-row">{study.results.map((result) => <article key={result}><strong>{result.split(' ')[0]}</strong><span>{result.split(' ').slice(1).join(' ')}</span></article>)}</section>
       <button className={`next-project ${next.color}`} onClick={() => navigate(`/work/${next.slug}`)}>Next Project - {next.name}</button>
     </>
+  )
+}
+
+function ProjectImageGallery({ study }) {
+  if (!study.images?.length) return null
+  return (
+    <section className="section project-image-gallery">
+      <SectionTitle eyebrow="PRODUCT SCREENS" title="Interface details from the live build." watermark="UI" />
+      <div>
+        {study.images.map(([src, title, caption]) => (
+          <figure key={src}>
+            <img src={src} alt={title} loading="lazy" />
+            <figcaption><strong>{title}</strong><span>{caption}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
   )
 }
 
