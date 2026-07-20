@@ -1095,44 +1095,21 @@ function ContactPage() {
   ]
   const projectTypes = ['Full-Stack Development', 'Frontend Development', 'UI/UX Design', 'Internship or Employment', 'Other']
 
-  async function handleContactSubmit(event) {
-    event.preventDefault()
-
+  function handleContactSubmit(event) {
     if (message.trim().length < 10) {
+      event.preventDefault()
       setError('Please add a little more detail before sending.')
       return
     }
 
-    const form = event.currentTarget
-    const formData = new FormData(form)
-    const payload = Object.fromEntries(formData.entries())
-
-    setSending(true)
     setError('')
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/omolarak724@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      const result = await response.json().catch(() => ({}))
-
-      if (!response.ok || result.success === false) {
-        throw new Error(result.message || 'Message could not be sent')
-      }
-
+    setSending(true)
+    window.setTimeout(() => {
+      setSending(false)
       setSent(true)
       setMessage('')
-      form.reset()
-    } catch (submitError) {
-      setError('The message could not send. Please use the email link instead.')
-    } finally {
-      setSending(false)
-    }
+      event.target.reset()
+    }, 900)
   }
 
   return (
@@ -1150,11 +1127,19 @@ function ContactPage() {
         </div>
 
       </div>
-      <form className={`contact-form ${sent ? 'sent' : ''}`} onSubmit={handleContactSubmit}>
+      <form
+        className={`contact-form ${sent ? 'sent' : ''}`}
+        action="https://formsubmit.co/omolarak724@gmail.com"
+        method="POST"
+        target="contact-submit-frame"
+        onSubmit={handleContactSubmit}
+      >
         <input type="hidden" name="_subject" value="New portfolio message for Faith Kareem" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://create-this-build-a-stunning-personal.vercel.app/contact" />
         <input type="text" name="_honey" tabIndex="-1" autoComplete="off" aria-hidden="true" className="hidden-field" />
+        <iframe title="Contact form submission" name="contact-submit-frame" className="hidden-field" />
         {!sent ? <>
           <div className="form-head">
             <span>START A CONVERSATION</span>
