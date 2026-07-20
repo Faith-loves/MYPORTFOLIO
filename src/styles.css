@@ -3771,17 +3771,7 @@ a {
   line-height: 1.35;
 }
 
-.contact-availability {
-  max-width: 30rem;
-  border-color: var(--gold-dim);
-}
 
-.contact-availability p {
-  margin: 0.55rem 0 0;
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
 
 .refined-contact .contact-form {
   position: relative;
@@ -3930,9 +3920,6 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .contact-availability {
-    max-width: none;
-  }
 }
 
 @media (max-width: 640px) {

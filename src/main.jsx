@@ -1037,11 +1037,7 @@ function ContactPage() {
             </a>
           ))}
         </div>
-        <div className="contact-availability">
-          <span>Availability</span>
-          <strong>Remote-friendly</strong>
-          <p>Freelance projects, internships, junior roles, and product collaborations.</p>
-        </div>
+
       </div>
       <form className={`contact-form ${sent ? 'sent' : ''}`} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
         {!sent ? <>
