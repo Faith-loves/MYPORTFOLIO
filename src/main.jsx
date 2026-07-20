@@ -5,9 +5,8 @@ import './styles.css'
 
 const routes = [
   ['/', 'Home'],
-  ['/work', 'Work'],
+  ['/work', 'Projects'],
   ['/about', 'About'],
-  ['/security', 'Security'],
   ['/contact', 'Contact']
 ]
 
@@ -111,6 +110,32 @@ const liveBuilds = [
 ]
 
 const selectedLiveBuilds = liveBuilds.filter((build) => build.url).slice(0, 4)
+
+const featuredProjectSlugs = ['deceivra', 'intern-track', 'sentinelx']
+const selectedFeaturedProjects = featuredProjectSlugs.map((slug) => liveBuilds.find((project) => project.slug === slug)).filter(Boolean)
+const projectFilters = ['All', 'Full Stack', 'Frontend', 'Cybersecurity', 'UI/UX', 'AI']
+const projectMeta = {
+  deceivra: { stack: ['React', 'AI UX', 'Security Signals'], role: 'Full-stack developer', duration: '3 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
+  'intern-track': { stack: ['React', 'Dashboard UX', 'State Management'], role: 'Full-stack developer', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
+  sentinelx: { stack: ['React', 'Security Dashboard', 'Risk UI'], role: 'Frontend + security engineering', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
+  'blockchain-voting': { stack: ['React', 'Auth Flow', 'Secure UX'], role: 'Full-stack developer', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
+  'ai-smart-ui': { stack: ['React', 'AI Interface', 'Responsive UI'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
+  'nevermind-store': { stack: ['React', 'Ecommerce UI', 'Product Flow'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
+  'taskflow-pro': { stack: ['React', 'Productivity UI', 'Workflow State'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
+  cipherpass: { stack: ['React', 'Password UX', 'Security'], role: 'Security-first frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
+  'devdocs-ai': { stack: ['React', 'AI Search', 'Documentation UX'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' }
+}
+
+function getProjectMeta(project) {
+  return projectMeta[project.slug] || { stack: project.filters.slice(0, 3), role: 'Full-stack developer', duration: 'Portfolio build', status: project.url ? 'Live' : 'Coming soon', github: 'https://github.com/Faith-loves' }
+}
+
+function matchesProjectFilter(project, filter) {
+  if (filter === 'All') return true
+  if (filter === 'Cybersecurity') return project.filters.includes('Security') || project.category.includes('Cybersecurity')
+  if (filter === 'UI/UX') return project.filters.includes('UX') || project.filters.includes('UI')
+  return project.filters.includes(filter) || project.category.includes(filter) || project.type.includes(filter)
+}
 
 const caseStudyDetails = {
   'blockchain-voting': {
@@ -514,13 +539,13 @@ function Navbar({ path, scrolled, navigate }) {
         <span>Faith</span><code>.dev</code>
       </button>
       <nav className="desktop-nav">
-        {routes.slice(1).map(([href, label]) => (
+        {routes.map(([href, label]) => (
           <button key={href} className={activePath(path, href) ? 'active' : ''} onClick={() => linkClick(href)}>
             {label}
           </button>
         ))}
+            <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Resume</a>
       </nav>
-      <a className="hire-button" href="/contact" onClick={(event) => { event.preventDefault(); linkClick('/contact') }}>Hire Me</a>
       <button className={`menu-button ${open ? 'open' : ''}`} onClick={() => setOpen(!open)} aria-label="Menu">
         <span />
         <span />
@@ -528,7 +553,7 @@ function Navbar({ path, scrolled, navigate }) {
       <AnimatePresence>
         {open && (
           <motion.div className="mobile-menu" initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}>
-            {routes.slice(1).map(([href, label], index) => (
+            {routes.map(([href, label], index) => (
               <motion.button
                 key={href}
                 initial={{ x: 60, opacity: 0 }}
@@ -539,6 +564,7 @@ function Navbar({ path, scrolled, navigate }) {
                 {label}
               </motion.button>
             ))}
+            <a className="mobile-resume-link" href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Resume</a>
             <div className="mobile-socials">
               {profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}
             </div>
@@ -575,43 +601,92 @@ function PageHero({ label, title, text }) {
 }
 
 function HomePage({ navigate }) {
-  const [track, setTrack] = useState('engineering')
-  const isDesign = track === 'design'
-
   return (
     <>
-      <section className={`hero ${isDesign ? 'design-track' : 'engineering-track'}`}>
+      <section className="hero recruiter-hero">
         <HeroMesh />
-        <div className="hero-content">
+        <div className="hero-content recruiter-hero-content">
           <motion.div className="role-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-            {isDesign ? 'UI/UX Portfolio Track - Coming Soon' : 'Full Stack / Frontend / Cybersecurity / Mobile'}
+            FULL-STACK DEVELOPER
           </motion.div>
-          <motion.h1 initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.18 } } }}>
-            {(isDesign ? ['UI/UX Track.', 'Coming Soon.'] : ['I Build It.', 'I Secure It.']).map((line) => (
+          <motion.h1 initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.16 } } }}>
+            {['Temiloluwa Faith Kareem', 'Full-Stack Developer'].map((line) => (
               <motion.span key={line} variants={{ hidden: { opacity: 0, filter: 'blur(18px)' }, show: { opacity: 1, filter: 'blur(0px)' } }}>
-                {line.includes('Secure') || line.includes('Coming') ? <><em>{line}</em></> : line}
+                {line.includes('Full-Stack') ? <em>{line}</em> : line}
               </motion.span>
             ))}
           </motion.h1>
-          <p>{isDesign ? 'A separate UI/UX case-study portfolio is being prepared with Figma flows, product thinking, wireframes, prototypes, and polished design systems.' : 'Engineering-focused portfolio for full-stack development, frontend systems, cybersecurity products, AI tools, and mobile app development.'}</p>
-          <TrackSelector active={track} setActive={setTrack} />
-          {!isDesign ? <RoleTicker /> : <div className="design-hero-note"><strong>Coming soon</strong><span>Figma case studies, UX research, product flows, and interface systems will live here.</span></div>}
-          <div className="hero-actions">
-            {isDesign ? <button onClick={() => setTrack('engineering')}>Back to Engineering Portfolio</button> : <a href="/work" onClick={(event) => { event.preventDefault(); navigate('/work') }}>See Engineering Work</a>}
-            <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">View CV</a>
+          <p>I build modern full-stack applications using React, Node.js, FastAPI, MongoDB, and Next.js with a security-first engineering mindset.</p>
+          <div className="hero-actions recruiter-actions">
+            <a href="/work" onClick={(event) => { event.preventDefault(); navigate('/work') }}>View Projects</a>
+            <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Download Resume</a>
+            <button onClick={() => navigate('/contact')}>Contact Me</button>
           </div>
+          <MetricsStrip />
         </div>
       </section>
       <Marquee />
-      {isDesign ? <UiUxComingSoon /> : <>
-        <AboutPreview navigate={navigate} />
-        <LiveBuildsSection compact navigate={navigate} />
-        <Services />
-        <Testimonials />
-        <CtaBanner navigate={navigate} />
-      </>}
+      <FeaturedProjectsSection navigate={navigate} />
+      <TechStackSection />
+      <GitHubSection />
+      <AboutPreview navigate={navigate} />
+      <Services />
+      <CtaBanner navigate={navigate} />
     </>
   )
+}
+
+function MetricsStrip() {
+  const metrics = [['2', 'Internships'], ['10+', 'Projects'], ['20+', 'UI Designs'], ['4.42', 'CGPA'], ['3x', 'Best Project Awards']]
+  return <div className="recruiter-metrics">{metrics.map(([value, label]) => <article key={label}><strong>{value}</strong><span>{label}</span></article>)}</div>
+}
+
+function FeaturedProjectsSection({ navigate }) {
+  return (
+    <section className="section featured-projects">
+      <SectionTitle eyebrow="FEATURED PROJECTS" title="The strongest proof of my full-stack direction." watermark="BUILD" />
+      <p className="section-note">Three deployed products that show interface quality, product thinking, and security-aware engineering decisions.</p>
+      <div className="featured-project-grid">
+        {selectedFeaturedProjects.map((project, index) => <FeaturedProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
+      </div>
+      <a className="wide-link" href="/work" onClick={(event) => { event.preventDefault(); navigate('/work') }}>See All Projects</a>
+    </section>
+  )
+}
+
+function FeaturedProjectCard({ project, index, navigate }) {
+  const meta = getProjectMeta(project)
+  return (
+    <article className={'featured-project-card ' + (index === 0 ? 'primary ' : '') + project.color}>
+      <div className="project-card-top"><span>{String(index + 1).padStart(2, '0')}</span><small>{meta.status}</small></div>
+      <h3>{project.name}</h3>
+      <p>{project.note}</p>
+      <div className="project-meta-row"><span>{meta.role}</span><span>{meta.duration}</span></div>
+      <div className="tag-row">{meta.stack.map((tag) => <span key={tag}>{tag}</span>)}</div>
+      <div className="project-action-row">
+        <a href={meta.github} target="_blank" rel="noreferrer">GitHub</a>
+        <a href={project.url} target="_blank" rel="noreferrer">Live Demo</a>
+        <button onClick={() => navigate('/work/' + project.slug)}>Case Study</button>
+      </div>
+    </article>
+  )
+}
+
+function TechStackSection() {
+  const groups = [
+    ['Frontend', ['React', 'Next.js', 'JavaScript', 'Responsive UI']],
+    ['Backend', ['Node.js', 'FastAPI', 'REST APIs', 'Authentication']],
+    ['Databases', ['MongoDB', 'Data Modeling', 'CRUD Systems']],
+    ['Cloud', ['Vercel', 'Deployment', 'Environment Config']],
+    ['Tools', ['GitHub', 'Figma', 'Postman', 'VS Code']],
+    ['Security', ['OWASP', 'JWT', 'Input Validation', 'API Security']]
+  ]
+  return <section className="section tech-stack-section"><SectionTitle eyebrow="TECH STACK" title="Tools I use to ship scalable full-stack applications." watermark="STACK" /><div>{groups.map(([title, items]) => <article key={title}><h3>{title}</h3>{items.map((item) => <span key={item}>{item}</span>)}</article>)}</div></section>
+}
+
+function GitHubSection() {
+  const repos = ['Deceivra', 'InternTrack', 'SentinelX']
+  return <section className="section github-section"><SectionTitle eyebrow="GITHUB" title="Repository activity and shipped project proof." watermark="CODE" /><div><article><h3>Recent repositories</h3><p>{repos.join(' / ')}</p><a href="https://github.com/Faith-loves" target="_blank" rel="noreferrer">Open GitHub</a></article><article><h3>Contribution graph</h3><div className="contribution-grid">{Array.from({ length: 56 }, (_, index) => <span key={index} className={index % 7 === 0 || index % 11 === 0 ? 'active' : ''} />)}</div></article><article><h3>Pinned repositories</h3><p>Full-stack builds, security-aware interfaces, dashboards, and deployed product experiments.</p></article></div></section>
 }
 
 function TrackSelector({ active, setActive }) {
@@ -685,7 +760,7 @@ function AboutPreview({ navigate }) {
         <SectionTitle eyebrow="01 - WHO I AM" title="A builder with a global vision." watermark="ABOUT" />
         <p className="large-copy">Computer Science student building full-stack products, frontend systems, cybersecurity dashboards, AI tools, and mobile app experiences with a practical security-first mindset.</p>
         <div className="stats-grid">
-          {['3+ Years Building', '12+ Projects Shipped', '4 Domains Mastered', '100% Passion Always'].map((stat) => (
+          {['2 Internships', '10+ Projects', '20+ UI Designs', '4.42 CGPA'].map((stat) => (
             <article key={stat}><strong>{stat.split(' ')[0]}</strong><span>{stat.split(' ').slice(1).join(' ')}</span></article>
           ))}
         </div>
@@ -716,33 +791,20 @@ function FeaturedProjects({ navigate }) {
 }
 
 function LiveBuildsSection({ compact = false, navigate }) {
-  const buildsToShow = (compact ? selectedLiveBuilds : liveBuilds).filter((build) => build.url)
+  const buildsToShow = compact ? selectedFeaturedProjects : liveBuilds.filter((build) => build.url)
 
   return (
-    <section className={`section live-builds ${compact ? 'compact' : ''}`}>
-      <SectionTitle eyebrow="DEPLOYED PROJECTS" title={compact ? 'Real deployed projects.' : 'Real deployed projects you can open.'} watermark="LIVE" />
+    <section className={'section live-builds ' + (compact ? 'compact' : '')}>
+      <SectionTitle eyebrow={compact ? 'FEATURED PROJECTS' : 'ALL PROJECTS'} title={compact ? 'Selected full-stack work.' : 'All deployed projects you can review.'} watermark="LIVE" />
       <p className="section-note">
         {compact
-          ? 'Live portfolio projects with working links, clean product stories, and recruiter-friendly proof of delivery.'
-          : 'These are the live deployed builds available now, each with a case study and direct demo link.'}
+          ? 'Recruiter-focused project proof: deployed applications with clear product stories, stack decisions, and case studies.'
+          : 'Browse the full archive of deployed projects, from full-stack applications to frontend, AI, UI/UX, and security-aware builds.'}
       </p>
       <div className="live-build-grid">
-        {buildsToShow.map((build, index) => (
-          <article key={build.url} className="live-build-card">
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <strong>{build.name}</strong>
-              <small>{build.type}</small>
-              <p>{build.note}</p>
-              <div className="live-build-actions">
-                <a href={`/work/${build.slug}`} onClick={(event) => { if (navigate) { event.preventDefault(); navigate(`/work/${build.slug}`) } }}>Case Study</a>
-                <a href={build.url} target="_blank" rel="noreferrer">Live Demo</a>
-              </div>
-            </div>
-          </article>
-        ))}
+        {buildsToShow.map((build, index) => <FeaturedProjectCard key={build.slug} project={build} index={index} navigate={navigate} />)}
       </div>
-      {compact ? <a className="wide-link" href="/work" onClick={(event) => { if (navigate) { event.preventDefault(); navigate('/work') } }}>See All Deployed Projects</a> : null}
+      {compact ? <a className="wide-link" href="/work" onClick={(event) => { if (navigate) { event.preventDefault(); navigate('/work') } }}>See All Projects</a> : null}
     </section>
   )
 }
@@ -798,18 +860,18 @@ function AboutPage() {
         <div className="about-portrait-card">
           <img src="/faith-temiloluwa-kareem.png" alt="Faith Temiloluwa Kareem" />
           <div>
-            <span>Open to remote work</span>
-            <strong>Designs. Builds. Secures.</strong>
+            <span>Full-stack developer</span>
+            <strong>Builds scalable software.</strong>
           </div>
         </div>
         <div className="about-hero-copy">
           <span>ABOUT FAITH</span>
           <h1>The person behind the pixels.</h1>
           <p>
-            I am Faith Temiloluwa Kareem, a Computer Science student building AI-powered cybersecurity and full-stack solutions. I care about security operations, intelligent automation, cloud technologies, and software that solves real-world problems.
+            I am Faith Temiloluwa Kareem, a Computer Science student focused on full-stack development. I started with frontend interfaces, expanded into backend systems, and now build applications that connect product clarity with reliable engineering.
           </p>
           <p>
-            My strength is range: I can think through the user experience, build the interface, connect the system, and ask how it could be attacked. That is the kind of builder I am becoming.
+            My edge is that I can move across the stack while still thinking about usability, authentication, data flow, and security risk. I want recruiters to see a developer who can ship software that is useful, maintainable, and harder to break.
           </p>
           <div className="about-link-row">
             {profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}
@@ -817,19 +879,19 @@ function AboutPage() {
         </div>
       </section>
       <section className="section about-statement">
-        <SectionTitle eyebrow="01 - IDENTITY" title="An engineer's discipline, a frontend eye, and a security mindset." watermark="FAITH" />
+        <SectionTitle eyebrow="01 - IDENTITY" title="A full-stack developer with product taste and security discipline." watermark="FAITH" />
         <div className="about-statement-grid">
           <article>
             <span>Frontend</span>
-            <p>I build responsive interfaces that feel clear, credible, and useful across devices.</p>
+            <p>I started with responsive interfaces and still care deeply about clarity, hierarchy, and mobile usability.</p>
           </article>
           <article>
             <span>Engineering</span>
-            <p>I build React interfaces, full-stack flows, dashboards, and deployable products with a practical builder's mindset.</p>
+            <p>I connect React frontends to APIs, data models, authentication flows, and deployment-ready product structure.</p>
           </article>
           <article>
             <span>Security</span>
-            <p>I study OWASP, testing workflows, and secure product decisions so the things I build are not fragile.</p>
+            <p>I apply OWASP, validation, API security, JWT, and database safety as engineering habits, not as a separate identity.</p>
           </article>
         </div>
       </section>
@@ -851,8 +913,8 @@ function SkillsDeepDive() {
 }
 
 function Timeline() {
-  const steps = ['2022 - Started HTML/CSS and frontend development', '2023 - Built first React app', '2024 - Discovered cybersecurity', '2024 - Completed DVWA pentest', '2025 - Building full-stack, security, and mobile projects']
-  return <section className="section"><SectionTitle eyebrow="JOURNEY" title="Built one layer at a time." watermark="TIMELINE" /><div className="timeline">{steps.map((step) => <article key={step}><span /> <p>{step}</p></article>)}</div></section>
+  const steps = ['Frontend foundations', 'React interfaces', 'Backend APIs', 'Full-stack applications', 'Security-first engineering', 'AI-assisted product workflows']
+  return <section className="section"><SectionTitle eyebrow="GROWTH" title="From interface craft to full-stack engineering." watermark="TIMELINE" /><div className="timeline growth-timeline">{steps.map((step) => <article key={step}><span /> <p>{step}</p></article>)}</div></section>
 }
 
 function Values() {
@@ -860,14 +922,20 @@ function Values() {
 }
 
 function WorkPage({ navigate }) {
+  const [activeFilter, setActiveFilter] = useState('All')
+  const filteredProjects = liveBuilds.filter((project) => project.url && matchesProjectFilter(project, activeFilter))
+
   return (
     <>
-      <PageHero label="ALL WORK" title="Everything I have worked on." text="A complete collection of my deployed full-stack, frontend, cybersecurity, AI, ecommerce, dashboard, and productivity projects." />
+      <PageHero label="PROJECTS" title="Full-stack projects recruiters can open and review." text="A filtered archive of deployed applications, interface systems, dashboards, AI tools, and security-first product work." />
+      <FeaturedProjectsSection navigate={navigate} />
       <section className="section work-index">
-        <SectionTitle eyebrow="DEPLOYED PROJECTS" title="All deployed projects I have worked on." watermark="LIVE" />
-        <p className="section-note">Every project below includes a case study button and a direct live demo link.</p>
+        <SectionTitle eyebrow="ALL PROJECTS" title="Filter by engineering focus." watermark="ARCHIVE" />
+        <div className="filters project-filter-bar">
+          {projectFilters.map((filter) => <button key={filter} className={filter === activeFilter ? 'active' : ''} onClick={() => setActiveFilter(filter)}>{filter}</button>)}
+        </div>
         <div className="work-grid">
-          {liveBuilds.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
+          {filteredProjects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} navigate={navigate} />)}
         </div>
       </section>
     </>
@@ -875,15 +943,20 @@ function WorkPage({ navigate }) {
 }
 
 function ProjectCard({ project, index = 0, navigate }) {
+  const meta = getProjectMeta(project)
   return (
-    <article className={`project-card ${project.color}`}>
-      <div className="project-card-top"><span>{String(index + 1).padStart(2, '0')}</span><small>{project.category}</small></div>
+    <article className={'project-card ' + project.color}>
+      <div className="project-card-top"><span>{String(index + 1).padStart(2, '0')}</span><small>{meta.status}</small></div>
       <ProjectPreview project={project} />
       <h3>{project.name}</h3>
       <p>{project.note}</p>
-      <div className="tag-row">{project.filters.map((tag) => <span key={tag}>{tag}</span>)}</div>
-      <button onClick={() => navigate(`/work/${project.slug}`)}>View Case Study</button>
-      {project.comingSoon ? <span className="coming-soon-link">Coming Soon</span> : <a href={project.url} target="_blank" rel="noreferrer">Live Demo</a>}
+      <div className="project-meta-row"><span>{meta.role}</span><span>{meta.duration}</span></div>
+      <div className="tag-row">{meta.stack.map((tag) => <span key={tag}>{tag}</span>)}</div>
+      <div className="project-action-row">
+        <a href={meta.github} target="_blank" rel="noreferrer">GitHub</a>
+        <a href={project.url} target="_blank" rel="noreferrer">Live Demo</a>
+        <button onClick={() => navigate('/work/' + project.slug)}>Case Study</button>
+      </div>
     </article>
   )
 }
@@ -920,6 +993,25 @@ function ProjectPage({ slug, navigate }) {
       <section className="section problem-solution">
         <article><span>The Problem</span><p>{study.problem}</p></article>
         <article><span>My Approach</span><p>{study.approach}</p></article>
+      </section>      <section className="section case-detail-grid">
+        <SectionTitle eyebrow="ENGINEERING BREAKDOWN" title="The decisions behind the build." watermark="DETAILS" />
+        <div>
+          {[
+            ['Overview', study.outcome],
+            ['Research', 'I studied the target workflow, user expectations, risk points, and interface moments where clarity would matter most.'],
+            ['Architecture', 'The project is structured as a deployed frontend experience with reusable UI sections, route-level project storytelling, and clean component boundaries.'],
+            ['Tech Stack', getProjectMeta(project).stack.join(' / ')],
+            ['Challenges', 'The main challenge was balancing polished presentation with a clear product explanation that recruiters can understand quickly.'],
+            ['Solution', study.approach],
+            ['Database', 'Where the product requires data, the case study explains how information should be modeled, validated, and protected before reaching the interface.'],
+            ['API Design', 'API thinking centers on predictable request flows, clear response states, secure validation, and user-facing feedback.'],
+            ['Authentication', 'Authentication is treated as a trust boundary: clear access states, careful session assumptions, and secure user journeys.'],
+            ['Deployment', project.url ? 'The project is deployed live so recruiters can inspect the real product, not just screenshots.' : 'The project is prepared as a portfolio case study while deployment is pending.'],
+            ['Performance', 'The interface is kept responsive with stable layouts, focused animations, and compact project cards.'],
+            ['Lessons Learned', 'Each build improved my judgment around product scope, user flow, component reuse, and security-first engineering.'],
+            ['Future Improvements', 'Next steps include stronger backend integration, deeper analytics, richer test coverage, and clearer admin workflows where relevant.']
+          ].map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}
+        </div>
       </section>
       <ProjectImageGallery study={study} />
       <section className="section recruiter-snapshot">
@@ -984,16 +1076,14 @@ function CaseStudyCards({ project, study }) {
 }
 
 function SecurityPage() {
-  const owasp = ['Broken Access Control', 'Cryptographic Failures', 'Injection', 'Insecure Design', 'Security Misconfiguration', 'Vulnerable Components', 'Auth Failures', 'Integrity Failures', 'Logging Failures', 'SSRF']
+  const practices = ['OWASP awareness', 'Secure Authentication', 'Input Validation', 'JWT handling', 'API Security', 'Database Security', 'Rate Limiting', 'HTTPS', 'Basic Pentesting']
   return (
     <>
-      <PageHero label="SECURITY" title="Security Research" text="I do not just build apps. I break them first, so the bad guys cannot." />
-      <section className="section security-terminal"><Terminal /></section>
+      <PageHero label="SECURITY FIRST" title="Engineering mindset, not a separate identity." text="Security strengthens how I build full-stack applications: better authentication, safer APIs, cleaner validation, and fewer fragile decisions." />
       <section className="section security-grid">
-        <SectionTitle eyebrow="OWASP TOP 10" title="My understanding." watermark="OWASP" />
-        <div>{owasp.map((item, index) => <article className="security-card" key={item}><span>A{String(index + 1).padStart(2, '0')}</span><h3>{item}</h3><p>Studied and mapped to practical web application risk.</p></article>)}</div>
+        <SectionTitle eyebrow="SECURE ENGINEERING" title="How security shapes my development choices." watermark="MINDSET" />
+        <div>{practices.map((item, index) => <article className="security-card" key={item}><span>0{index + 1}</span><h3>{item}</h3><p>Applied as a practical software engineering habit when designing forms, APIs, authentication, databases, and deployment flows.</p></article>)}</div>
       </section>
-      <section className="section arsenal"><SectionTitle eyebrow="TOOLS I WIELD" title="Security toolkit." watermark="TOOLS" /><p>Kali Linux - Burp Suite - OWASP ZAP - Nmap - SQLMap - Metasploit - Wireshark - DVWA - Hydra - Nikto - Gobuster</p></section>
     </>
   )
 }
@@ -1028,8 +1118,8 @@ function ContactPage() {
     <section className="contact-page refined-contact">
       <div className="contact-intro">
         <span className="contact-kicker">CONTACT</span>
-        <h1>Let's build<br /><em>the next thing.</em></h1>
-        <p>I am open to frontend, full-stack, cybersecurity, AI, and mobile app work. Send the role, project idea, timeline, and the best way to reach you.</p>
+        <h1>Let's build<br /><em>scalable software together.</em></h1>
+        <p>Available for Full-Stack Development Opportunities. Send the role, project idea, timeline, and the best way to reach you.</p>
         <div className="contact-methods">
           {contactMethods.map(([label, href]) => (
             <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
@@ -1069,7 +1159,7 @@ function ContactPage() {
 }
 
 function Footer({ navigate }) {
-  return <footer className="site-footer"><div><button className="logo" onClick={() => navigate('/')}><span>Faith</span><code>.dev</code></button><p>Designing. Building. Securing.</p><small>2026 Faith Temiloluwa Kareem. All rights reserved.</small></div><nav>{routes.map(([href, label]) => <button key={href} onClick={() => navigate(href)}>{label}</button>)}</nav><div><p>Available for new projects.</p><button className="footer-hire" onClick={() => navigate('/contact')}>Hire Me</button><div className="footer-socials">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div></div><strong>Designed, built and secured by Faith Temiloluwa Kareem</strong></footer>
+  return <footer className="site-footer recruiter-footer"><div><button className="logo" onClick={() => navigate('/')}><span>Faith</span><code>.dev</code></button><p>Full-Stack Developer building scalable software with a security-first mindset.</p><small>Lagos, Nigeria</small></div><nav>{routes.map(([href, label]) => <button key={href} onClick={() => navigate(href)}>{label}</button>)}<a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Download Resume</a></nav><div><p>Open to full-stack development opportunities.</p><button className="footer-hire" onClick={() => navigate('/contact')}>Contact Me</button><div className="footer-socials">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div></div><strong>React / Node.js / FastAPI / MongoDB / Security-first engineering</strong></footer>
 }
 
 function BackToTop() {
