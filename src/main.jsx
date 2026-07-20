@@ -1086,8 +1086,6 @@ function Terminal() {
 function ContactPage() {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
-  const [sent, setSent] = useState(false)
-  const [sending, setSending] = useState(false)
   const contactMethods = [
     ['GitHub', 'https://github.com/Faith-loves'],
     ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
@@ -1096,20 +1094,28 @@ function ContactPage() {
   const projectTypes = ['Full-Stack Development', 'Frontend Development', 'UI/UX Design', 'Internship or Employment', 'Other']
 
   function handleContactSubmit(event) {
-    if (message.trim().length < 10) {
-      event.preventDefault()
+    event.preventDefault()
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const name = formData.get('name')?.toString().trim() || 'Portfolio visitor'
+    const email = formData.get('email')?.toString().trim() || 'No email provided'
+    const projectType = formData.get('project_type')?.toString() || 'Portfolio inquiry'
+    const bodyMessage = message.trim()
+
+    if (bodyMessage.length < 10) {
       setError('Please add a little more detail before sending.')
       return
     }
 
     setError('')
-    setSending(true)
-    window.setTimeout(() => {
-      setSending(false)
-      setSent(true)
-      setMessage('')
-      event.target.reset()
-    }, 900)
+    const subject = encodeURIComponent(`Portfolio message from ${name}`)
+    const body = encodeURIComponent(`Name: ${name}
+Email: ${email}
+Project type: ${projectType}
+
+Message:
+${bodyMessage}`)
+    window.location.href = `mailto:omolarak724@gmail.com?subject=${subject}&body=${body}`
   }
 
   return (
@@ -1127,42 +1133,28 @@ function ContactPage() {
         </div>
 
       </div>
-      <form
-        className={`contact-form ${sent ? 'sent' : ''}`}
-        action="https://formsubmit.co/omolarak724@gmail.com"
-        method="POST"
-        target="contact-submit-frame"
-        onSubmit={handleContactSubmit}
-      >
-        <input type="hidden" name="_subject" value="New portfolio message for Faith Kareem" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://create-this-build-a-stunning-personal.vercel.app/contact" />
-        <input type="text" name="_honey" tabIndex="-1" autoComplete="off" aria-hidden="true" className="hidden-field" />
-        <iframe title="Contact form submission" name="contact-submit-frame" className="hidden-field" />
-        {!sent ? <>
-          <div className="form-head">
-            <span>START A CONVERSATION</span>
-            <p>Send the details here and they will go straight to my inbox.</p>
-          </div>
-          <div className="field-grid">
-            <label>Name<input required name="name" placeholder="Your name" /></label>
-            <label>Email<input required name="email" type="email" placeholder="you@example.com" /></label>
-          </div>
-          <label>Project or opportunity type
-            <select name="project_type">
-              {projectTypes.map((type) => <option key={type}>{type}</option>)}
-            </select>
-          </label>
-          <label>Message
-            <textarea required name="message" value={message} onChange={(event) => setMessage(event.target.value)} minLength="10" maxLength="500" placeholder="Tell me about the opportunity, project, timeline and the best way to reach you." />
-          </label>
-          <div className="form-foot">
-            {error ? <small className="form-error">{error}</small> : <small>{message.length}/500</small>}
-            <a href="mailto:omolarak724@gmail.com">Email directly</a>
-          </div>
-          <button type="submit" disabled={sending}>{sending ? 'Sending...' : 'Send Message'}</button>
-        </> : <div className="thanks"><span>SENT</span><h2>Message sent</h2><p>If this is the first test, check Gmail or spam for the FormSubmit confirmation email and approve it once.</p><button type="button" onClick={() => setSent(false)}>Send another message</button></div>}
+      <form className="contact-form" onSubmit={handleContactSubmit}>
+        <div className="form-head">
+          <span>START A CONVERSATION</span>
+          <p>Fill this in and your email app will open with the message ready to send.</p>
+        </div>
+        <div className="field-grid">
+          <label>Name<input required name="name" placeholder="Your name" /></label>
+          <label>Email<input required name="email" type="email" placeholder="you@example.com" /></label>
+        </div>
+        <label>Project or opportunity type
+          <select name="project_type">
+            {projectTypes.map((type) => <option key={type}>{type}</option>)}
+          </select>
+        </label>
+        <label>Message
+          <textarea required name="message" value={message} onChange={(event) => setMessage(event.target.value)} minLength="10" maxLength="500" placeholder="Tell me about the opportunity, project, timeline and the best way to reach you." />
+        </label>
+        <div className="form-foot">
+          {error ? <small className="form-error">{error}</small> : <small>{message.length}/500</small>}
+          <a href="mailto:omolarak724@gmail.com">Email directly</a>
+        </div>
+        <button type="submit">Open Email to Send</button>
       </form>
     </section>
   )
