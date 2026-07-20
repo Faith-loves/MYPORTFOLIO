@@ -3666,3 +3666,304 @@ a {
     gap: 0.5rem;
   }
 }
+
+/* Refined contact page */
+.refined-contact {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  grid-template-columns: minmax(0, 0.95fr) minmax(20rem, 0.82fr);
+  gap: clamp(1.6rem, 5vw, 5rem);
+  align-items: center;
+  padding: clamp(7rem, 11vw, 9rem) clamp(1rem, 5vw, 4rem) clamp(3rem, 7vw, 5rem);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 20%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 17rem),
+    radial-gradient(circle at 92% 24%, color-mix(in srgb, var(--indigo) 24%, transparent), transparent 21rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 36%);
+}
+
+.refined-contact::before {
+  position: absolute;
+  inset: 5.5rem clamp(1rem, 5vw, 4rem) auto;
+  height: 1px;
+  content: '';
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.contact-intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.35rem;
+}
+
+.contact-kicker,
+.form-head span,
+.contact-methods span,
+.contact-availability span,
+.thanks span {
+  color: var(--gold);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.refined-contact h1 {
+  max-width: 52rem;
+  margin: 0;
+  font-size: clamp(4rem, 8vw, 8.4rem);
+  line-height: 0.82;
+}
+
+.refined-contact h1 em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.refined-contact .contact-intro > p {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.75;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.contact-methods a,
+.contact-availability {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent),
+    rgba(13, 13, 26, 0.76);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.18);
+}
+
+.contact-methods a {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.contact-methods a:hover {
+  border-color: var(--gold-dim);
+  background: rgba(25, 24, 36, 0.9);
+  transform: translateY(-3px);
+}
+
+.contact-methods strong,
+.contact-availability strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.contact-availability {
+  max-width: 30rem;
+  border-color: var(--gold-dim);
+}
+
+.contact-availability p {
+  margin: 0.55rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.refined-contact .contact-form {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--gold-dim);
+  border-radius: 1.35rem;
+  padding: clamp(1.15rem, 3vw, 2rem);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(201, 168, 76, 0.12), transparent 12rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(11, 11, 22, 0.9);
+  box-shadow: 0 32px 110px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+}
+
+.form-head {
+  display: grid;
+  gap: 0.45rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.form-head p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.refined-contact label {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.refined-contact input,
+.refined-contact textarea,
+.refined-contact select {
+  width: 100%;
+  border: 1px solid rgba(201, 168, 76, 0.24);
+  border-radius: 0.9rem;
+  padding: 0.95rem 1rem;
+  outline: 0;
+  background: rgba(5, 5, 10, 0.72);
+  color: var(--text-primary);
+  font: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.refined-contact input:focus,
+.refined-contact textarea:focus,
+.refined-contact select:focus {
+  border-color: var(--gold);
+  background: rgba(5, 5, 10, 0.92);
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.11);
+}
+
+.refined-contact textarea {
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.form-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form-foot small,
+.form-foot a {
+  color: var(--text-muted);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.72rem;
+}
+
+.form-foot a {
+  color: var(--gold-light);
+}
+
+.refined-contact .contact-form button,
+.thanks a {
+  min-height: 3.15rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #130f08;
+  font-weight: 900;
+  box-shadow: 0 18px 50px rgba(201, 168, 76, 0.18);
+}
+
+.refined-contact .contact-form button:hover,
+.thanks a:hover {
+  transform: translateY(-2px);
+}
+
+.refined-contact .thanks {
+  min-height: 24rem;
+  align-content: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+.refined-contact .thanks h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1;
+}
+
+.refined-contact .thanks p {
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.refined-contact .thanks a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  margin-top: 0.75rem;
+  padding: 0 1.35rem;
+}
+
+@media (max-width: 980px) {
+  .refined-contact {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding-top: 7rem;
+  }
+
+  .contact-methods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-availability {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .refined-contact {
+    gap: 1.4rem;
+    padding: 6.25rem 1rem 2.5rem;
+  }
+
+  .refined-contact h1 {
+    font-size: clamp(3rem, 15vw, 4.7rem);
+    line-height: 0.88;
+  }
+
+  .contact-methods,
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-methods a,
+  .contact-availability,
+  .refined-contact .contact-form {
+    border-radius: 0.95rem;
+  }
+
+  .refined-contact .contact-form {
+    padding: 1rem;
+  }
+
+  .form-foot {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+}

@@ -1017,23 +1017,57 @@ function Terminal() {
 function ContactPage() {
   const [sent, setSent] = useState(false)
   const [message, setMessage] = useState('')
+  const contactMethods = [
+    ['Email', 'omolarak724@gmail.com', 'mailto:omolarak724@gmail.com'],
+    ['LinkedIn', 'temiloluwa-faith-kareem', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
+    ['GitHub', 'Faith-loves', 'https://github.com/Faith-loves']
+  ]
+  const projectTypes = ['Frontend build', 'Full-stack app', 'Cybersecurity product', 'Mobile app', 'AI interface']
+
   return (
-    <section className="contact-page">
-      <div>
-        <h1>LET'S<br />BUILD<br /><em>SOMETHING.</em></h1>
-        <p>Available for freelance projects, remote roles, internships, and collaboration on frontend, full-stack, cybersecurity, AI, and mobile app products.</p>
-        <div className="social-row">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div>
-        <code>Remote-friendly<br />omolarak724@gmail.com</code>
+    <section className="contact-page refined-contact">
+      <div className="contact-intro">
+        <span className="contact-kicker">CONTACT</span>
+        <h1>Let's build<br /><em>the next thing.</em></h1>
+        <p>I am open to frontend, full-stack, cybersecurity, AI, and mobile app work. Send the role, project idea, timeline, and the best way to reach you.</p>
+        <div className="contact-methods">
+          {contactMethods.map(([label, value, href]) => (
+            <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </a>
+          ))}
+        </div>
+        <div className="contact-availability">
+          <span>Availability</span>
+          <strong>Remote-friendly</strong>
+          <p>Freelance projects, internships, junior roles, and product collaborations.</p>
+        </div>
       </div>
-      <form className={sent ? 'sent' : ''} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
+      <form className={`contact-form ${sent ? 'sent' : ''}`} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
         {!sent ? <>
-          <label>Name<input required /></label>
-          <label>Email<input required type="email" /></label>
-          <label>Service<select><option>Full Stack</option><option>Frontend Development</option><option>Cybersecurity</option><option>Mobile App</option><option>Other</option></select></label>
-          <label>Message<textarea required value={message} onChange={(event) => setMessage(event.target.value)} maxLength="500" /></label>
-          <small>{message.length}/500</small>
-          <button>SEND MESSAGE</button>
-        </> : <div className="thanks"><h2>MESSAGE SENT</h2><p>I will be in touch within 24 hours.</p></div>}
+          <div className="form-head">
+            <span>START A CONVERSATION</span>
+            <p>Use this form to draft your message. You can also email me directly.</p>
+          </div>
+          <div className="field-grid">
+            <label>Name<input required placeholder="Your name" /></label>
+            <label>Email<input required type="email" placeholder="you@example.com" /></label>
+          </div>
+          <label>What do you need?
+            <select>
+              {projectTypes.map((type) => <option key={type}>{type}</option>)}
+            </select>
+          </label>
+          <label>Message
+            <textarea required value={message} onChange={(event) => setMessage(event.target.value)} maxLength="500" placeholder="Tell me what you are building, the deadline, and what success should look like." />
+          </label>
+          <div className="form-foot">
+            <small>{message.length}/500</small>
+            <a href="mailto:omolarak724@gmail.com">Email directly</a>
+          </div>
+          <button>Send Message</button>
+        </> : <div className="thanks"><span>READY</span><h2>Message prepared</h2><p>Thank you. You can also send the details directly to omolarak724@gmail.com.</p><a href="mailto:omolarak724@gmail.com">Open email</a></div>}
       </form>
     </section>
   )
