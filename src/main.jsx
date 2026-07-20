@@ -1103,6 +1103,10 @@ function ContactPage() {
       return
     }
 
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const payload = Object.fromEntries(formData.entries())
+
     setSending(true)
     setError('')
 
@@ -1110,15 +1114,20 @@ function ContactPage() {
       const response = await fetch('https://formsubmit.co/ajax/omolarak724@gmail.com', {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           Accept: 'application/json'
         },
-        body: new FormData(event.currentTarget)
+        body: JSON.stringify(payload)
       })
+      const result = await response.json().catch(() => ({}))
 
-      if (!response.ok) throw new Error('Message could not be sent')
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || 'Message could not be sent')
+      }
+
       setSent(true)
       setMessage('')
-      event.currentTarget.reset()
+      form.reset()
     } catch (submitError) {
       setError('The message could not send. Please use the email link instead.')
     } finally {
@@ -1168,7 +1177,7 @@ function ContactPage() {
             <a href="mailto:omolarak724@gmail.com">Email directly</a>
           </div>
           <button type="submit" disabled={sending}>{sending ? 'Sending...' : 'Send Message'}</button>
-        </> : <div className="thanks"><span>SENT</span><h2>Message sent</h2><p>Thank you. Your message has been sent to my inbox.</p><button type="button" onClick={() => setSent(false)}>Send another message</button></div>}
+        </> : <div className="thanks"><span>SENT</span><h2>Message sent</h2><p>If this is the first test, check Gmail or spam for the FormSubmit confirmation email and approve it once.</p><button type="button" onClick={() => setSent(false)}>Send another message</button></div>}
       </form>
     </section>
   )
