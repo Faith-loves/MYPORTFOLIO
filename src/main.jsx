@@ -617,10 +617,8 @@ function HomePage({ navigate }) {
             ))}
           </motion.h1>
           <p>I build polished, secure and scalable web applications using React, Next.js, Node.js and FastAPI.</p>
-          <div className="hero-actions recruiter-actions">
-            <a href="/work" onClick={(event) => { event.preventDefault(); navigate('/work') }}>View Projects</a>
+          <div className="hero-actions recruiter-actions single-action">
             <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Download Resume</a>
-            <button className="text-link-action" onClick={() => navigate('/contact')}>Contact Me</button>
           </div>
         </div>
       </section>
