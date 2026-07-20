@@ -1086,12 +1086,45 @@ function Terminal() {
 function ContactPage() {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
   const contactMethods = [
     ['GitHub', 'https://github.com/Faith-loves'],
     ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
     ['Email', 'mailto:omolarak724@gmail.com']
   ]
   const projectTypes = ['Full-Stack Development', 'Frontend Development', 'UI/UX Design', 'Internship or Employment', 'Other']
+
+  async function handleContactSubmit(event) {
+    event.preventDefault()
+
+    if (message.trim().length < 10) {
+      setError('Please add a little more detail before sending.')
+      return
+    }
+
+    setSending(true)
+    setError('')
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/omolarak724@gmail.com', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json'
+        },
+        body: new FormData(event.currentTarget)
+      })
+
+      if (!response.ok) throw new Error('Message could not be sent')
+      setSent(true)
+      setMessage('')
+      event.currentTarget.reset()
+    } catch (submitError) {
+      setError('The message could not send. Please use the email link instead.')
+    } finally {
+      setSending(false)
+    }
+  }
 
   return (
     <section className="contact-page refined-contact">
@@ -1108,44 +1141,34 @@ function ContactPage() {
         </div>
 
       </div>
-      <form
-        className="contact-form"
-        action="https://formsubmit.co/omolarak724@gmail.com"
-        method="POST"
-        onSubmit={(event) => {
-          if (message.trim().length < 10) {
-            event.preventDefault()
-            setError('Please add a little more detail before sending.')
-            return
-          }
-          setError('')
-        }}
-      >
+      <form className={`contact-form ${sent ? 'sent' : ''}`} onSubmit={handleContactSubmit}>
         <input type="hidden" name="_subject" value="New portfolio message for Faith Kareem" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" tabIndex="-1" autoComplete="off" aria-hidden="true" className="hidden-field" />
-        <div className="form-head">
-          <span>START A CONVERSATION</span>
-          <p>Send the details here and they will go straight to my inbox.</p>
-        </div>
-        <div className="field-grid">
-          <label>Name<input required name="name" placeholder="Your name" /></label>
-          <label>Email<input required name="email" type="email" placeholder="you@example.com" /></label>
-        </div>
-        <label>Project or opportunity type
-          <select name="project_type">
-            {projectTypes.map((type) => <option key={type}>{type}</option>)}
-          </select>
-        </label>
-        <label>Message
-          <textarea required name="message" value={message} onChange={(event) => setMessage(event.target.value)} minLength="10" maxLength="500" placeholder="Tell me about the opportunity, project, timeline and the best way to reach you." />
-        </label>
-        <div className="form-foot">
-          {error ? <small className="form-error">{error}</small> : <small>{message.length}/500</small>}
-          <a href="mailto:omolarak724@gmail.com">Email directly</a>
-        </div>
-        <button type="submit">Send Message</button>
+        {!sent ? <>
+          <div className="form-head">
+            <span>START A CONVERSATION</span>
+            <p>Send the details here and they will go straight to my inbox.</p>
+          </div>
+          <div className="field-grid">
+            <label>Name<input required name="name" placeholder="Your name" /></label>
+            <label>Email<input required name="email" type="email" placeholder="you@example.com" /></label>
+          </div>
+          <label>Project or opportunity type
+            <select name="project_type">
+              {projectTypes.map((type) => <option key={type}>{type}</option>)}
+            </select>
+          </label>
+          <label>Message
+            <textarea required name="message" value={message} onChange={(event) => setMessage(event.target.value)} minLength="10" maxLength="500" placeholder="Tell me about the opportunity, project, timeline and the best way to reach you." />
+          </label>
+          <div className="form-foot">
+            {error ? <small className="form-error">{error}</small> : <small>{message.length}/500</small>}
+            <a href="mailto:omolarak724@gmail.com">Email directly</a>
+          </div>
+          <button type="submit" disabled={sending}>{sending ? 'Sending...' : 'Send Message'}</button>
+        </> : <div className="thanks"><span>SENT</span><h2>Message sent</h2><p>Thank you. Your message has been sent to my inbox.</p><button type="button" onClick={() => setSent(false)}>Send another message</button></div>}
       </form>
     </section>
   )
