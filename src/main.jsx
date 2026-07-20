@@ -617,17 +617,16 @@ function HomePage({ navigate }) {
             ))}
           </motion.h1>
           <p>I build polished, secure and scalable web applications using React, Next.js, Node.js and FastAPI.</p>
-          <p className="hero-secondary">I combine strong interface design, backend engineering and a security-first mindset to turn ideas into complete digital products.</p>
           <div className="hero-actions recruiter-actions">
             <a href="/work" onClick={(event) => { event.preventDefault(); navigate('/work') }}>View Projects</a>
             <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Download Resume</a>
             <button className="text-link-action" onClick={() => navigate('/contact')}>Contact Me</button>
           </div>
-          <MetricsStrip />
         </div>
       </section>
-      <FeaturedProjectsSection navigate={navigate} />
+      <MetricsStrip />
       <AboutPreview navigate={navigate} />
+      <FeaturedProjectsSection navigate={navigate} />
       <SelectedExpertise />
       <EngineeringPhilosophy />
       <CtaBanner navigate={navigate} />
@@ -636,8 +635,8 @@ function HomePage({ navigate }) {
 }
 
 function MetricsStrip() {
-  const metrics = ['2 internships', '10+ projects', '20+ interfaces', '4.42 CGPA', '3x best project awards']
-  return <div className="recruiter-metrics editorial-metrics">{metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
+  const metrics = ['2 Internships', '10+ Projects', '20+ Interfaces Designed', '3x Best Project Awards']
+  return <section className="metrics-strip" aria-label="Portfolio highlights"><div className="recruiter-metrics editorial-metrics">{metrics.map((metric) => <span key={metric}>{metric}</span>)}</div></section>
 }
 
 function FeaturedProjectsSection({ navigate }) {
