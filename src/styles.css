@@ -4581,3 +4581,56 @@ a {
     padding-block: 2.8rem;
   }
 }
+
+/* About preview readability fix */
+.editorial-about-preview {
+  gap: clamp(3rem, 7vw, 7rem);
+}
+
+.editorial-about-preview > div:last-child {
+  display: grid;
+  align-content: center;
+  gap: clamp(1rem, 2vw, 1.35rem);
+  min-width: 0;
+}
+
+.editorial-about-preview .section-title {
+  margin: 0 0 clamp(1.1rem, 2.2vw, 1.75rem);
+}
+
+.editorial-about-preview .section-title h2 {
+  max-width: 42rem;
+  line-height: 1.04;
+}
+
+.editorial-about-preview .section-title > strong {
+  left: -1.2rem;
+  top: -2.6rem;
+  color: rgba(255, 255, 255, 0.032);
+  font-size: clamp(7rem, 16vw, 15rem);
+}
+
+.editorial-about-preview .large-copy {
+  max-width: 41rem;
+  margin: 0;
+  font-size: clamp(1.08rem, 1.5vw, 1.25rem);
+  line-height: 1.82;
+}
+
+.editorial-about-preview .left-note {
+  max-width: 42rem;
+  margin: 0;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.82;
+}
+
+.editorial-about-preview .text-link {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+@media (max-width: 980px) {
+  .editorial-about-preview .section-title > strong {
+    display: none;
+  }
+}
+
