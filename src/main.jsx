@@ -1084,7 +1084,6 @@ function Terminal() {
 }
 
 function ContactPage() {
-  const [sent, setSent] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const contactMethods = [
@@ -1109,30 +1108,44 @@ function ContactPage() {
         </div>
 
       </div>
-      <form className={`contact-form ${sent ? 'sent' : ''}`} onSubmit={(event) => { event.preventDefault(); if (message.trim().length < 10) { setError('Please add a little more detail before sending.'); return } setError(''); setSent(true) }}>
-        {!sent ? <>
-          <div className="form-head">
-            <span>START A CONVERSATION</span>
-            <p>Use this form to draft your message. You can also email me directly.</p>
-          </div>
-          <div className="field-grid">
-            <label>Name<input required placeholder="Your name" /></label>
-            <label>Email<input required type="email" placeholder="you@example.com" /></label>
-          </div>
-          <label>Project or opportunity type
-            <select>
-              {projectTypes.map((type) => <option key={type}>{type}</option>)}
-            </select>
-          </label>
-          <label>Message
-            <textarea required value={message} onChange={(event) => setMessage(event.target.value)} maxLength="500" placeholder="Tell me about the opportunity, project, timeline and the best way to reach you." />
-          </label>
-          <div className="form-foot">
-            {error ? <small className="form-error">{error}</small> : <small>{message.length}/500</small>}
-            <a href="mailto:omolarak724@gmail.com">Email directly</a>
-          </div>
-          <button>Send Message</button>
-        </> : <div className="thanks"><span>READY</span><h2>Message prepared</h2><p>Thank you. You can also send the details directly to omolarak724@gmail.com.</p><a href="mailto:omolarak724@gmail.com">Open email</a></div>}
+      <form
+        className="contact-form"
+        action="https://formsubmit.co/omolarak724@gmail.com"
+        method="POST"
+        onSubmit={(event) => {
+          if (message.trim().length < 10) {
+            event.preventDefault()
+            setError('Please add a little more detail before sending.')
+            return
+          }
+          setError('')
+        }}
+      >
+        <input type="hidden" name="_subject" value="New portfolio message for Faith Kareem" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" tabIndex="-1" autoComplete="off" aria-hidden="true" className="hidden-field" />
+        <div className="form-head">
+          <span>START A CONVERSATION</span>
+          <p>Send the details here and they will go straight to my inbox.</p>
+        </div>
+        <div className="field-grid">
+          <label>Name<input required name="name" placeholder="Your name" /></label>
+          <label>Email<input required name="email" type="email" placeholder="you@example.com" /></label>
+        </div>
+        <label>Project or opportunity type
+          <select name="project_type">
+            {projectTypes.map((type) => <option key={type}>{type}</option>)}
+          </select>
+        </label>
+        <label>Message
+          <textarea required name="message" value={message} onChange={(event) => setMessage(event.target.value)} minLength="10" maxLength="500" placeholder="Tell me about the opportunity, project, timeline and the best way to reach you." />
+        </label>
+        <div className="form-foot">
+          {error ? <small className="form-error">{error}</small> : <small>{message.length}/500</small>}
+          <a href="mailto:omolarak724@gmail.com">Email directly</a>
+        </div>
+        <button type="submit">Send Message</button>
       </form>
     </section>
   )
