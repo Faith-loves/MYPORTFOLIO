@@ -7,7 +7,8 @@ const routes = [
   ['/', 'Home'],
   ['/work', 'Work'],
   ['/about', 'About'],
-  ['/security', 'Security']
+  ['/security', 'Security'],
+  ['/contact', 'Contact']
 ]
 
 const profileLinks = [
@@ -440,6 +441,7 @@ function resolveRoute(path) {
   if (path === '/work') return { type: 'work' }
   if (path.startsWith('/work/')) return { type: 'project', slug: path.split('/').pop() }
   if (path === '/security') return { type: 'security' }
+  if (path === '/contact') return { type: 'contact' }
   return { type: 'notFound' }
 }
 
@@ -449,7 +451,8 @@ function PageRenderer({ route, navigate }) {
   if (route.type === 'work') return <WorkPage navigate={navigate} />
   if (route.type === 'project') return <ProjectPage slug={route.slug} navigate={navigate} />
   if (route.type === 'security') return <SecurityPage />
-  return <NotFound navigate={navigate} />
+  if (route.type === 'contact') return <ContactPage />
+  return <HomePage navigate={navigate} />
 }
 
 function Atmosphere() {
@@ -517,7 +520,7 @@ function Navbar({ path, scrolled, navigate }) {
           </button>
         ))}
       </nav>
-      <a className="hire-button" href="mailto:omolarak724@gmail.com">Hire Me</a>
+      <a className="hire-button" href="/contact" onClick={(event) => { event.preventDefault(); linkClick('/contact') }}>Hire Me</a>
       <button className={`menu-button ${open ? 'open' : ''}`} onClick={() => setOpen(!open)} aria-label="Menu">
         <span />
         <span />
@@ -1011,8 +1014,33 @@ function Terminal() {
   return <div className="terminal-window"><div className="terminal-top"><span /><span /><span /><b>faith@kali</b></div><pre>{lines.map((line) => <code key={line}>{line}{'\n'}</code>)}<i /></pre></div>
 }
 
+function ContactPage() {
+  const [sent, setSent] = useState(false)
+  const [message, setMessage] = useState('')
+  return (
+    <section className="contact-page">
+      <div>
+        <h1>LET'S<br />BUILD<br /><em>SOMETHING.</em></h1>
+        <p>Available for freelance projects, remote roles, internships, and collaboration on frontend, full-stack, cybersecurity, AI, and mobile app products.</p>
+        <div className="social-row">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div>
+        <code>Remote-friendly<br />omolarak724@gmail.com</code>
+      </div>
+      <form className={sent ? 'sent' : ''} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
+        {!sent ? <>
+          <label>Name<input required /></label>
+          <label>Email<input required type="email" /></label>
+          <label>Service<select><option>Full Stack</option><option>Frontend Development</option><option>Cybersecurity</option><option>Mobile App</option><option>Other</option></select></label>
+          <label>Message<textarea required value={message} onChange={(event) => setMessage(event.target.value)} maxLength="500" /></label>
+          <small>{message.length}/500</small>
+          <button>SEND MESSAGE</button>
+        </> : <div className="thanks"><h2>MESSAGE SENT</h2><p>I will be in touch within 24 hours.</p></div>}
+      </form>
+    </section>
+  )
+}
+
 function Footer({ navigate }) {
-  return <footer className="site-footer"><div><button className="logo" onClick={() => navigate('/')}><span>Faith</span><code>.dev</code></button><p>Designing. Building. Securing.</p><small>2026 Faith Temiloluwa Kareem. All rights reserved.</small></div><nav>{routes.map(([href, label]) => <button key={href} onClick={() => navigate(href)}>{label}</button>)}</nav><div><p>Available for new projects.</p><a className="footer-hire" href="mailto:omolarak724@gmail.com">Hire Me</a><div className="footer-socials">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div></div><strong>Designed, built and secured by Faith Temiloluwa Kareem</strong></footer>
+  return <footer className="site-footer"><div><button className="logo" onClick={() => navigate('/')}><span>Faith</span><code>.dev</code></button><p>Designing. Building. Securing.</p><small>2026 Faith Temiloluwa Kareem. All rights reserved.</small></div><nav>{routes.map(([href, label]) => <button key={href} onClick={() => navigate(href)}>{label}</button>)}</nav><div><p>Available for new projects.</p><button className="footer-hire" onClick={() => navigate('/contact')}>Hire Me</button><div className="footer-socials">{profileLinks.map(([label, href]) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{label}</a>)}</div></div><strong>Designed, built and secured by Faith Temiloluwa Kareem</strong></footer>
 }
 
 function BackToTop() {
