@@ -1018,9 +1018,9 @@ function ContactPage() {
   const [sent, setSent] = useState(false)
   const [message, setMessage] = useState('')
   const contactMethods = [
-    ['Email', 'omolarak724@gmail.com', 'mailto:omolarak724@gmail.com'],
-    ['LinkedIn', 'temiloluwa-faith-kareem', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
-    ['GitHub', 'Faith-loves', 'https://github.com/Faith-loves']
+    ['GitHub', 'https://github.com/Faith-loves'],
+    ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
+    ['Email', 'mailto:omolarak724@gmail.com']
   ]
   const projectTypes = ['Frontend build', 'Full-stack app', 'Cybersecurity product', 'Mobile app', 'AI interface']
 
@@ -1031,10 +1031,9 @@ function ContactPage() {
         <h1>Let's build<br /><em>the next thing.</em></h1>
         <p>I am open to frontend, full-stack, cybersecurity, AI, and mobile app work. Send the role, project idea, timeline, and the best way to reach you.</p>
         <div className="contact-methods">
-          {contactMethods.map(([label, value, href]) => (
+          {contactMethods.map(([label, href]) => (
             <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
-              <span>{label}</span>
-              <strong>{value}</strong>
+              <strong>{label}</strong>
             </a>
           ))}
         </div>
