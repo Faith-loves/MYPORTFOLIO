@@ -10,20 +10,6 @@ const routes = [
   ['/contact', 'Contact']
 ]
 
-const generatorOptions = [
-  {
-    id: 'colour',
-    title: 'Generate Colour',
-    path: '/generate-colour',
-    text: 'Build a refined palette direction for your next interface.'
-  },
-  {
-    id: 'layout',
-    title: 'Generate Layout',
-    path: '/generate-layout',
-    text: 'Choose a page structure and section rhythm before you design.'
-  }
-]
 
 const profileLinks = [
   ['GitHub', 'https://github.com/Faith-loves'],
@@ -448,26 +434,6 @@ function App() {
     setPath(to)
   }, [])
 
-  const handleAuth = useCallback((user) => {
-    localStorage.setItem('faith-auth-user', JSON.stringify(user))
-    setAuthUser(user)
-    navigate('/create')
-  }, [navigate])
-
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem('faith-auth-user')
-    setAuthUser(null)
-    navigate('/')
-  }, [navigate])
-
-  const startGenerator = useCallback((option) => {
-    if (!authUser) {
-      sessionStorage.setItem('faith-auth-intent', option.path)
-      navigate('/login')
-      return
-    }
-    navigate(option.path)
-  }, [authUser, navigate])
 
   const route = useMemo(() => resolveRoute(path), [path])
 
@@ -527,18 +493,14 @@ function resolveRoute(path) {
   return { type: 'notFound' }
 }
 
-function PageRenderer({ route, navigate, authUser, onAuth, startGenerator }) {
-  if (route.type === 'home') return <HomePage navigate={navigate} startGenerator={startGenerator} />
-  if (route.type === 'create') return authUser ? <CreatePage authUser={authUser} startGenerator={startGenerator} /> : <AuthPage mode="login" navigate={navigate} onAuth={onAuth} />
-  if (route.type === 'login') return <AuthPage mode="login" navigate={navigate} onAuth={onAuth} />
-  if (route.type === 'register') return <AuthPage mode="register" navigate={navigate} onAuth={onAuth} />
-  if (route.type === 'generator') return authUser ? <GeneratorPage mode={route.mode} authUser={authUser} navigate={navigate} /> : <AuthPage mode="login" navigate={navigate} onAuth={onAuth} />
+function PageRenderer({ route, navigate }) {
+  if (route.type === 'home') return <HomePage navigate={navigate} />
   if (route.type === 'about') return <AboutPage />
   if (route.type === 'work') return <WorkPage navigate={navigate} />
   if (route.type === 'project') return <ProjectPage slug={route.slug} navigate={navigate} />
   if (route.type === 'security') return <SecurityPage />
   if (route.type === 'contact') return <ContactPage />
-  return <HomePage navigate={navigate} startGenerator={startGenerator} />
+  return <HomePage navigate={navigate} />
 }
 
 function Atmosphere() {
@@ -678,10 +640,7 @@ function HomePage({ navigate }) {
             ))}
           </motion.h1>
           <p>I build polished, secure and scalable web applications using React, Next.js, Node.js and FastAPI.</p>
-          <div className="hero-actions recruiter-actions generator-actions">
-            {generatorOptions.map((option) => (
-              <button key={option.id} type="button" onClick={() => startGenerator(option)}>{option.title}</button>
-            ))}
+          <div className="hero-actions recruiter-actions single-action">
             <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Download Resume</a>
           </div>
         </div>
