@@ -10,6 +10,21 @@ const routes = [
   ['/contact', 'Contact']
 ]
 
+const generatorOptions = [
+  {
+    id: 'colour',
+    title: 'Generate Colour',
+    path: '/generate-colour',
+    text: 'Build a refined palette direction for your next interface.'
+  },
+  {
+    id: 'layout',
+    title: 'Generate Layout',
+    path: '/generate-layout',
+    text: 'Choose a page structure and section rhythm before you design.'
+  }
+]
+
 const profileLinks = [
   ['GitHub', 'https://github.com/Faith-loves'],
   ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
@@ -35,6 +50,7 @@ const liveBuilds = [
     category: 'Full Stack',
     filters: ['Full Stack', 'Security'],
     color: 'cyan',
+    cover: '/blockchain-voting-home.png',
     url: 'https://blockchain-voting-5ob8.vercel.app/',
     note: 'Secure voting flow with verification, ballot review, and deployment-ready product structure.'
   },
@@ -146,6 +162,12 @@ const caseStudyDetails = {
     problem: 'Voting products have to communicate trust immediately. The main challenge was making voter verification, ballot casting, and audit review feel understandable without flattening the seriousness of the workflow.',
     approach: 'I structured the experience around a clear sequence: verify eligibility, review the ballot, cast the vote, and leave the user with a confidence signal. The interface favors readable states, strong confirmations, and a deployment-ready product rhythm.',
     outcome: 'The result is a live voting flow that presents a security-heavy idea in a way normal users can follow, while still showing the technical care behind verification and auditability.',
+    images: [
+      ['/blockchain-voting-home.png', 'Home screen', 'Responsive entry screen introducing the blockchain election system and institutional voting portal.'],
+      ['/blockchain-voting-login.png', 'Student sign-in screen', 'Student portal authentication flow with email, matric number, password, and responsive sign-in layout.'],
+      ['/blockchain-voting-ballot.png', 'Ballot selection screen', 'Candidate selection workflow with progress tracking, position context, and mobile-ready voting controls.'],
+      ['/blockchain-voting-confirmation.png', 'Vote confirmation screen', 'Submitted ballot confirmation with receipt details, hash information, MetaMask context, and verification actions.']
+    ],
     cards: [
       ['Trust Model', 'The case study frames the product around eligibility checks, ballot review, and post-submit confidence. Each step is written to reduce uncertainty and make the vote feel traceable.'],
       ['Interface Flow', 'The layout avoids unnecessary decoration and keeps the main action visible. Supporting copy explains what is happening before the user commits to a sensitive action.'],
@@ -426,6 +448,27 @@ function App() {
     setPath(to)
   }, [])
 
+  const handleAuth = useCallback((user) => {
+    localStorage.setItem('faith-auth-user', JSON.stringify(user))
+    setAuthUser(user)
+    navigate('/create')
+  }, [navigate])
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('faith-auth-user')
+    setAuthUser(null)
+    navigate('/')
+  }, [navigate])
+
+  const startGenerator = useCallback((option) => {
+    if (!authUser) {
+      sessionStorage.setItem('faith-auth-intent', option.path)
+      navigate('/login')
+      return
+    }
+    navigate(option.path)
+  }, [authUser, navigate])
+
   const route = useMemo(() => resolveRoute(path), [path])
 
   return (
@@ -484,14 +527,18 @@ function resolveRoute(path) {
   return { type: 'notFound' }
 }
 
-function PageRenderer({ route, navigate }) {
-  if (route.type === 'home') return <HomePage navigate={navigate} />
+function PageRenderer({ route, navigate, authUser, onAuth, startGenerator }) {
+  if (route.type === 'home') return <HomePage navigate={navigate} startGenerator={startGenerator} />
+  if (route.type === 'create') return authUser ? <CreatePage authUser={authUser} startGenerator={startGenerator} /> : <AuthPage mode="login" navigate={navigate} onAuth={onAuth} />
+  if (route.type === 'login') return <AuthPage mode="login" navigate={navigate} onAuth={onAuth} />
+  if (route.type === 'register') return <AuthPage mode="register" navigate={navigate} onAuth={onAuth} />
+  if (route.type === 'generator') return authUser ? <GeneratorPage mode={route.mode} authUser={authUser} navigate={navigate} /> : <AuthPage mode="login" navigate={navigate} onAuth={onAuth} />
   if (route.type === 'about') return <AboutPage />
   if (route.type === 'work') return <WorkPage navigate={navigate} />
   if (route.type === 'project') return <ProjectPage slug={route.slug} navigate={navigate} />
   if (route.type === 'security') return <SecurityPage />
   if (route.type === 'contact') return <ContactPage />
-  return <HomePage navigate={navigate} />
+  return <HomePage navigate={navigate} startGenerator={startGenerator} />
 }
 
 function Atmosphere() {
@@ -631,7 +678,10 @@ function HomePage({ navigate }) {
             ))}
           </motion.h1>
           <p>I build polished, secure and scalable web applications using React, Next.js, Node.js and FastAPI.</p>
-          <div className="hero-actions recruiter-actions single-action">
+          <div className="hero-actions recruiter-actions generator-actions">
+            {generatorOptions.map((option) => (
+              <button key={option.id} type="button" onClick={() => startGenerator(option)}>{option.title}</button>
+            ))}
             <a href="/FaithKareem_CV.pdf" target="_blank" rel="noreferrer">Download Resume</a>
           </div>
         </div>
