@@ -238,6 +238,11 @@ const caseStudyDetails = {
     problem: 'Internship applications involve deadlines, statuses, interviews, and follow-ups. The challenge was turning a stressful search process into a calmer tracking dashboard.',
     approach: 'I centered the project on application organization, progress states, and deadline awareness. The interface is designed to help users know what is pending, what needs attention, and what has moved forward.',
     outcome: 'Intern Track becomes a strong dashboard case study because it solves a real workflow with clear categories, focused sections, and a live deployed product.',
+    images: [
+      ['/interntrack-landing.png', 'Landing page', 'Responsive marketing screen showing InternTrack positioning across desktop, tablet, and mobile.'],
+      ['/interntrack-login.png', 'Login screen', 'Authentication flow preview with a clean login card and responsive layout across devices.'],
+      ['/interntrack-dashboard.png', 'Dashboard screen', 'Application tracking dashboard with overview metrics, navigation, quick actions, and responsive dashboard states.']
+    ],
     cards: [
       ['Application System', 'The case study explains how applications can be tracked by stage so users do not lose context across many opportunities.'],
       ['Deadline Awareness', 'The product story emphasizes timing, follow-ups, and interview readiness as part of the dashboard value.'],
