@@ -24,6 +24,7 @@ const liveBuilds = [
     category: 'Cybersecurity + Frontend',
     filters: ['Security', 'Frontend', 'AI', 'UX'],
     color: 'cyan',
+    cover: '/deceivra-home.png',
     url: 'https://deceivra.vercel.app/',
     note: 'A context-aware scam detection platform that analyses suspicious messages, explains manipulation tactics and gives users clear safety recommendations.'
   },
@@ -54,6 +55,7 @@ const liveBuilds = [
     category: 'Cybersecurity',
     filters: ['Security', 'Frontend'],
     color: 'terminal',
+    cover: '/sentinelx-home.png',
     url: 'https://sentinelx-pi.vercel.app/',
     note: 'A security operations platform for correlating logs, detecting attack patterns and presenting analyst-friendly incident insights.'
   },
@@ -84,6 +86,7 @@ const liveBuilds = [
     category: 'Dashboard',
     filters: ['Frontend', 'Dashboard', 'Productivity'],
     color: 'emerald',
+    cover: '/interntrack-landing.png',
     url: 'https://intern-track-sable.vercel.app/',
     note: 'A full-stack application tracker for organising job applications, progress stages, deadlines and career-search activity.'
   },
@@ -181,6 +184,12 @@ const caseStudyDetails = {
     problem: 'Security dashboards often overload the user with charts and alerts. SentinelX needed to feel like an analyst workspace where risk, priority, and next action are easy to scan.',
     approach: 'I shaped the interface around alert visibility, risk signals, and operational rhythm. The product language is intentionally direct, with a darker security tone and compact information surfaces.',
     outcome: 'The case study shows a live cybersecurity frontend that communicates monitoring, alert review, and analyst visibility with a strong security identity.',
+    images: [
+      ['/sentinelx-home.png', 'Dashboard home screen', 'Responsive threat-hunting dashboard with risk score, incident summary, navigation, and live security status.'],
+      ['/sentinelx-intake.png', 'Incident intake screen', 'Analyst-submitted evidence flow with severity, source, summary, recommendations, and evidence JSON fields.'],
+      ['/sentinelx-investigate.png', 'Investigation screen', 'Attack graph workspace that prepares the analyst to reconstruct an intrusion path from incident data.'],
+      ['/sentinelx-assistant.png', 'AI assistant screen', 'Incident analyst assistant with suggested prompts, incident snapshot, and responsive investigation support.']
+    ],
     cards: [
       ['Risk Visibility', 'The dashboard is written around what an analyst needs to know first: what happened, how serious it is, and where attention should go next.'],
       ['Dashboard Rhythm', 'Sections are organized to scan quickly instead of behaving like disconnected cards. This supports repeated operational use.'],
@@ -948,6 +957,15 @@ function ProjectCard({ project, index = 0, navigate }) {
 
 function ProjectPreview({ project }) {
   const labels = project.filters.slice(0, 3)
+  if (project.cover) {
+    return (
+      <div className={`project-art preview-frame static-preview cover-preview ${project.color}`}>
+        <img src={project.cover} alt={`${project.name} interface screenshot`} loading="lazy" />
+        <span className="preview-live-dot">Case study</span>
+      </div>
+    )
+  }
+
   return (
     <div className={`project-art preview-frame static-preview ${project.color}`}>
       <div className="static-preview-shell">
@@ -955,7 +973,7 @@ function ProjectPreview({ project }) {
         <strong>{project.name}</strong>
         <div>{labels.map((label) => <i key={label}>{label}</i>)}</div>
       </div>
-      <span className="preview-live-dot">Case study</span>
+      <span className="preview-live-dot">Coming soon</span>
     </div>
   )
 }
