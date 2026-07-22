@@ -69,6 +69,7 @@ const liveBuilds = [
     category: 'Ecommerce',
     filters: ['Frontend', 'Ecommerce'],
     color: 'gold',
+    cover: '/nevermind-store-home.png',
     url: 'https://nevermind-store-sigma.vercel.app/',
     note: 'A customer-facing store experience with product browsing and polished shopping presentation.'
   },
@@ -225,6 +226,13 @@ const caseStudyDetails = {
     problem: 'The store needed to feel polished enough for shopping while keeping product discovery straightforward. The challenge was balancing presentation with a practical buying journey.',
     approach: 'I focused on product browsing, visual hierarchy, and shopping flow clarity. The experience is built to help visitors inspect products, understand the brand mood, and move through the interface without confusion.',
     outcome: 'Nevermind Store now sits in the portfolio as a live ecommerce frontend that shows product presentation, layout polish, and customer-facing interaction design.',
+    images: [
+      ['/nevermind-store-home.png', 'Home screen', 'Responsive storefront hero with editorial fashion imagery, navigation, and strong brand positioning.'],
+      ['/nevermind-store-shop-women.png', 'Women shop grid', 'Product listing experience with filters, pricing, wishlist actions, and responsive product cards.'],
+      ['/nevermind-store-shop-men.png', 'Men shop grid', 'Category browsing screen showing product discovery, filter controls, and ecommerce card actions.'],
+      ['/nevermind-store-cart.png', 'Cart screen', 'Shopping bag flow with item quantities, remove actions, checkout summary, and mobile cart state.'],
+      ['/nevermind-store-login.png', 'Account login screen', 'Customer account sign-in screen for cart, wishlist, and checkout continuity.']
+    ],
     cards: [
       ['Product Browsing', 'The case study highlights how the store organizes product attention, helping visitors compare items without a heavy interface.'],
       ['Shopping Flow', 'The product experience is built around familiar ecommerce expectations: browse, inspect, choose, and continue.'],
