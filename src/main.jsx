@@ -80,6 +80,7 @@ const liveBuilds = [
     category: 'Productivity',
     filters: ['Frontend', 'Productivity'],
     color: 'indigo',
+    cover: '/taskflow-pro-home.png',
     url: 'https://taskflow-pro-8.vercel.app/',
     note: 'Task planning interface with workflow states, dashboard rhythm, and productivity polish.'
   },
@@ -252,6 +253,12 @@ const caseStudyDetails = {
     problem: 'Task tools can become noisy when statuses, priorities, and daily planning all sit on the same screen. TaskFlow Pro needed a cleaner workflow that makes progress easy to understand.',
     approach: 'I built the case around task states, dashboard rhythm, and a practical planning interface. The UI supports repeated daily use through simple grouping and clear status language.',
     outcome: 'The project demonstrates productivity UI thinking: visible workflow states, readable planning surfaces, and a live deployed interface.',
+    images: [
+      ['/taskflow-pro-home.png', 'Home screen', 'Responsive TaskFlow Pro landing screen presenting the editable demo workspace and project workflow value.'],
+      ['/taskflow-pro-dashboard.png', 'Dashboard screen', 'Project overview dashboard with team performance, recent activity, task metrics, and responsive navigation.'],
+      ['/taskflow-pro-kanban.png', 'Kanban board', 'Kanban workflow for website redesign work with task columns, priorities, status metrics, and mobile board structure.'],
+      ['/taskflow-pro-analytics.png', 'Analytics screen', 'Analytics view showing completed tasks per week, team workload, project progress, and mobile chart layout.']
+    ],
     cards: [
       ['Workflow States', 'The product story focuses on how work moves from planned to active to complete, making progress easier to understand.'],
       ['Planning Clarity', 'The interface favors direct labels and clear grouping so the user can make decisions quickly.'],
