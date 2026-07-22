@@ -113,6 +113,7 @@ const liveBuilds = [
     category: 'AI + Developer Tools',
     filters: ['AI', 'Frontend'],
     color: 'indigo',
+    cover: '/devdocs-ai-preview.png',
     url: 'https://dev-docs-ai-lac.vercel.app/',
     note: 'An AI documentation assistant for searching technical docs, simplifying developer questions, and turning scattered references into usable answers.'
   }
@@ -326,6 +327,10 @@ const caseStudyDetails = {
     problem: 'Developers often lose time moving between documentation pages, examples, and unclear explanations. DevDocs AI needed to show how AI can make documentation search faster and more usable.',
     approach: 'I framed the tool around developer questions: search, summarize, clarify, and return practical answers. The case study explains the value in terms of reduced context switching and better technical understanding.',
     outcome: 'DevDocs AI is now connected to its live deployment with a fuller case study that shows the product purpose and developer workflow.',
+    images: [
+      ['/devdocs-ai-preview.png', 'Documentation preview screen', 'Responsive DevDocs AI workspace showing code input, generated Markdown preview, copy, and download actions.'],
+      ['/devdocs-ai-generator.png', 'Code documentation generator', 'Source-code documentation generator with language selection, supported stacks, and mobile-ready input layout.']
+    ],
     cards: [
       ['Developer Search', 'The product is presented as a focused assistant for finding and understanding docs, not as a generic chatbot.'],
       ['Answer Quality', 'The case study emphasizes useful technical explanations, direct summaries, and clearer next steps for developers.'],
