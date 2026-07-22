@@ -1150,7 +1150,8 @@ function Terminal() {
 
 function ContactPage() {
   const [message, setMessage] = useState('')
-  const [error, setError] = useState('')
+  const [status, setStatus] = useState({ type: 'idle', text: '' })
+  const [isSending, setIsSending] = useState(false)
   const contactMethods = [
     ['GitHub', 'https://github.com/Faith-loves'],
     ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
@@ -1158,29 +1159,42 @@ function ContactPage() {
   ]
   const projectTypes = ['Full-Stack Development', 'Frontend Development', 'UI/UX Design', 'Internship or Employment', 'Other']
 
-  function handleContactSubmit(event) {
+  async function handleContactSubmit(event) {
     event.preventDefault()
     const form = event.currentTarget
     const formData = new FormData(form)
-    const name = formData.get('name')?.toString().trim() || 'Portfolio visitor'
-    const email = formData.get('email')?.toString().trim() || 'No email provided'
-    const projectType = formData.get('project_type')?.toString() || 'Portfolio inquiry'
     const bodyMessage = message.trim()
 
     if (bodyMessage.length < 10) {
-      setError('Please add a little more detail before sending.')
+      setStatus({ type: 'error', text: 'Please add a little more detail before sending.' })
       return
     }
 
-    setError('')
-    const subject = encodeURIComponent(`Portfolio message from ${name}`)
-    const body = encodeURIComponent(`Name: ${name}
-Email: ${email}
-Project type: ${projectType}
+    setIsSending(true)
+    setStatus({ type: 'idle', text: '' })
+    formData.append('access_key', 'ca6c68c6-3e41-42db-bae5-9a4a219031c1')
+    formData.append('subject', `Portfolio message from ${formData.get('name') || 'Portfolio visitor'}`)
+    formData.append('from_name', 'Faith Portfolio Contact Form')
 
-Message:
-${bodyMessage}`)
-    window.location.href = `mailto:omolarak724@gmail.com?subject=${subject}&body=${body}`
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      })
+      const result = await response.json()
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Message could not be sent.')
+      }
+
+      form.reset()
+      setMessage('')
+      setStatus({ type: 'success', text: 'Message sent successfully. I will reply as soon as possible.' })
+    } catch (submitError) {
+      setStatus({ type: 'error', text: submitError.message || 'Message failed. Please try again or email directly.' })
+    } finally {
+      setIsSending(false)
+    }
   }
 
   return (
@@ -1201,7 +1215,7 @@ ${bodyMessage}`)
       <form className="contact-form" onSubmit={handleContactSubmit}>
         <div className="form-head">
           <span>START A CONVERSATION</span>
-          <p>Fill this in and your email app will open with the message ready to send.</p>
+          <p>Fill this in and I will receive the message directly in my inbox.</p>
         </div>
         <div className="field-grid">
           <label>Name<input required name="name" placeholder="Your name" /></label>
@@ -1216,10 +1230,10 @@ ${bodyMessage}`)
           <textarea required name="message" value={message} onChange={(event) => setMessage(event.target.value)} minLength="10" maxLength="500" placeholder="Tell me about the opportunity, project, timeline and the best way to reach you." />
         </label>
         <div className="form-foot">
-          {error ? <small className="form-error">{error}</small> : <small>{message.length}/500</small>}
+          {status.text ? <small className={`form-${status.type}`}>{status.text}</small> : <small>{message.length}/500</small>}
           <a href="mailto:omolarak724@gmail.com">Email directly</a>
         </div>
-        <button type="submit">Open Email to Send</button>
+        <button type="submit" disabled={isSending}>{isSending ? 'Sending...' : 'Send Message'}</button>
       </form>
     </section>
   )

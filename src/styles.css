@@ -4437,6 +4437,16 @@ a {
   color: #ffb4a8 !important;
 }
 
+.form-success {
+  color: #8ff0b1 !important;
+}
+
+.refined-contact .contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+  transform: none;
+}
+
 .minimal-footer {
   grid-template-columns: 1fr auto auto;
   align-items: start;
