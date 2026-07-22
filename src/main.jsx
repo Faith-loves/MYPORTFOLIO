@@ -102,6 +102,7 @@ const liveBuilds = [
     category: 'Security',
     filters: ['Security', 'Full Stack'],
     color: 'terminal',
+    cover: '/cipherpass-generated.png',
     url: 'https://cipher-pass-beta.vercel.app/',
     note: 'A focused password and access-management interface built around vault clarity, account protection, and secure product trust.'
   },
@@ -302,6 +303,10 @@ const caseStudyDetails = {
     problem: 'Password tools must feel trustworthy without overwhelming users with security language. CipherPass needed a case study that explains vault clarity, safe access, and account protection in practical terms.',
     approach: 'I positioned the product around secure access management: a clear vault experience, careful sign-in expectations, and a product tone that makes sensitive information feel handled with care.',
     outcome: 'CipherPass is now linked as a live security project and presented with a detailed case study instead of a coming-soon placeholder.',
+    images: [
+      ['/cipherpass-generated.png', 'Generated password screen', 'Responsive password generator with generated output, copy action, strength status, and local storage trust signal.'],
+      ['/cipherpass-generator.png', 'Password rules screen', 'Generator setup screen with password length control, character options, and mobile-friendly security controls.']
+    ],
     cards: [
       ['Vault Clarity', 'The case study focuses on making stored credentials easy to review while keeping the interface serious and controlled.'],
       ['Trust Signals', 'Copy and layout emphasize protection, account access, and secure product expectations without turning the page into a technical essay.'],
