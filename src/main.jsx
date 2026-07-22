@@ -47,6 +47,7 @@ const liveBuilds = [
     category: 'AI + Frontend',
     filters: ['AI', 'Frontend'],
     color: 'indigo',
+    cover: '/ai-smart-ui-home.png',
     url: 'https://ai-smart-ui.vercel.app/',
     note: 'Prompt-first AI workspace with generated interface output and responsive UI thinking.'
   },
@@ -173,6 +174,13 @@ const caseStudyDetails = {
     problem: 'AI tools can become vague quickly when the input, generated output, and user control all compete for attention. This project needed a workspace that made prompting feel direct and the response area easy to read.',
     approach: 'I treated the product as a practical AI workbench: prompt area first, generated result second, and supporting interface details kept quiet. The goal was to make the user feel oriented from the first screen.',
     outcome: 'AI Smart UI presents a clean prompt-first experience with enough polish to feel like a real product direction, not a loose demo.',
+    images: [
+      ['/ai-smart-ui-home.png', 'Home screen', 'Responsive AI ColorSense landing screen with clear product positioning and generation entry points.'],
+      ['/ai-smart-ui-dashboard.png', 'Generator dashboard', 'Signed-in workspace where users choose between smart color generation and layout generation flows.'],
+      ['/ai-smart-ui-color.png', 'Smart color generator', 'Palette generation screen with target, style, industry, emotion, color analysis, and CSS variable output.'],
+      ['/ai-smart-ui-layout.png', 'Layout generator', 'Layout generation workspace showing mobile app wireframe previews and palette-aware interface controls.'],
+      ['/ai-smart-ui-register.png', 'Registration screen', 'Responsive account creation flow with a polished purple gradient visual system.']
+    ],
     cards: [
       ['Prompt Experience', 'The interface makes the prompt feel like the primary object. It supports fast entry, review, and iteration without crowding the workspace.'],
       ['Output Clarity', 'Generated content is presented with readable hierarchy so the result feels useful immediately instead of buried inside decorative UI.'],
