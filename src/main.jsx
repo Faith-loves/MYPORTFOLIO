@@ -19,6 +19,17 @@ const profileLinks = [
 
 const liveBuilds = [
   {
+    slug: 'aura-ai',
+    name: 'AURA-AI',
+    type: 'Autonomous Intelligence Workspace',
+    category: 'AI + Full Stack',
+    filters: ['AI', 'Full Stack', 'Frontend', 'UX'],
+    color: 'indigo',
+    cover: '/aura-ai-dashboard.png',
+    url: 'https://aura-ai-psi-steel.vercel.app/',
+    note: 'A responsive autonomous AI workspace for planning tasks, monitoring executions, managing tools, and keeping human approvals visible before sensitive actions run.'
+  },
+  {
     slug: 'deceivra',
     name: 'Deceivra',
     type: 'Context-Aware Scam Detection Platform',
@@ -121,10 +132,11 @@ const liveBuilds = [
 
 const selectedLiveBuilds = liveBuilds.filter((build) => build.url).slice(0, 4)
 
-const featuredProjectSlugs = ['deceivra', 'intern-track', 'sentinelx']
+const featuredProjectSlugs = ['aura-ai', 'deceivra', 'intern-track']
 const selectedFeaturedProjects = featuredProjectSlugs.map((slug) => liveBuilds.find((project) => project.slug === slug)).filter(Boolean)
 const projectFilters = ['All', 'Full Stack', 'Frontend', 'AI', 'Security', 'UI/UX']
 const projectMeta = {
+  'aura-ai': { stack: ['React', 'AI Workspace', 'Responsive Dashboard'], role: 'Full-stack AI product builder', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
   deceivra: { stack: ['React', 'AI UX', 'Security Signals'], role: 'Full-stack developer', duration: '3 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
   'intern-track': { stack: ['React', 'Dashboard UX', 'State Management'], role: 'Full-stack developer', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
   sentinelx: { stack: ['React', 'Security Dashboard', 'Risk UI'], role: 'Frontend + security engineering', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
@@ -148,6 +160,34 @@ function matchesProjectFilter(project, filter) {
 }
 
 const caseStudyDetails = {
+  'aura-ai': {
+    role: 'Full-stack AI product builder',
+    problem: 'Autonomous AI products need to feel powerful without making users feel out of control. AURA-AI needed a workspace where a user can ask the system for help, turn goals into plans, monitor generated tasks, review executions, inspect available tools, and approve sensitive actions before anything important runs.',
+    approach: 'I structured the product around a clear operational loop: chat with AURA, create plans, track tasks, launch executions, inspect tools, and review approval gates. The interface keeps the dark AI identity polished while making every empty state useful, readable, and responsive across desktop and mobile.',
+    outcome: 'AURA-AI presents a live autonomous intelligence dashboard that shows strong product thinking: agent control, safety checkpoints, system transparency, tool visibility, and mobile-first responsiveness. The case study gives recruiters a clear view of how the product works beyond a single landing screen.',
+    images: [
+      ['/aura-ai-dashboard.png', 'Dashboard workspace', 'Main autonomous intelligence workspace with system status, active execution panel, memory count, tools readiness, and responsive desktop/mobile composition.'],
+      ['/aura-ai-chat.png', 'AURA chat screen', 'Conversation interface where users can ask AURA questions, start goals, inspect health, plan software projects, and review stored context.'],
+      ['/aura-ai-tasks.png', 'Tasks screen', 'Task monitoring page showing generated task states, filters, search, counters, and an empty state that routes users back to plan creation.'],
+      ['/aura-ai-plans.png', 'Plans screen', 'Planning workspace for structured goals and execution strategies, with clear create-plan actions and responsive navigation.'],
+      ['/aura-ai-executions.png', 'Executions screen', 'Execution control page for monitoring autonomous runs, refreshing state, and starting a new execution when a plan is ready.'],
+      ['/aura-ai-tools.png', 'Tools screen', 'Tool registry showing available capabilities, safety status, search, standard tools, and confirmation-required counts.'],
+      ['/aura-ai-approvals.png', 'Approvals screen', 'Human-in-the-loop approval center for reviewing paused actions before execution, with pending, approved, and rejected states.']
+    ],
+    cards: [
+      ['Agent Control', 'The product is organized around what an autonomous assistant is allowed to do, what it is currently doing, and where the user needs to step in.'],
+      ['Safety Visibility', 'Approvals, protected status, tools readiness, and system health are surfaced directly so the AI experience feels supervised rather than vague.'],
+      ['Responsive Product UI', 'Each workflow has a desktop and mobile treatment, proving the system can scale from a wide dashboard to a phone-sized control surface.']
+    ],
+    process: [
+      ['Map the Loop', 'Defined the core user journey from chat input to generated plan, task tracking, execution, tool inspection, and approval review.'],
+      ['Design the States', 'Built each page around meaningful empty states, status indicators, and clear primary actions so the interface still explains itself before data exists.'],
+      ['Shape the Trust Layer', 'Made approvals, protected mode, tool counts, and system health visible because autonomous workflows need confidence signals at every step.'],
+      ['Refine Responsiveness', 'Adjusted the layout for desktop and mobile so dashboard panels, navigation, cards, and action buttons remain usable on smaller screens.'],
+      ['Ship the Story', 'Connected the live deployment and case study so recruiters can inspect both the product and the thinking behind it.']
+    ],
+    results: ['Live autonomous AI workspace', 'Human-in-the-loop approval model', 'Responsive dashboard case study', 'Clear agent safety story']
+  },
   'blockchain-voting': {
     role: 'Full-stack security builder',
     problem: 'Voting products have to communicate trust immediately. The main challenge was making voter verification, ballot casting, and audit review feel understandable without flattening the seriousness of the workflow.',
