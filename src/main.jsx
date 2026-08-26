@@ -136,57 +136,37 @@ const featuredProjectSlugs = ['aura-ai', 'deceivra', 'intern-track']
 const selectedFeaturedProjects = featuredProjectSlugs.map((slug) => liveBuilds.find((project) => project.slug === slug)).filter(Boolean)
 const projectFilters = ['All', 'Full Stack', 'Frontend', 'AI', 'Security', 'UI/UX']
 const projectMeta = {
-  'aura-ai': { stack: ['React', 'AI Workspace', 'Responsive Dashboard'], role: 'Full-stack AI product builder', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
-  deceivra: { stack: ['React', 'AI UX', 'Security Signals'], role: 'Full-stack developer', duration: '3 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
-  'intern-track': { stack: ['React', 'Dashboard UX', 'State Management'], role: 'Full-stack developer', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
-  sentinelx: { stack: ['React', 'Security Dashboard', 'Risk UI'], role: 'Frontend + security engineering', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
-  'blockchain-voting': { stack: ['React', 'Auth Flow', 'Secure UX'], role: 'Full-stack developer', duration: '2 weeks', status: 'Live', github: 'https://github.com/Faith-loves' },
-  'ai-smart-ui': { stack: ['React', 'AI Interface', 'Responsive UI'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
-  'nevermind-store': { stack: ['React', 'Ecommerce UI', 'Product Flow'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
-  'taskflow-pro': { stack: ['React', 'Productivity UI', 'Workflow State'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
-  cipherpass: { stack: ['React', 'Password UX', 'Security'], role: 'Security-first frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' },
-  'devdocs-ai': { stack: ['React', 'AI Search', 'Documentation UX'], role: 'Frontend developer', duration: '1 week', status: 'Live', github: 'https://github.com/Faith-loves' }
-}
-
-function getProjectMeta(project) {
-  return projectMeta[project.slug] || { stack: project.filters.slice(0, 3), role: 'Full-stack developer', duration: 'Portfolio build', status: project.url ? 'Live' : 'Coming soon', github: 'https://github.com/Faith-loves' }
-}
-
-function matchesProjectFilter(project, filter) {
-  if (filter === 'All') return true
-  if (filter === 'Security') return project.filters.includes('Security') || project.category.includes('Cybersecurity') || project.category.includes('Security')
-  if (filter === 'UI/UX') return project.filters.includes('UX') || project.filters.includes('UI')
-  return project.filters.includes(filter) || project.category.includes(filter) || project.type.includes(filter)
-}
-
-const caseStudyDetails = {
   'aura-ai': {
     role: 'Full-stack AI product builder',
-    problem: 'Autonomous AI products need to feel powerful without making users feel out of control. AURA-AI needed a workspace where a user can ask the system for help, turn goals into plans, monitor generated tasks, review executions, inspect available tools, and approve sensitive actions before anything important runs.',
-    approach: 'I structured the product around a clear operational loop: chat with AURA, create plans, track tasks, launch executions, inspect tools, and review approval gates. The interface keeps the dark AI identity polished while making every empty state useful, readable, and responsive across desktop and mobile.',
-    outcome: 'AURA-AI presents a live autonomous intelligence dashboard that shows strong product thinking: agent control, safety checkpoints, system transparency, tool visibility, and mobile-first responsiveness. The case study gives recruiters a clear view of how the product works beyond a single landing screen.',
+    problem: 'AURA-AI was built around a bigger challenge than a normal chatbot: how do you make an autonomous assistant feel useful, powerful, observable, and safe at the same time? The product needed to support conversation, memory, planning, task orchestration, tool execution, multimodal direction, approval workflows, audit trails, and reliability monitoring without overwhelming the user.',
+    approach: 'I shaped AURA as an agentic workspace instead of a single chat screen. The experience is organized around a clear runtime loop: ask AURA for help, preserve useful context in memory, convert goals into structured plans, surface plan steps as tasks, monitor executions, inspect tool capabilities, and pause risky actions for human approval. The interface keeps the visual language sharp and futuristic, while the product logic stays grounded in control, safety, and operational transparency.',
+    outcome: 'AURA-AI presents a live autonomous intelligence workspace with a strong full-stack product story. It shows how conversational AI can connect to persistent history, model routing, planning, tool permissions, human-in-the-loop approvals, audit visibility, and responsive dashboard design. For recruiters, the project demonstrates both interface polish and systems thinking around real AI product architecture.',
     images: [
-      ['/aura-ai-dashboard.png', 'Dashboard workspace', 'Main autonomous intelligence workspace with system status, active execution panel, memory count, tools readiness, and responsive desktop/mobile composition.'],
-      ['/aura-ai-chat.png', 'AURA chat screen', 'Conversation interface where users can ask AURA questions, start goals, inspect health, plan software projects, and review stored context.'],
-      ['/aura-ai-tasks.png', 'Tasks screen', 'Task monitoring page showing generated task states, filters, search, counters, and an empty state that routes users back to plan creation.'],
-      ['/aura-ai-plans.png', 'Plans screen', 'Planning workspace for structured goals and execution strategies, with clear create-plan actions and responsive navigation.'],
-      ['/aura-ai-executions.png', 'Executions screen', 'Execution control page for monitoring autonomous runs, refreshing state, and starting a new execution when a plan is ready.'],
-      ['/aura-ai-tools.png', 'Tools screen', 'Tool registry showing available capabilities, safety status, search, standard tools, and confirmation-required counts.'],
-      ['/aura-ai-approvals.png', 'Approvals screen', 'Human-in-the-loop approval center for reviewing paused actions before execution, with pending, approved, and rejected states.']
+      ['/aura-ai-dashboard.png', 'Dashboard workspace', 'Main autonomous intelligence workspace with runtime health, active execution overview, memory count, tools readiness, protected status, and responsive desktop/mobile composition.'],
+      ['/aura-ai-chat.png', 'AURA chat screen', 'Conversational AI interface with persistent chat structure, prompt suggestions, model/provider context, multimodal readiness, and a focused input area.'],
+      ['/aura-ai-tasks.png', 'Tasks screen', 'Task monitoring page for plan-generated steps, including task status counters, search, filtering, running/completed/failed visibility, and a clear empty state.'],
+      ['/aura-ai-plans.png', 'Plans screen', 'Planning workspace for turning user goals into structured execution strategies with goal states, steps, dependencies, and create-plan actions.'],
+      ['/aura-ai-executions.png', 'Executions screen', 'Execution control page for tracking autonomous runs, lifecycle status, paused work, refresh actions, and new execution creation.'],
+      ['/aura-ai-tools.png', 'Tools screen', 'Modular tool registry showing available capabilities, categories, risk-related metadata, confirmation requirements, and tool health visibility.'],
+      ['/aura-ai-approvals.png', 'Approvals screen', 'Human-in-the-loop approval center for reviewing paused high-risk actions before execution, with pending, approved, and rejected states.']
     ],
     cards: [
-      ['Agent Control', 'The product is organized around what an autonomous assistant is allowed to do, what it is currently doing, and where the user needs to step in.'],
-      ['Safety Visibility', 'Approvals, protected status, tools readiness, and system health are surfaced directly so the AI experience feels supervised rather than vague.'],
-      ['Responsive Product UI', 'Each workflow has a desktop and mobile treatment, proving the system can scale from a wide dashboard to a phone-sized control surface.']
+      ['Agentic Architecture', 'AURA is presented as a modular AI runtime, not just a chat UI. Conversation, planning, memory, tools, execution, safety, auditing, and reliability are treated as separate product capabilities that work together.'],
+      ['Model Responsibility', 'The case study explains how different NVIDIA Nemotron models can support different responsibilities: primary reasoning, multimodal understanding, and content safety moderation.'],
+      ['Safety and Control', 'The product story emphasizes that model intelligence does not mean unrestricted authority. Risk classification, permission decisions, approval gates, audit logs, and protected states keep the user in control.'],
+      ['Execution Visibility', 'Plans, tasks, executions, and tool reliability give the user a way to inspect what the assistant intends to do, what is running, what failed, and what needs attention.'],
+      ['Responsive Product UI', 'Every major workflow is shown in desktop and mobile mockups, proving that the product can scale from a wide operational dashboard to a compact phone control surface.'],
+      ['Full-Stack Delivery', 'The project connects a Next.js and React frontend with a Python/FastAPI backend direction, typed data models, AI provider integration, and production-minded secret handling.']
     ],
     process: [
-      ['Map the Loop', 'Defined the core user journey from chat input to generated plan, task tracking, execution, tool inspection, and approval review.'],
-      ['Design the States', 'Built each page around meaningful empty states, status indicators, and clear primary actions so the interface still explains itself before data exists.'],
-      ['Shape the Trust Layer', 'Made approvals, protected mode, tool counts, and system health visible because autonomous workflows need confidence signals at every step.'],
-      ['Refine Responsiveness', 'Adjusted the layout for desktop and mobile so dashboard panels, navigation, cards, and action buttons remain usable on smaller screens.'],
-      ['Ship the Story', 'Connected the live deployment and case study so recruiters can inspect both the product and the thinking behind it.']
+      ['Define the System', 'Framed AURA around the idea that an AI assistant should do more than generate text. It should understand goals, retain context, plan work, use tools, and expose its decisions.'],
+      ['Separate Responsibilities', 'Outlined a modular architecture where the main conversation model, multimodal model, content safety layer, tools, memory, planning, and execution engine can evolve independently.'],
+      ['Design the Runtime Loop', 'Mapped the core experience from chat input to structured plans, task creation, execution tracking, tool inspection, approval review, and audit visibility.'],
+      ['Build Trust States', 'Made safety visible through protected mode, approval queues, tool risk metadata, confirmation-required counts, health indicators, and operational empty states.'],
+      ['Support Real Workflows', 'Designed pages for chat, plans, tasks, executions, tools, approvals, memory, audit, settings, and system monitoring so the product feels like an actual assistant workspace.'],
+      ['Prepare for Production', 'Kept API credentials server-side in the product story, treated environment files as secrets, and positioned reliability monitoring as part of the runtime rather than an afterthought.']
     ],
-    results: ['Live autonomous AI workspace', 'Human-in-the-loop approval model', 'Responsive dashboard case study', 'Clear agent safety story']
+    results: ['Live autonomous AI workspace', 'Conversational AI plus planning', 'Memory and task orchestration', 'Tool execution safety model', 'Human approval workflow', 'Audit and reliability story', 'Responsive full-stack case study']
   },
   'blockchain-voting': {
     role: 'Full-stack security builder',
