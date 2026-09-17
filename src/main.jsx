@@ -19,6 +19,34 @@ const profileLinks = [
 
 const liveBuilds = [
   {
+    slug: 'missionguard-ai',
+    name: 'MissionGuard AI',
+    type: 'Space-Weather Risk Intelligence',
+    category: 'AI + Full Stack',
+    filters: ['AI', 'Full Stack', 'Frontend', 'Security', 'UX'],
+    color: 'cyan',
+    cover: '/missionguard-dashboard.png',
+    coverAlt: 'MissionGuard AI space-weather readiness dashboard',
+    stack: ['Next.js', 'TypeScript', 'FastAPI', 'Python', 'Firebase', 'IBM Granite'],
+    github: 'https://github.com/Faith-loves',
+    url: 'https://missionguard-ai-one.vercel.app/',
+    note: 'An educational space-weather decision-support dashboard that combines NASA and NOAA feeds with transparent deterministic scoring, grounded IBM Granite explanations, what-if simulations, and private mission history.'
+  },
+  {
+    slug: 'aurevia',
+    name: 'Aurévia',
+    type: 'Full-Stack Fragrance Storefront',
+    category: 'Full Stack + Ecommerce',
+    filters: ['Full Stack', 'Frontend', 'Ecommerce', 'UX'],
+    color: 'gold',
+    cover: '/aurevia-home-mockup.png',
+    coverAlt: 'Aurévia storefront desktop and mobile presentation mockup',
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'React', 'Paystack'],
+    github: null,
+    url: 'https://aurevia-git-main-solo-yo-fes-projects.vercel.app',
+    note: 'A luxury fragrance storefront with 119 image-backed fragrances, refined product discovery, customer accounts, server-verified Paystack payments, and an admin dashboard for catalogue management.'
+  },
+  {
     slug: 'aura-ai',
     name: 'AURA-AI',
     type: 'Autonomous Intelligence Workspace',
@@ -136,6 +164,73 @@ const featuredProjectSlugs = ['aura-ai', 'deceivra', 'intern-track']
 const selectedFeaturedProjects = featuredProjectSlugs.map((slug) => liveBuilds.find((project) => project.slug === slug)).filter(Boolean)
 const projectFilters = ['All', 'Full Stack', 'Frontend', 'AI', 'Security', 'UI/UX']
 const projectMeta = {
+  'missionguard-ai': {
+    role: 'Full-stack AI and data-product developer',
+    problem: 'Space-weather signals are distributed across NASA and NOAA feeds and are difficult to interpret at a glance. MissionGuard turns those observations into a transparent, educational readiness view without presenting AI output as operational mission or launch guidance.',
+    approach: 'I designed a deterministic four-factor risk engine as the source of truth. It combines normalized NOAA Kp readings with NASA solar flares, coronal mass ejections, and geomagnetic storm events. IBM Granite receives the calculated assessment only to explain it in plain language, while validation guardrails reject unsupported claims and use a deterministic fallback when needed.',
+    outcome: 'MissionGuard delivers a live readiness dashboard, historical trend view, risk-factor breakdown, what-if simulator, AI explanations, and user-scoped saved history. Its technical design keeps calculations inspectable and preserves a clear boundary: this is an educational decision-support prototype, not operational spacecraft or launch-safety guidance.',
+    technology: 'Frontend: Next.js, React, TypeScript, Tailwind CSS, and Firebase web SDK. Backend: Python, FastAPI, httpx, Pydantic, PyJWT, and cryptography. Data: NASA DONKI and NOAA SWPC. AI: IBM watsonx.ai with Granite. Deployment: Vercel, Render, Firebase Authentication, and Cloud Firestore.',
+    systemThinking: 'NASA DONKI and NOAA SWPC data pass through a FastAPI normalization layer into the deterministic risk engine. The Next.js interface consumes its resulting score, readiness, level, and recommendation. The protected explanation endpoint accepts an assessment snapshot with a verified Firebase token; Granite can explain the assessment but has no path back into the scoring engine. Saved records are isolated by Firebase UID in Firestore.',
+    challenges: 'External data can be delayed, incomplete, or unavailable. Required-data gaps produce UNKNOWN and HOLD instead of an invented score. A five-minute fresh cache and up-to-30-minute stale fallback handle temporary provider failures, while UI status makes completeness visible. The system also prevents AI explanations from changing calculated values or presenting simulations as live observations.',
+    lessons: 'AI is more useful here as a constrained explainer than as a decision-maker. A fixed scoring model makes every factor contribution inspectable, and grounding checks plus deterministic fallbacks make the explanation layer resilient to provider errors or unsupported output. The case also reinforced that user history is private portfolio data, not a tamper-proof operational audit trail.',
+    future: 'Potential next steps include validated historical forecasting, more NOAA feeds, organization accounts, exportable reports, alert subscriptions, AI rate limits, stronger observability, and end-to-end verification of production Firestore rules.',
+    galleryTitle: 'Dashboard, simulation, and personal history.',
+    images: [
+      ['/missionguard-dashboard.png', 'Live mission readiness dashboard', 'A live space-weather assessment with readiness, risk level, observed Kp activity, factor breakdown, data completeness, save controls, AI explanation, and a what-if simulator.'],
+      ['/missionguard-simulator.png', 'What-if simulator', 'Hypothetical Kp, flare, CME, and storm inputs run through the same deterministic engine. The result is explicitly separate from live NASA and NOAA observations.'],
+      ['/missionguard-history.png', 'User-scoped mission history', 'Saved live assessments and simulations are shown together with the inputs, risk score, readiness, and recommendation that produced each record.']
+    ],
+    cards: [
+      ['Transparent Risk Engine', 'A fixed four-factor model scores geomagnetic activity up to 35 points, solar flares up to 25, CME activity up to 30, and geomagnetic storms up to 10. Readiness is computed as 100 minus the risk score.'],
+      ['Live Data With Clear Limits', 'NASA DONKI and NOAA SWPC feeds supply the data. Missing required data yields UNKNOWN and HOLD; cached assessments are visibly marked when a source outage requires a stale fallback.'],
+      ['AI That Explains, Not Decides', 'IBM Granite produces a natural-language explanation of the completed deterministic assessment. Guardrails check claims, classifications, factors, simulation wording, and operational language before the response reaches the interface.'],
+      ['Safe What-If Exploration', 'Users can change Kp, flare, Earth-directed CME count, CME speed, and storm count without altering live data. The simulator uses the same scoring engine and labels results as hypothetical.'],
+      ['Private Saved History', 'Firebase Email/Password authentication protects the dashboard. Firestore stores assessments and simulations under the signed-in user UID, while the AI explanation route validates Firebase bearer tokens.'],
+      ['Full-Stack Delivery', 'The Next.js frontend on Vercel works with a FastAPI backend on Render, public space-weather routes, protected AI explanations, Firebase authentication, and Firestore records.']
+    ],
+    process: [
+      ['Frame the Boundary', 'Defined MissionGuard as an educational readiness prototype and made the limitation visible: it is not official NASA, NOAA, or launch guidance.'],
+      ['Normalize Observations', 'Collect NASA DONKI flare, CME, and storm events plus NOAA Kp readings through the FastAPI data layer.'],
+      ['Score Deterministically', 'Calculate score, readiness, risk level, and prototype recommendation with a fixed engine before any AI explanation is requested.'],
+      ['Explain With Guardrails', 'Send the assessment snapshot to Granite for explanation, validate the returned claims, and fall back to deterministic copy if the provider is unavailable or the response fails checks.'],
+      ['Explore Scenarios', 'Reuse the same risk engine for hypothetical conditions while preserving a hard distinction between simulated inputs and live observations.'],
+      ['Protect Personal Records', 'Use Firebase authentication and UID-scoped Firestore paths for saved assessments and simulations, then present the combined timeline in mission history.']
+    ],
+    results: ['NASA and NOAA data integration', 'Deterministic 100-point risk model', '60-second live refresh', 'Grounded Granite explanations', 'What-if simulator', 'Firebase-authenticated history', 'Educational safety boundary']
+  },
+  aurevia: {
+    role: 'Full-stack ecommerce developer',
+    problem: 'Choosing a fragrance online means making a sensory decision without being able to smell the product. Aurévia needed to make a catalogue of 119 fragrances approachable while supporting reliable product management, protected customer accounts, and payment handling behind a calm luxury interface.',
+    approach: 'I connected editorial storytelling with practical catalogue controls: browse by fragrance family, collection, size, and concentration, then sort alphabetically or by price. The shopping journey extends through product pages, wishlist, cart, checkout, and orders. PostgreSQL and Prisma support catalogue data, while account protection and server-side payment verification keep sensitive decisions on the server.',
+    outcome: 'Aurévia combines a nature-inspired luxury storefront with a full-stack commerce system. The catalogue contains 119 image-backed fragrances across Parfum, Eau de Parfum, and Eau de Toilette. Customer shopping and account flows sit alongside admin product management, Paystack verification, and a catalogue fallback that preserves browsing during temporary database unavailability.',
+    technology: 'Next.js 16, React 19, TypeScript, Tailwind CSS, Radix UI, PostgreSQL, Prisma 8 contract-first ORM, NextAuth credentials authentication, Paystack, Zustand client state, Cloudinary-ready media configuration, and Vercel deployment.',
+    systemThinking: 'The architecture separates client shopping state from server authority. Zustand manages client state, PostgreSQL and Prisma hold catalogue data, and the server enforces prices, stock, availability, checkout totals, and payment verification. A checked-in catalogue fallback supports browsing if the database is temporarily unavailable; it does not replace server-side checkout checks.',
+    challenges: 'The build balances a large visual catalogue with product variants and admin edits. Idempotent seeding adds missing catalogue data without overwriting existing products, images, or variants. Payment handling requires server verification before a paid order is created, while a separate catalogue fallback keeps discovery available during database interruptions.',
+    lessons: 'A polished storefront depends on the systems behind it: consistent product data, clear account boundaries, and trustworthy order handling. Catalogue browsing can remain available through fallback data while checkout still relies on authoritative server checks. Idempotent seeding also helps preserve catalogue changes made through the admin workflow.',
+    future: 'Potential next steps include automated regression coverage for catalogue filters, sorting, protected routes, and payment verification; monitoring fallback usage; and usability sessions to evaluate fragrance discovery and checkout clarity.',
+    galleryTitle: 'Desktop and mobile presentation mockups.',
+    images: [
+      ['/aurevia-home-mockup.png', 'Storefront — desktop and mobile', 'Generated presentation mockup based on the live storefront, featuring warm fragrance imagery, cream typography, and gold shopping and discovery actions.'],
+      ['/aurevia-finder-mockup.png', 'Scent finder — desktop and mobile', 'Generated presentation mockup based on the live scent-finder introduction, with a plum backdrop, clear discovery actions, and account-free exploration.']
+    ],
+    cards: [
+      ['Catalogue Discovery', '119 image-backed fragrances can be explored by family, collection, size, and concentration. Alphabetical and ascending or descending price sorting provide direct ways to narrow the catalogue.'],
+      ['Customer Experience', 'Product pages, cart, checkout, wishlist, orders, and fragrance guides connect discovery to shopping. NextAuth credentials authentication protects customer account routes.'],
+      ['Payment Authority', 'Paystack payments are verified on the server before a paid order is created. Prices, product availability, stock, and checkout totals are also enforced server-side.'],
+      ['Admin Product Management', 'The admin dashboard manages products, imagery, variants, and catalogue visibility. Administrator access requires an explicit role promotion; the project does not ship with a default admin password.'],
+      ['Catalogue Resilience', 'The database catalogue has a checked-in fallback so visitors can continue browsing during temporary database unavailability. Idempotent seeding creates missing data without overwriting existing catalogue edits.'],
+      ['Brand and Media', 'Cream typography, plum surfaces, gold actions, and fragrance imagery establish a quiet luxury identity. Cloudinary-ready configuration supports the media-management setup.']
+    ],
+    process: [
+      ['Define', 'Connect nature-inspired fragrance discovery to the practical requirements of a complete ecommerce catalogue and shopping journey.'],
+      ['Design', 'Pair editorial collections and scent guidance with product imagery, understandable descriptions, filters, and sorting.'],
+      ['Model', 'Use the Prisma 8 contract as the data-model source of truth, backed by PostgreSQL and an idempotent seed containing 119 fragrances.'],
+      ['Build', 'Connect the Next.js and React interface to customer authentication, shopping state, order experiences, and admin catalogue controls.'],
+      ['Protect', 'Keep commerce checks and Paystack verification on the server, protect account routes, and provision admin access through an explicit role change.'],
+      ['Deliver', 'Deploy on Vercel with server-only credentials and a catalogue fallback that maintains browsing when the database is temporarily unavailable.']
+    ],
+    results: ['119 image-backed fragrances', 'Three fragrance concentrations', 'Protected customer accounts', 'Server-verified payments', 'Admin catalogue management', 'Fallback catalogue browsing']
+  },
   'aura-ai': {
     role: 'Full-stack AI product builder',
     problem: 'AURA-AI was built around a bigger challenge than a normal chatbot: how do you make an autonomous assistant feel useful, powerful, observable, and safe at the same time? The product needed to support conversation, memory, planning, task orchestration, tool execution, multimodal direction, approval workflows, audit trails, and reliability monitoring without overwhelming the user.',
@@ -393,8 +488,8 @@ const projectMeta = {
 }
 
 const getProjectMeta = (project) => ({
-  stack: [...new Set([...project.filters, 'React', 'JavaScript'])],
-  github: 'https://github.com/Faith-loves'
+  stack: project.stack || [...new Set([...project.filters, 'React', 'JavaScript'])],
+  github: project.github === null ? null : (project.github || 'https://github.com/Faith-loves')
 })
 
 const matchesProjectFilter = (project, filter) => {
@@ -447,10 +542,6 @@ const posts = [
 function App() {
   const [path, setPath] = useState(() => {
     const initialPath = window.location.pathname
-    if (initialPath.startsWith('/work/')) {
-      window.history.replaceState({}, '', '/')
-      return '/'
-    }
     return resolveRoute(initialPath).type === 'notFound' ? '/' : initialPath
   })
   const [scrolled, setScrolled] = useState(false)
@@ -748,7 +839,7 @@ function FeaturedProjectCard({ project, index, navigate }) {
       <div className="tag-row">{meta.stack.slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}</div>
       <div className="project-action-row subtle-actions">
         <a href={project.url} target="_blank" rel="noreferrer">Live Demo</a>
-        <a href={meta.github} target="_blank" rel="noreferrer">GitHub</a>
+        {meta.github && <a href={meta.github} target="_blank" rel="noreferrer">GitHub</a>}
         <button onClick={() => navigate('/work/' + project.slug)}>Case Study</button>
       </div>
     </article>
@@ -1033,7 +1124,7 @@ function ProjectPreview({ project }) {
   if (project.cover) {
     return (
       <div className={`project-art preview-frame static-preview cover-preview ${project.color}`}>
-        <img src={project.cover} alt={`${project.name} interface screenshot`} loading="lazy" />
+        <img src={project.cover} alt={project.coverAlt || `${project.name} interface screenshot`} loading="lazy" />
         <span className="preview-live-dot">Case study</span>
       </div>
     )
@@ -1076,15 +1167,15 @@ function ProjectPage({ slug, navigate }) {
             ['Overview', study.outcome],
             ['Problem', study.problem],
             ['My role', study.role],
-            ['Technology stack', getProjectMeta(project).stack.join(' / ')],
+            ['Technology stack', study.technology || getProjectMeta(project).stack.join(' / ')],
             ['Key product decisions', study.approach],
-            ['System thinking', 'The build is presented through reusable interface sections, routed case studies and deployed project links that make the product reviewable.'],
-            ['Engineering challenges', 'The challenge was keeping the product polished while making its technical purpose clear without unsupported metrics.'],
+            ['System thinking', study.systemThinking || 'The build is presented through reusable interface sections, routed case studies and deployed project links that make the product reviewable.'],
+            ['Engineering challenges', study.challenges || 'The challenge was keeping the product polished while making its technical purpose clear without unsupported metrics.'],
             ['Solution', study.approach],
             ['Outcome', study.outcome],
-            ['Lessons learned', 'Each build improved my judgement around scope, component reuse, responsive layouts and security-aware product decisions.'],
-            ['Future improvements', 'Next steps would include stronger backend integration, clearer admin flows and deeper validation where the product needs it.'],
-            ['Links', project.url ? 'Live demo and GitHub repository are available from this page.' : 'GitHub repository is available; live deployment is pending.']
+            ['Lessons learned', study.lessons || 'Each build improved my judgement around scope, component reuse, responsive layouts and security-aware product decisions.'],
+            ['Future improvements', study.future || 'Next steps would include stronger backend integration, clearer admin flows and deeper validation where the product needs it.'],
+            ['Links', project.url ? (getProjectMeta(project).github ? 'Live demo and GitHub profile are available from the project listing.' : 'Open the live project using the link above.') : 'GitHub repository is available; live deployment is pending.']
           ].map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}
         </div>
       </section>
@@ -1112,7 +1203,7 @@ function ProjectImageGallery({ study }) {
   if (!study.images?.length) return null
   return (
     <section className="section project-image-gallery">
-      <SectionTitle eyebrow="PRODUCT SCREENS" title="Interface details from the live build." watermark="UI" />
+      <SectionTitle eyebrow="PRODUCT SCREENS" title={study.galleryTitle || 'Interface details from the live build.'} watermark="UI" />
       <div>
         {study.images.map(([src, title, caption]) => (
           <figure key={src}>
@@ -1297,4 +1388,3 @@ function BackToTop() {
 }
 
 createRoot(document.getElementById('root')).render(<App />)
-
