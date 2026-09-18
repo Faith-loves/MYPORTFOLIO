@@ -25,8 +25,8 @@ const liveBuilds = [
     category: 'AI + Full Stack',
     filters: ['AI', 'Full Stack', 'Frontend', 'Security', 'UX'],
     color: 'cyan',
-    cover: '/missionguard-dashboard.png',
-    coverAlt: 'MissionGuard AI space-weather readiness dashboard',
+    cover: '/missionguard-history.png',
+    coverAlt: 'MissionGuard AI saved mission history screen',
     stack: ['Next.js', 'TypeScript', 'FastAPI', 'Python', 'Firebase', 'IBM Granite'],
     github: 'https://github.com/Faith-loves',
     url: 'https://missionguard-ai-one.vercel.app/',
@@ -160,8 +160,8 @@ const liveBuilds = [
 
 const selectedLiveBuilds = liveBuilds.filter((build) => build.url).slice(0, 4)
 
-const featuredProjectSlugs = ['aura-ai', 'deceivra', 'intern-track']
-const selectedFeaturedProjects = featuredProjectSlugs.map((slug) => liveBuilds.find((project) => project.slug === slug)).filter(Boolean)
+// Keep newest additions at the top of liveBuilds: Selected Work always shows the first three.
+const selectedFeaturedProjects = liveBuilds.slice(0, 3)
 const projectFilters = ['All', 'Full Stack', 'Frontend', 'AI', 'Security', 'UI/UX']
 const projectMeta = {
   'missionguard-ai': {
