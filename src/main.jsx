@@ -14,7 +14,7 @@ const routes = [
 const profileLinks = [
   ['GitHub', 'https://github.com/Faith-loves'],
   ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
-  ['Email', 'mailto:omolarak724@gmail.com']
+  ['Email', 'mailto:faithbuilds.co@gmail.com']
 ]
 
 const liveBuilds = [
@@ -1277,7 +1277,7 @@ function ContactPage() {
   const contactMethods = [
     ['GitHub', 'https://github.com/Faith-loves'],
     ['LinkedIn', 'https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420'],
-    ['Email', 'mailto:omolarak724@gmail.com']
+    ['Email', 'mailto:faithbuilds.co@gmail.com']
   ]
   const projectTypes = ['Full-Stack Development', 'Frontend Development', 'UI/UX Design', 'Internship or Employment', 'Other']
 
@@ -1353,7 +1353,7 @@ function ContactPage() {
         </label>
         <div className="form-foot">
           {status.text ? <small className={`form-${status.type}`}>{status.text}</small> : <small>{message.length}/500</small>}
-          <a href="mailto:omolarak724@gmail.com">Email directly</a>
+          <a href="mailto:faithbuilds.co@gmail.com">Email directly</a>
         </div>
         <button type="submit" disabled={isSending}>{isSending ? 'Sending...' : 'Send Message'}</button>
       </form>

@@ -2,7 +2,7 @@
 
 A responsive portfolio website showcasing my work across full-stack development, artificial intelligence, cybersecurity, frontend engineering, and UI/UX design.
 
-**[View the live portfolio](https://faith-portfolio.vercel.app)** · **[GitHub](https://github.com/Faith-loves)** · **[LinkedIn](https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420)** · **[Email me](mailto:omolarak724@gmail.com)**
+**[View the live portfolio](https://faith-portfolio.vercel.app)** · **[GitHub](https://github.com/Faith-loves)** · **[LinkedIn](https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420)** · **[Email me](mailto:faithbuilds.co@gmail.com)**
 
 ![Portfolio project preview](public/aura-ai-dashboard.png)
 
@@ -103,7 +103,7 @@ MYPORTFOLIO/
 
 I am open to internships, junior developer roles, freelance projects, and collaborations involving full-stack development, AI products, cybersecurity interfaces, or frontend engineering.
 
-- Email: [omolarak724@gmail.com](mailto:omolarak724@gmail.com)
+- Email: [faithbuilds.co@gmail.com](mailto:faithbuilds.co@gmail.com)
 - LinkedIn: [Temiloluwa Faith Kareem](https://www.linkedin.com/in/temiloluwa-faith-kareem-a526b7420)
 - GitHub: [Faith-loves](https://github.com/Faith-loves)
 
